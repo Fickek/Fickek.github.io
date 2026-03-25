@@ -1,39 +1,796 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <title>Color Game</title>
-    <link rel="stylesheet" type="text/css" href="css/colorGame.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PAVLOV.EXE — Game Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ph:    #c8ff00;
+  --ph2:   #8ab800;
+  --ph3:   #4a6600;
+  --amber: #ffb300;
+  --red:   #ff4444;
+  --bg:    #060608;
+  --bg2:   #0c0d10;
+  --bg3:   #111318;
+  --border: rgba(200,255,0,0.2);
+  --glow:  rgba(200,255,0,0.35);
+  --font:  'Press Start 2P', monospace;
+  --mono:  'Share Tech Mono', monospace;
+}
 
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ph);
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 1.7;
+  overflow-x: hidden;
+  cursor: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16'><rect x='6' y='0' width='4' height='4' fill='%23c8ff00'/><rect x='0' y='6' width='4' height='4' fill='%23c8ff00'/><rect x='12' y='6' width='4' height='4' fill='%23c8ff00'/><rect x='6' y='12' width='4' height='4' fill='%23c8ff00'/><rect x='6' y='6' width='4' height='4' fill='%23c8ff00'/></svg>") 8 8, crosshair;
+}
+
+/* CRT SCANLINES */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background: repeating-linear-gradient(0deg, rgba(0,0,0,0.13) 0px, rgba(0,0,0,0.13) 1px, transparent 1px, transparent 3px);
+  pointer-events: none;
+  z-index: 9998;
+}
+/* CRT VIGNETTE */
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.6) 100%);
+  pointer-events: none;
+  z-index: 9997;
+}
+
+@keyframes flicker {
+  0%,91%,95%,100% { opacity:1; }
+  92%,94%         { opacity:0.87; }
+  93%             { opacity:0.93; }
+}
+#crt-wrap { animation: flicker 9s infinite; }
+
+/* ======= BOOT ======= */
+#boot {
+  position: fixed; inset: 0;
+  background: var(--bg);
+  z-index: 99999;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 24px;
+  transition: opacity 0.7s;
+}
+#boot.out { opacity: 0; pointer-events: none; }
+
+.boot-logo {
+  font-family: var(--font);
+  font-size: clamp(14px, 3vw, 28px);
+  color: var(--ph);
+  text-shadow: 0 0 24px var(--glow);
+  text-align: center;
+  line-height: 2;
+}
+
+.boot-log {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--ph2);
+  width: min(520px, 90vw);
+  min-height: 140px;
+  max-height: 160px;
+  overflow: hidden;
+}
+.boot-log .l {
+  opacity: 0;
+  display: block;
+  animation: show 0.01s forwards;
+}
+@keyframes show { to { opacity: 1; } }
+
+.boot-bar-wrap {
+  width: min(420px, 85vw);
+  border: 2px solid var(--ph3);
+  padding: 3px;
+}
+.boot-bar {
+  height: 14px;
+  background: var(--ph);
+  box-shadow: 0 0 10px var(--glow);
+  width: 0%;
+  transition: width 0.06s linear;
+}
+
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+.boot-press {
+  font-family: var(--font);
+  font-size: 10px;
+  color: var(--amber);
+  text-shadow: 0 0 10px rgba(255,179,0,0.6);
+  animation: blink 0.8s step-end infinite;
+  display: none;
+}
+
+/* ======= INSERT COIN ======= */
+#insert-coin {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.88);
+  z-index: 99998;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 28px;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.5s;
+}
+#insert-coin h2 {
+  font-family: var(--font);
+  font-size: clamp(18px, 4vw, 32px);
+  color: var(--amber);
+  text-shadow: 0 0 24px rgba(255,179,0,0.7);
+  animation: blink 1s step-end infinite;
+  text-align: center;
+}
+#insert-coin .sub { font-family: var(--mono); font-size: 14px; color: var(--ph2); }
+.coin-btn {
+  font-family: var(--font);
+  font-size: 11px;
+  background: none;
+  border: 2px solid var(--amber);
+  color: var(--amber);
+  padding: 14px 32px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  box-shadow: 0 0 20px rgba(255,179,0,0.2);
+  transition: all 0.15s;
+}
+.coin-btn:hover { background: var(--amber); color: #000; box-shadow: 0 0 36px rgba(255,179,0,0.6); }
+
+#main { opacity: 0; transition: opacity 0.8s; }
+#main.visible { opacity: 1; }
+
+/* ======= HUD ======= */
+.hud {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: 46px;
+  background: rgba(6,6,8,0.97);
+  border-bottom: 1px solid var(--ph3);
+  display: flex; align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  z-index: 500;
+  font-family: var(--font);
+  font-size: 8px;
+  gap: 16px;
+}
+.hud-item { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.hud-lbl { color: var(--ph3); font-size: 6px; letter-spacing: 1px; }
+.hud-val { color: var(--ph); text-shadow: 0 0 8px var(--glow); }
+.hud-sep { width: 1px; height: 24px; background: var(--ph3); }
+.hud-lives { display: flex; gap: 4px; }
+.heart {
+  width: 10px; height: 10px;
+  background: var(--red);
+  clip-path: polygon(50% 90%,0% 35%,15% 0%,50% 20%,85% 0%,100% 35%);
+}
+.heart.off { background: var(--ph3); }
+
+@keyframes scoreup { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-3px)} }
+.hud-val.tick { animation: scoreup 0.1s ease; }
+
+/* ======= NAV ======= */
+nav {
+  position: fixed; bottom: 20px; left: 50%;
+  transform: translateX(-50%);
+  z-index: 500;
+  display: flex;
+  border: 1px solid var(--ph3);
+  background: rgba(6,6,8,0.97);
+}
+nav a {
+  font-family: var(--font);
+  font-size: 7px;
+  padding: 10px 18px;
+  color: var(--ph2);
+  text-decoration: none;
+  border-right: 1px solid var(--ph3);
+  transition: all 0.12s;
+  letter-spacing: 1px;
+}
+nav a:last-child { border-right: none; }
+nav a:hover, nav a.active { background: var(--ph); color: #000; }
+
+/* ======= HERO ======= */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  justify-content: center;
+  padding: 80px 60px;
+  position: relative; overflow: hidden;
+}
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image: linear-gradient(var(--ph3) 1px,transparent 1px), linear-gradient(90deg,var(--ph3) 1px,transparent 1px);
+  background-size: 32px 32px;
+  opacity: 0.07;
+}
+.hero-deco {
+  position: absolute; right: 80px; top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font);
+  font-size: 140px;
+  color: var(--ph);
+  opacity: 0.06;
+  pointer-events: none; user-select: none;
+  animation: float 4s ease-in-out infinite;
+}
+@keyframes float { 0%,100%{transform:translateY(-50%)} 50%{transform:translateY(calc(-50% - 12px))} }
+
+.hero-label {
+  font-family: var(--font);
+  font-size: 8px; color: var(--ph3);
+  letter-spacing: 3px; margin-bottom: 24px;
+}
+.hero h1 {
+  font-family: var(--font);
+  font-size: clamp(24px,5vw,58px);
+  color: var(--ph);
+  text-shadow: 0 0 32px var(--glow), 0 0 70px rgba(200,255,0,0.12);
+  line-height: 1.5; margin-bottom: 10px;
+}
+.hero h2 {
+  font-family: var(--font);
+  font-size: clamp(9px,1.8vw,16px);
+  color: var(--amber);
+  text-shadow: 0 0 14px rgba(255,179,0,0.5);
+  margin-bottom: 36px;
+}
+.hero-desc {
+  font-family: var(--mono);
+  color: var(--ph2); font-size: 14px;
+  max-width: 480px; line-height: 1.9;
+  margin-bottom: 40px;
+  border-left: 2px solid var(--ph3);
+  padding-left: 16px;
+}
+.hero-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 48px; }
+.tag {
+  font-family: var(--font); font-size: 7px;
+  padding: 6px 10px;
+  border: 1px solid var(--ph3); color: var(--ph2);
+  letter-spacing: 1px; cursor: default;
+  transition: all 0.12s;
+}
+.tag:hover { border-color: var(--ph); color: var(--ph); background: rgba(200,255,0,0.05); box-shadow: 0 0 10px rgba(200,255,0,0.2); }
+.hero-scroll {
+  position: absolute; bottom: 40px; left: 60px;
+  font-family: var(--font); font-size: 7px; color: var(--ph3);
+  animation: blink 2s step-end infinite;
+}
+.konami-hint {
+  font-family: var(--font); font-size: 7px; color: var(--ph3);
+  margin-top: 12px; display: block;
+  animation: blink 3.5s step-end infinite;
+}
+
+/* ======= SECTIONS ======= */
+section {
+  padding: 100px 60px;
+  max-width: 1400px; margin: 0 auto;
+}
+.sec-header {
+  display: flex; align-items: center;
+  gap: 16px; margin-bottom: 60px;
+}
+.sec-num { font-family: var(--font); font-size: 8px; color: var(--amber); }
+.sec-title {
+  font-family: var(--font);
+  font-size: clamp(13px,2.2vw,22px);
+  color: var(--ph);
+  text-shadow: 0 0 20px var(--glow);
+}
+.sec-line {
+  flex: 1; height: 1px;
+  background: repeating-linear-gradient(90deg, var(--ph3) 0, var(--ph3) 4px, transparent 4px, transparent 8px);
+}
+
+/* ======= PORTFOLIO GRID ======= */
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 8px;
+  grid-auto-rows: 260px;
+}
+.mcard {
+  position: relative; overflow: hidden;
+  background: var(--bg2);
+  border: 1px solid var(--ph3);
+  cursor: pointer;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+.mcard::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(0deg,rgba(0,0,0,0.14) 0,rgba(0,0,0,0.14) 1px,transparent 1px,transparent 3px);
+  pointer-events: none; z-index: 2;
+}
+.mcard:hover {
+  border-color: var(--ph);
+  box-shadow: 0 0 24px rgba(200,255,0,0.22), inset 0 0 12px rgba(200,255,0,0.04);
+  transform: scale(1.015); z-index: 10;
+}
+.mcard.lg { grid-column: span 7; grid-row: span 2; }
+.mcard.md { grid-column: span 5; }
+.mcard.sm { grid-column: span 4; }
+.mcard.wd { grid-column: span 8; }
+.mcard.tl { grid-column: span 4; grid-row: span 2; }
+
+.mcard img, .mcard .vthumb { width:100%; height:100%; object-fit:cover; transition:transform 0.4s; filter:saturate(0.8) brightness(0.88); }
+.mcard:hover img { transform:scale(1.04); filter:saturate(1) brightness(1); }
+.vthumb { position:relative; }
+.vthumb img { position:absolute; inset:0; }
+.play-wrap { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; z-index:3; }
+.play-btn {
+  width:56px; height:56px;
+  background:rgba(0,0,0,0.75);
+  border:2px solid var(--ph);
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 0 18px rgba(200,255,0,0.28);
+  transition:all 0.18s;
+}
+.mcard:hover .play-btn { background:var(--ph); box-shadow:0 0 36px rgba(200,255,0,0.6); }
+.play-btn::after {
+  content:''; width:0; height:0;
+  border-top:9px solid transparent; border-bottom:9px solid transparent;
+  border-left:14px solid var(--ph); margin-left:3px;
+}
+.mcard:hover .play-btn::after { border-left-color:#000; }
+
+.covlay {
+  position:absolute; inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,0.9) 0%,transparent 55%);
+  opacity:0; transition:opacity 0.22s;
+  display:flex; flex-direction:column; justify-content:flex-end;
+  padding:14px; z-index:4;
+}
+.mcard:hover .covlay { opacity:1; }
+.covlay h3 {
+  font-family:var(--font); font-size:8px;
+  color:var(--ph); text-shadow:0 0 10px var(--glow);
+  margin-bottom:4px; line-height:1.7;
+}
+.covlay p { font-family:var(--mono); font-size:12px; color:var(--ph2); }
+
+.card-add {
+  width:100%; height:100%;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  gap:12px;
+  border:2px dashed var(--ph3);
+  padding:20px; cursor:default;
+  transition:all 0.2s;
+}
+.card-add:hover { border-color:var(--ph); }
+.card-add .plus { font-family:var(--font); font-size:14px; color:var(--ph3); }
+.card-add span { font-family:var(--font); font-size:6px; color:var(--ph3); text-align:center; line-height:2.2; }
+
+/* ======= PROJECTS ======= */
+.proj-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+.pcard {
+  background:var(--bg2); border:1px solid var(--ph3);
+  position:relative; overflow:hidden;
+  transition:all 0.2s;
+}
+.pcard::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  background:var(--ph); box-shadow:0 0 10px var(--glow);
+  transform:scaleX(0); transition:transform 0.3s; transform-origin:left;
+}
+.pcard:hover { border-color:var(--ph); box-shadow:0 0 28px rgba(200,255,0,0.14); transform:translateY(-4px); }
+.pcard:hover::before { transform:scaleX(1); }
+
+.proj-banner {
+  height:160px; background:var(--bg3);
+  display:flex; align-items:center; justify-content:center;
+  border-bottom:1px solid var(--ph3);
+  position:relative; overflow:hidden;
+}
+.proj-banner::after {
+  content:''; position:absolute; inset:0;
+  background:repeating-linear-gradient(0deg,rgba(0,0,0,0.2) 0,rgba(0,0,0,0.2) 1px,transparent 1px,transparent 3px);
+  pointer-events:none;
+}
+.proj-banner img { width:100%; height:100%; object-fit:cover; filter:saturate(0.6); }
+.banner-em { font-size:52px; }
+
+.proj-body { padding:20px; }
+.proj-studio { font-family:var(--font); font-size:7px; color:var(--amber); letter-spacing:2px; margin-bottom:10px; text-shadow:0 0 8px rgba(255,179,0,0.4); }
+.proj-name { font-family:var(--font); font-size:13px; color:var(--ph); margin-bottom:14px; line-height:1.6; text-shadow:0 0 12px var(--glow); }
+.proj-desc { font-family:var(--mono); font-size:12px; color:var(--ph2); line-height:1.8; margin-bottom:16px; }
+.proj-meta { display:flex; flex-wrap:wrap; gap:4px; }
+.mtag { font-family:var(--font); font-size:6px; padding:4px 8px; border:1px solid var(--ph3); color:var(--ph2); letter-spacing:1px; }
+
+.proj-stats {
+  display:flex; gap:16px;
+  padding:14px 20px;
+  border-top:1px solid var(--ph3);
+  background:rgba(200,255,0,0.02);
+}
+.stat { display:flex; flex-direction:column; gap:2px; }
+.sval { font-family:var(--font); font-size:12px; color:var(--ph); text-shadow:0 0 10px var(--glow); }
+.slbl { font-family:var(--mono); font-size:10px; color:var(--ph3); }
+
+/* ======= LIGHTBOX ======= */
+.lb {
+  position:fixed; inset:0; z-index:10000;
+  background:rgba(0,0,0,0.97);
+  display:flex; align-items:center; justify-content:center;
+  opacity:0; pointer-events:none; transition:opacity 0.22s;
+}
+.lb::before {
+  content:''; position:absolute; inset:0;
+  background:repeating-linear-gradient(0deg,rgba(200,255,0,0.018) 0,rgba(200,255,0,0.018) 1px,transparent 1px,transparent 3px);
+  pointer-events:none;
+}
+.lb.open { opacity:1; pointer-events:all; }
+.lb-inner {
+  position:relative;
+  max-width:90vw;
+  display:flex; flex-direction:column;
+  align-items:center; gap:20px;
+  transform:scale(0.96); transition:transform 0.22s;
+}
+.lb.open .lb-inner { transform:scale(1); }
+.lb-frame {
+  padding:4px;
+  border:2px solid var(--ph);
+  box-shadow:0 0 40px rgba(200,255,0,0.28), inset 0 0 20px rgba(200,255,0,0.04);
+  position:relative;
+}
+.lbc { position:absolute; width:12px; height:12px; background:var(--ph); }
+.lbc.tl{top:-2px;left:-2px;} .lbc.tr{top:-2px;right:-2px;} .lbc.bl{bottom:-2px;left:-2px;} .lbc.br{bottom:-2px;right:-2px;}
+
+.lb-img { max-width:100%; max-height:65vh; display:block; }
+.lb-frame iframe { width:min(860px,82vw); height:min(484px,46vw); border:none; display:block; }
+.lb-info { text-align:center; max-width:600px; }
+.lb-info h2 { font-family:var(--font); font-size:10px; color:var(--ph); text-shadow:0 0 14px var(--glow); margin-bottom:6px; line-height:1.8; }
+.lb-info p { font-family:var(--mono); font-size:13px; color:var(--ph2); }
+.lb-close {
+  position:absolute; top:-14px; right:-14px;
+  width:32px; height:32px;
+  background:var(--ph); border:none; cursor:pointer;
+  font-family:var(--font); font-size:9px; color:#000;
+  display:flex; align-items:center; justify-content:center;
+  transition:background 0.15s;
+}
+.lb-close:hover { background:var(--amber); }
+
+/* ======= FOOTER ======= */
+footer {
+  border-top:1px solid var(--ph3);
+  padding:40px 60px;
+  display:flex; justify-content:space-between; align-items:center;
+  font-family:var(--mono); font-size:12px; color:var(--ph2);
+}
+footer a { color:var(--ph); text-decoration:none; font-family:var(--font); font-size:7px; letter-spacing:1px; transition:opacity 0.15s; }
+footer a:hover { opacity:0.6; }
+.ft-copy { font-family:var(--font); font-size:6px; color:var(--ph3); }
+
+/* ======= SCROLL ANIM ======= */
+.fu { opacity:0; transform:translateY(20px); transition:opacity 0.5s,transform 0.5s; }
+.fu.vis { opacity:1; transform:translateY(0); }
+.fu:nth-child(2){transition-delay:.08s} .fu:nth-child(3){transition-delay:.16s} .fu:nth-child(4){transition-delay:.24s} .fu:nth-child(5){transition-delay:.32s}
+
+/* ======= ACHIEVEMENT ======= */
+.ach {
+  position:fixed; bottom:80px; left:50%;
+  transform:translateX(-50%) translateY(120px);
+  background:var(--bg2);
+  border:1px solid var(--amber);
+  box-shadow:0 0 28px rgba(255,179,0,0.38);
+  padding:14px 24px;
+  display:flex; align-items:center; gap:14px;
+  z-index:9996;
+  transition:transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  max-width:340px; width:90%;
+}
+.ach.show { transform:translateX(-50%) translateY(0); }
+.ach-ico { font-size:22px; }
+.ach-txt { display:flex; flex-direction:column; gap:2px; }
+.ach-lbl { font-family:var(--font); font-size:6px; color:var(--amber); letter-spacing:2px; }
+.ach-name { font-family:var(--font); font-size:9px; color:var(--ph); }
+
+/* ======= RESPONSIVE ======= */
+@media(max-width:900px){
+  section,.hero,footer{padding:60px 20px;}
+  .portfolio-grid{grid-template-columns:repeat(2,1fr);}
+  .mcard.lg,.mcard.wd,.mcard.tl,.mcard.md,.mcard.sm{grid-column:span 2;grid-row:span 1;}
+  .proj-grid{grid-template-columns:1fr;}
+  nav{display:none;}
+  .hud{padding:0 10px;font-size:6px;gap:8px;}
+  .hero-deco{display:none;}
+}
+</style>
 </head>
-
 <body>
 
-    <h1>The Great
-        <br>
-        <span id="colorDisplay">RGB</span>
-        <br>
-        Color Game</h1>
+<div id="boot">
+  <div class="boot-logo">PAVLOV.EXE</div>
+  <div class="boot-log" id="boot-log"></div>
+  <div class="boot-bar-wrap"><div class="boot-bar" id="boot-bar"></div></div>
+  <div class="boot-press" id="boot-press">PRESS ANY KEY TO START</div>
+</div>
 
-    <div id="stripe">
-        <button id="reset">New Colors</button>
-        <span id="message"></span>
-        <button class="mode">Easy</button>
-        <button class="mode selected">Hard</button>
+<div id="insert-coin">
+  <h2>INSERT COIN</h2>
+  <p class="sub">CLICK TO CONTINUE</p>
+  <button class="coin-btn" id="coin-btn">[ INSERT COIN ]</button>
+</div>
+
+<div id="crt-wrap">
+<div id="main">
+
+<div class="hud">
+  <div class="hud-item"><span class="hud-lbl">SCORE</span><span class="hud-val" id="score-val">000000</span></div>
+  <div class="hud-sep"></div>
+  <div class="hud-item"><span class="hud-lbl">PLAYER</span><span class="hud-val">D.PAVLOV</span></div>
+  <div class="hud-sep"></div>
+  <div class="hud-item"><span class="hud-lbl">LIVES</span><div class="hud-lives"><div class="heart"></div><div class="heart"></div><div class="heart"></div></div></div>
+  <div class="hud-sep"></div>
+  <div class="hud-item"><span class="hud-lbl">LEVEL</span><span class="hud-val">03</span></div>
+  <div class="hud-sep"></div>
+  <div class="hud-item"><span class="hud-lbl">HI-SCORE</span><span class="hud-val">999999</span></div>
+</div>
+
+<nav>
+  <a href="#hero" class="active">HOME</a>
+  <a href="#portfolio">WORKS</a>
+  <a href="#projects">CREDITS</a>
+</nav>
+
+<div id="hero" class="hero" style="padding-top:80px;">
+  <div class="hero-grid"></div>
+  <div class="hero-deco">◆</div>
+  <p class="hero-label">&gt; TECHNICAL GAME DESIGNER_</p>
+  <h1>DANIIL<br>PAVLOV</h1>
+  <h2>3.5+ YRS · PC &amp; MOBILE F2P</h2>
+  <p class="hero-desc">Designing systems, economies and events for live games.<br>LiveOps · Balance · UE5 · Unity · C++ · Blueprint</p>
+  <div class="hero-tags">
+    <span class="tag">LIVEOPS</span><span class="tag">SYSTEMS</span><span class="tag">F2P ECONOMY</span>
+    <span class="tag">UE5</span><span class="tag">UNITY</span><span class="tag">EVENT DESIGN</span>
+    <span class="tag">BALANCE</span><span class="tag">C++</span>
+  </div>
+  <span class="konami-hint">TRY: ↑ ↑ ↓ ↓ ← → ← → B A</span>
+  <div class="hero-scroll">▼ SCROLL TO CONTINUE ▼</div>
+</div>
+
+<section id="portfolio">
+  <div class="sec-header fu"><span class="sec-num">STAGE 01</span><h2 class="sec-title">PORTFOLIO</h2><div class="sec-line"></div></div>
+  <div class="portfolio-grid">
+
+    <div class="mcard lg fu" data-type="image" data-src="https://via.placeholder.com/900x560/0c0d10/c8ff00?text=YOUR+IMAGE+1" data-title="НАЗВАНИЕ РАБОТЫ 1" data-desc="Описание работы. Замени src и data-src на ссылку на своё изображение." onclick="openLB(this)">
+      <img src="https://via.placeholder.com/900x560/0c0d10/c8ff00?text=YOUR+IMAGE+1" alt="">
+      <div class="covlay"><h3>НАЗВАНИЕ РАБОТЫ 1</h3><p>Замени на своё изображение</p></div>
     </div>
 
-    <div id="container">
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
+    <div class="mcard md fu" data-type="youtube" data-youtube-id="dQw4w9WgXcQ" data-title="ВИДЕО — НАЗВАНИЕ ПРОЕКТА" data-desc="YouTube видео. Замени data-youtube-id на нужный ID." onclick="openLB(this)">
+      <div class="vthumb"><img src="https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg" alt=""><div class="play-wrap"><div class="play-btn"></div></div></div>
+      <div class="covlay"><h3>ВИДЕО — НАЗВАНИЕ</h3><p>YouTube · замени ID</p></div>
     </div>
 
-    <script type="text/javascript" src="js/colorGame.js"></script>
+    <div class="mcard md fu" data-type="image" data-src="https://via.placeholder.com/640x360/111318/8ab800?text=IMAGE+2" data-title="НАЗВАНИЕ РАБОТЫ 2" data-desc="Описание второй работы." onclick="openLB(this)">
+      <img src="https://via.placeholder.com/640x360/111318/8ab800?text=IMAGE+2" alt="">
+      <div class="covlay"><h3>НАЗВАНИЕ РАБОТЫ 2</h3><p>Изображение</p></div>
+    </div>
 
+    <div class="mcard sm fu" data-type="image" data-src="https://via.placeholder.com/480x320/0c0d10/c8ff00?text=IMAGE+3" data-title="НАЗВАНИЕ РАБОТЫ 3" data-desc="Описание третьей работы." onclick="openLB(this)">
+      <img src="https://via.placeholder.com/480x320/0c0d10/c8ff00?text=IMAGE+3" alt="">
+      <div class="covlay"><h3>НАЗВАНИЕ РАБОТЫ 3</h3><p>Изображение</p></div>
+    </div>
+
+    <div class="mcard wd fu" data-type="youtube" data-youtube-id="dQw4w9WgXcQ" data-title="ВИДЕО 2 — ГЕЙМПЛЕЙ" data-desc="Второй YouTube ролик. Замени data-youtube-id." onclick="openLB(this)">
+      <div class="vthumb"><img src="https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg" alt=""><div class="play-wrap"><div class="play-btn"></div></div></div>
+      <div class="covlay"><h3>ВИДЕО 2 — МЕХАНИКА</h3><p>YouTube · замени ID</p></div>
+    </div>
+
+    <div class="mcard tl fu" data-type="image" data-src="https://via.placeholder.com/480x640/111318/c8ff00?text=TALL" data-title="ВЕРТИКАЛЬНОЕ" data-desc="Мобильный скрин или UI." onclick="openLB(this)">
+      <img src="https://via.placeholder.com/480x640/111318/c8ff00?text=TALL" alt="">
+      <div class="covlay"><h3>ВЕРТИКАЛЬНОЕ</h3><p>UI / Mobile</p></div>
+    </div>
+
+    <div class="mcard md fu" data-type="image" data-src="https://via.placeholder.com/640x360/0c0d10/8ab800?text=IMAGE+4" data-title="НАЗВАНИЕ РАБОТЫ 4" data-desc="Описание четвёртой работы." onclick="openLB(this)">
+      <img src="https://via.placeholder.com/640x360/0c0d10/8ab800?text=IMAGE+4" alt="">
+      <div class="covlay"><h3>НАЗВАНИЕ РАБОТЫ 4</h3><p>Изображение</p></div>
+    </div>
+
+    <div class="mcard md fu" data-type="image" data-src="https://via.placeholder.com/640x360/111318/c8ff00?text=IMAGE+5" data-title="НАЗВАНИЕ РАБОТЫ 5" data-desc="Описание пятой работы." onclick="openLB(this)">
+      <img src="https://via.placeholder.com/640x360/111318/c8ff00?text=IMAGE+5" alt="">
+      <div class="covlay"><h3>НАЗВАНИЕ РАБОТЫ 5</h3><p>Изображение</p></div>
+    </div>
+
+    <div class="mcard sm fu" style="cursor:default;">
+      <div class="card-add"><span class="plus">+</span><span>ADD MEDIA<br>IMAGE OR VIDEO</span></div>
+    </div>
+
+  </div>
+</section> */
+
+<section id="projects">
+  <div class="sec-header fu"><span class="sec-num">STAGE 02</span><h2 class="sec-title">COMMERCIAL PROJECTS</h2><div class="sec-line"></div></div>
+  <div class="proj-grid">
+
+    <div class="pcard fu">
+      <div class="proj-banner"><span class="banner-em">⚔️</span></div>
+      <div class="proj-body">
+        <p class="proj-studio">PIXEL SKY · 2021–2023</p>
+        <h3 class="proj-name">SKYFORGE</h3>
+        <p class="proj-desc">MMO action RPG. Разработка сезонных ивентов, балансировка 90+ единиц оружия, возврат 28% неактивных игроков.</p>
+        <div class="proj-meta"><span class="mtag">PC MMO</span><span class="mtag">LIVEOPS</span><span class="mtag">BALANCE</span><span class="mtag">EVENTS</span><span class="mtag">SQL</span></div>
+      </div>
+      <div class="proj-stats">
+        <div class="stat"><span class="sval">28%</span><span class="slbl">Возврат игроков</span></div>
+        <div class="stat"><span class="sval">90+</span><span class="slbl">Ребалансировано</span></div>
+        <div class="stat"><span class="sval">−30%</span><span class="slbl">Жалоб на баланс</span></div>
+      </div>
+    </div>
+
+    <div class="pcard fu">
+      <div class="proj-banner"><span class="banner-em">🐱</span></div>
+      <div class="proj-body">
+        <p class="proj-studio">ELEPHANT GAMES · 2023</p>
+        <h3 class="proj-name">KNIGHT CATS 2</h3>
+        <p class="proj-desc">Мобильная F2P игра. Системный дизайн, экономика, UX-флоу и механики прогрессии для мобильной платформы.</p>
+        <div class="proj-meta"><span class="mtag">MOBILE F2P</span><span class="mtag">SYSTEMS</span><span class="mtag">ECONOMY</span><span class="mtag">UNITY</span><span class="mtag">PROGRESSION</span></div>
+      </div>
+      <div class="proj-stats">
+        <div class="stat"><span class="sval">F2P</span><span class="slbl">Монетизация</span></div>
+        <div class="stat"><span class="sval">MOBILE</span><span class="slbl">Платформа</span></div>
+      </div>
+    </div>
+
+    <div class="pcard fu">
+      <div class="proj-banner"><span class="banner-em">🚀</span></div>
+      <div class="proj-body">
+        <p class="proj-studio">WHALEBOX STUDIO · 2023–2024</p>
+        <h3 class="proj-name">RESCUE DASH</h3>
+        <p class="proj-desc">Mobile runner/puzzle. Дизайн 100+ уровней, настройка сложности, оптимизация в Unity, AssetBundles.</p>
+        <div class="proj-meta"><span class="mtag">MOBILE</span><span class="mtag">LEVEL DESIGN</span><span class="mtag">UNITY</span><span class="mtag">OPTIMIZATION</span><span class="mtag">C#</span></div>
+      </div>
+      <div class="proj-stats">
+        <div class="stat"><span class="sval">100+</span><span class="slbl">Уровней создано</span></div>
+        <div class="stat"><span class="sval">UNITY</span><span class="slbl">Движок</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="ft-copy">© 2026 DANIIL PAVLOV · GAME DESIGNER · ALMATY, KZ</div>
+  <div style="display:flex;gap:24px;">
+    <a href="https://daniil-pavlov.tilda.ws" target="_blank">PORTFOLIO →</a>
+    <a href="https://github.com/Fickek" target="_blank">GITHUB →</a>
+  </div>
+</footer>
+
+</div></div>
+
+<div class="lb" id="lb" onclick="closeLBbg(event)">
+  <div class="lb-inner">
+    <div class="lb-frame">
+      <div class="lbc tl"></div><div class="lbc tr"></div><div class="lbc bl"></div><div class="lbc br"></div>
+      <div id="lb-media"></div>
+    </div>
+    <div class="lb-info"><h2 id="lb-title"></h2><p id="lb-desc"></p></div>
+    <button class="lb-close" onclick="closeLB()">X</button>
+  </div>
+</div>
+
+<div class="ach" id="ach">
+  <div class="ach-ico" id="ach-ico">🏆</div>
+  <div class="ach-txt"><span class="ach-lbl">ACHIEVEMENT UNLOCKED</span><span class="ach-name" id="ach-name">PORTFOLIO VIEWED</span></div>
+</div>
+
+<script>
+/* AUDIO */
+let AC;
+function ac(){if(!AC)AC=new(window.AudioContext||window.webkitAudioContext)();return AC;}
+function beep(f,d,t='square',v=0.07){try{const c=ac(),o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.type=t;o.frequency.value=f;g.gain.setValueAtTime(v,c.currentTime);g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+d);o.start();o.stop(c.currentTime+d);}catch(e){}}
+function coinSnd(){beep(988,.08,'square',.1);setTimeout(()=>beep(1318,.12,'square',.1),80);setTimeout(()=>beep(1568,.15,'square',.1),160);}
+function selSnd(){beep(440,.06,'square',.05);}
+function hvSnd(){beep(330,.04,'square',.025);}
+function openSnd(){beep(660,.07);setTimeout(()=>beep(880,.09),55);}
+function closeSnd(){beep(440,.06);setTimeout(()=>beep(330,.07),45);}
+function achSnd(){[523,659,784,1047].forEach((f,i)=>setTimeout(()=>beep(f,.12,'square',.06),i*75));}
+function bootSnd(i){beep([220,330,440,550,660,770,880][i%7],.045,'square',.04);}
+
+/* BOOT */
+const LINES=[
+  {t:'> PAVLOV PORTFOLIO SYSTEM v2.0',d:300},
+  {t:'> CHECKING HARDWARE...',d:200},
+  {t:'  CPU: GAME DESIGN CORE x3.5Y     [OK]',d:180},
+  {t:'  MEM: UNITY + UE5 + C++          [OK]',d:180},
+  {t:'  GPU: LIVEOPS RENDERER            [OK]',d:180},
+  {t:'> LOADING COMMERCIAL PROJECTS... [OK]',d:220},
+  {t:'> SKYFORGE MODULE                  [OK]',d:140},
+  {t:'> KNIGHT CATS 2 MODULE             [OK]',d:140},
+  {t:'> RESCUE DASH MODULE               [OK]',d:140},
+  {t:'> ALL SYSTEMS READY.',d:320},
+];
+function runBoot(){
+  const log=document.getElementById('boot-log'),bar=document.getElementById('boot-bar'),press=document.getElementById('boot-press');
+  let i=0;
+  function nx(){
+    if(i>=LINES.length){bar.style.width='100%';setTimeout(()=>{press.style.display='block';press.onclick=startGame;document.addEventListener('keydown',startGame,{once:true});},400);return;}
+    const sp=document.createElement('span');sp.className='l';sp.textContent=LINES[i].t;log.appendChild(sp);log.scrollTop=log.scrollHeight;
+    bootSnd(i);bar.style.width=Math.round((i+1)/LINES.length*100)+'%';
+    setTimeout(nx,LINES[i++].d);
+  }
+  setTimeout(nx,500);
+}
+function startGame(){
+  coinSnd();
+  const b=document.getElementById('boot');b.classList.add('out');
+  setTimeout(()=>{b.style.display='none';const c=document.getElementById('insert-coin');c.style.opacity='1';c.style.pointerEvents='all';document.getElementById('coin-btn').addEventListener('click',enterSite);},750);
+}
+function enterSite(){
+  coinSnd();
+  const c=document.getElementById('insert-coin');c.style.opacity='0';c.style.pointerEvents='none';
+  setTimeout(()=>c.style.display='none',500);
+  document.getElementById('main').classList.add('visible');
+  scoreAdd(1000);
+  setTimeout(()=>showAch('🎮','PORTFOLIO LOADED'),1200);
+}
+
+/* SCORE */
+let score=0;
+const sEl=document.getElementById('score-val');
+function scoreAdd(n){score+=n;sEl.textContent=String(score).padStart(6,'0');sEl.classList.remove('tick');void sEl.offsetWidth;sEl.classList.add('tick');}
+
+/* ACHIEVEMENT */
+const achEl=document.getElementById('ach');let achT;
+function showAch(icon,name){document.getElementById('ach-ico').textContent=icon;document.getElementById('ach-name').textContent=name;achSnd();achEl.classList.add('show');clearTimeout(achT);achT=setTimeout(()=>achEl.classList.remove('show'),3500);}
+
+/* LIGHTBOX */
+function openLB(c){
+  openSnd();scoreAdd(100);
+  const m=document.getElementById('lb-media');
+  document.getElementById('lb-title').textContent=c.dataset.title||'';
+  document.getElementById('lb-desc').textContent=c.dataset.desc||'';
+  if(c.dataset.type==='youtube'){const id=c.dataset.youtubeId;m.innerHTML=`<iframe src="https://www.youtube.com/embed/${id}?autoplay=1&rel=0" allow="autoplay;fullscreen" allowfullscreen></iframe>`;}
+  else{m.innerHTML=`<img class="lb-img" src="${c.dataset.src}" alt="">`;}
+  document.getElementById('lb').classList.add('open');document.body.style.overflow='hidden';
+}
+function closeLB(){closeSnd();document.getElementById('lb').classList.remove('open');document.getElementById('lb-media').innerHTML='';document.body.style.overflow='';}
+function closeLBbg(e){if(e.target===document.getElementById('lb'))closeLB();}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLB();});
+
+/* SCROLL */
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');scoreAdd(10);}});},{threshold:.1});
+document.querySelectorAll('.fu').forEach(el=>obs.observe(el));
+
+/* NAV */
+const secs=['hero','portfolio','projects'],navAs=document.querySelectorAll('nav a');
+window.addEventListener('scroll',()=>{let cur='hero';secs.forEach(id=>{const el=document.getElementById(id);if(el&&window.scrollY>=el.offsetTop-200)cur=id;});navAs.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+cur));});
+
+/* HOVER SOUNDS */
+document.querySelectorAll('.mcard,.pcard,.tag').forEach(el=>el.addEventListener('mouseenter',()=>hvSnd()));
+navAs.forEach(a=>a.addEventListener('click',()=>{selSnd();scoreAdd(50);}));
+
+/* KONAMI */
+const K=['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];let ki=0;
+document.addEventListener('keydown',e=>{
+  if(e.key===K[ki]){ki++;if(ki===K.length){ki=0;scoreAdd(9999);showAch('⭐','30 LIVES UNLOCKED!');[0,80,160,240].forEach((t,i)=>setTimeout(()=>beep(660+i*220,.1,'square',.07),t));}}else ki=0;
+});
+
+window.addEventListener('load',runBoot);
+</script>
 </body>
-
 </html>
