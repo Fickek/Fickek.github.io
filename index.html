@@ -567,7 +567,7 @@ footer a:hover { opacity:0.6; }
     <span class="tag">UE5</span><span class="tag">UNITY</span><span class="tag">EVENT DESIGN</span>
     <span class="tag">BALANCE</span><span class="tag">C++</span>
   </div>
-  <span class="konami-hint">TRY: ↑ ↑ ↓ ↓ ← → ← → B A</span>
+  <span class="konami-hint">TRY: UP UP DOWN DOWN LEFT RIGHT LEFT RIGHT B A </span>
   <div class="hero-scroll">▼ SCROLL TO CONTINUE ▼</div>
 </div>
 
@@ -777,7 +777,7 @@ navAs.forEach(a=>a.addEventListener('click',()=>{selSnd();scoreAdd(50);}));
 /* KONAMI */
 const K=['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];let ki=0;
 document.addEventListener('keydown',e=>{
-  if(e.key===K[ki]){ki++;if(ki===K.length){ki=0;scoreAdd(9999);showAch('⭐','30 LIVES UNLOCKED!');[0,80,160,240].forEach((t,i)=>setTimeout(()=>beep(660+i*220,.1,'square',.07),t));}}else ki=0;
+  if(e.key===K[ki]){ki++;if(ki===K.length){ki=0;scoreAdd(9999);showAch('⭐','COMBO!!!');[0,80,160,240].forEach((t,i)=>setTimeout(()=>beep(660+i*220,.1,'square',.07),t));}}else ki=0;
 });
 
 window.addEventListener('load',runBoot);
