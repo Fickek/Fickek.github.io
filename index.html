@@ -125,7 +125,7 @@ html,body{
 .pcard::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--ph);transform:scaleX(0);transition:transform 0.28s;transform-origin:left;}
 .pcard:hover{border-color:var(--ph);box-shadow:0 0 20px rgba(200,255,0,0.12);transform:translateY(-3px);}
 .pcard:hover::before{transform:scaleX(1);}
-.proj-banner{height:clamp(80px,10vw,140px);background:var(--bg3);display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--ph3);font-size:clamp(32px,5vw,52px);}
+.proj-banner{height:clamp(80px,10vw,400px);background:var(--bg3);display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--ph3);font-size:clamp(32px,5vw,52px);}
 .proj-body{padding:clamp(12px,2vw,20px);}
 .proj-studio{font-family:var(--font);font-size:clamp(5px,0.9vw,7px);color:var(--amber);letter-spacing:2px;margin-bottom:8px;}
 .proj-name{font-family:var(--font);font-size:clamp(9px,1.5vw,14px);color:var(--ph);margin-bottom:10px;line-height:1.5;text-shadow:0 0 10px var(--glow);}
@@ -177,81 +177,16 @@ html,body{
 #ctrl-panel::before{content:'';position:absolute;top:1px;left:20px;right:20px;height:1px;background:rgba(255,255,255,0.07);border-radius:10px;}
 
 /* =====================
-   JOYSTICK — 3D with shadow
+   JOYSTICK — Ball-top SVG illustration, static
    ===================== */
 .joystick-wrap{display:flex;flex-direction:column;align-items:center;gap:4px;flex-shrink:0;}
-
 #joystick-base{
-  width:clamp(80px,12vw,110px);
-  height:clamp(80px,12vw,110px);
-  background:radial-gradient(circle at 40% 35%,#252838,#0d0e12 70%);
-  border:2px solid var(--metal);
-  border-radius:50%;
+  width:clamp(72px,11vw,100px);
+  height:clamp(72px,11vw,100px);
   position:relative;
-  box-shadow:
-    inset 0 4px 14px rgba(0,0,0,0.95),
-    inset 0 0 0 1px var(--metal2),
-    0 4px 12px rgba(0,0,0,0.6);
-}
-/* cross guide */
-#joystick-base::before{
-  content:'';position:absolute;inset:0;border-radius:50%;
-  background:
-    linear-gradient(90deg,transparent calc(50% - 0.5px),rgba(255,255,255,0.05) calc(50%),transparent calc(50% + 0.5px)),
-    linear-gradient(0deg,transparent calc(50% - 0.5px),rgba(255,255,255,0.05) calc(50%),transparent calc(50% + 0.5px));
-  pointer-events:none;
-}
-
-/* shadow ellipse on the base, moves opposite to stick */
-#j-shadow{
-  position:absolute;
-  width:clamp(16px,2.4vw,22px);
-  height:clamp(6px,1vw,9px);
-  background:rgba(0,0,0,0.7);
-  border-radius:50%;
-  left:50%;top:50%;
-  transform:translate(-50%,-50%);
-  filter:blur(3px);
-  pointer-events:none;
-  transition:transform 0.04s linear;
-}
-
-/* stick unit — shaft + ball translated together */
-#j-stick{
-  position:absolute;
-  left:50%;top:50%;
-  transform:translate(-50%,-50%);
-  display:flex;flex-direction:column;align-items:center;
-  pointer-events:none;
-  transition:transform 0.04s linear;
-  z-index:2;
-}
-#j-shaft-el{
-  width:8px;
-  height:clamp(18px,3vw,28px);
-  /* gradient gives impression of cylindrical shaft */
-  background:linear-gradient(90deg,#3a3a3a 0%,#999 30%,#ccc 50%,#888 70%,#3a3a3a 100%);
-  border-radius:4px 4px 2px 2px;
   flex-shrink:0;
-  box-shadow:2px 2px 4px rgba(0,0,0,0.6);
 }
-#j-ball-el{
-  width:clamp(22px,3.4vw,32px);
-  height:clamp(22px,3.4vw,32px);
-  border-radius:50%;
-  border:1.5px solid #661111;
-  flex-shrink:0;
-  order:-1;
-  margin-bottom:-3px;
-  position:relative;
-  /* base red */
-  background:#cc2222;
-  /* specular highlight + depth — updated via JS */
-  box-shadow:
-    0 0 12px rgba(204,34,34,0.55),
-    inset -3px -3px 6px rgba(0,0,0,0.5),
-    inset 3px 3px 6px rgba(255,120,120,0.25);
-}
+#joystick-svg{width:100%;height:100%;overflow:visible;display:block;}
 
 /* =====================
    BUTTONS — zigzag row
@@ -379,14 +314,61 @@ html,body{
 .fu{opacity:0;transform:translateY(14px);transition:opacity 0.45s,transform 0.45s;}
 .fu.vis{opacity:1;transform:translateY(0);}
 
+/* BANNER UPLOAD */
+.proj-banner{cursor:pointer;position:relative;overflow:hidden;}
+.proj-banner:hover .banner-placeholder{border-color:var(--ph);}
+.banner-img-wrap{width:100%;height:100%;position:relative;}
+.banner-placeholder{
+  width:100%;height:100%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:6px;
+  border:2px dashed var(--ph3);
+  transition:border-color 0.2s;
+}
+.banner-plus{font-family:var(--font);font-size:18px;color:var(--ph3);}
+.banner-hint{font-family:var(--font);font-size:clamp(4px,0.8vw,6px);color:var(--ph3);letter-spacing:1px;}
+.banner-img-wrap img{width:100%;height:100%;object-fit:cover;filter:saturate(0.85);transition:filter 0.2s;}
+.proj-banner:hover .banner-img-wrap img{filter:saturate(1);}
+.banner-change-hint{
+  position:absolute;inset:0;
+  background:rgba(0,0,0,0.55);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity 0.2s;
+  font-family:var(--font);font-size:clamp(5px,0.9vw,7px);color:var(--ph);letter-spacing:1px;
+}
+.proj-banner:hover .banner-change-hint{opacity:1;}
+
+/* MOBILE — safe area + compact layout */
 @media(max-width:600px){
-  #cabinet{border-radius:0;padding:8px;}
+  html,body{height:100%;height:100dvh;}
+  #cabinet{
+    border-radius:0;
+    padding:env(safe-area-inset-top,8px) env(safe-area-inset-right,8px) env(safe-area-inset-bottom,8px) env(safe-area-inset-left,8px);
+    padding-top:max(env(safe-area-inset-top),8px);
+    padding-bottom:max(env(safe-area-inset-bottom),8px);
+    height:100dvh;
+  }
   #screen-wrap{border-radius:8px;}
-  #ctrl-panel{border-radius:14px;padding:8px 12px;gap:10px;}
+  #ctrl-panel{
+    border-radius:14px;
+    padding:6px 10px;
+    gap:8px;
+    height:auto;
+    min-height:72px;
+    flex-wrap:nowrap;
+  }
+  #joystick-base{width:56px;height:56px;}
+  .btn-slot{height:52px;}
+  .btn-arcade{width:22px;height:22px;}
+  .btns-wrap{gap:5px;}
+  .coin-slot-wrap{width:40px;height:40px;}
+  .coin-label{font-size:4px;}
+  #hud{padding:3px 8px;gap:4px;flex-wrap:nowrap;overflow:hidden;}
+  .hud-sep{height:16px;}
+  .hud-item:nth-child(9),.hud-sep:nth-child(8){display:none;}
   .port-grid{grid-template-columns:repeat(2,1fr);}
   .mcard.lg,.mcard.wd,.mcard.tl,.mcard.md,.mcard.sm{grid-column:span 2;grid-row:span 1;}
   .proj-grid{grid-template-columns:1fr;}
-  #joystick-base{width:60px;height:60px;}
 }
 </style>
 </head>
@@ -426,7 +408,7 @@ html,body{
 
         <div id="hero" class="hero">
           <div class="hero-grid"></div>
-          <p class="hero-label">&gt; GAME DESIGNER_</p>
+          <p class="hero-label">&gt; TECHNICAL GAME DESIGNER_</p>
           <h1>DANIIL<br>PAVLOV</h1>
           <h2>3.5+ YRS · PC &amp; MOBILE F2P</h2>
           <p class="hero-desc">Systems · LiveOps · Events · Economy<br>UE5 · Unity · C++ · Blueprint · SQL</p>
@@ -442,41 +424,53 @@ html,body{
           <div class="sec-header fu"><span class="sec-num">STAGE 01</span><h2 class="sec-title">PORTFOLIO</h2><div class="sec-line"></div></div>
           <div class="port-grid">
 
-            <div class="mcard lg fu" data-type="image" data-src="src\assets\UE5AIHideAndSeekGame_Icon_1.jpg" data-title="UE5 AI Hide And Seek Game" data-desc="Описание работы. Замени src и data-src на ссылку на своё изображение." onclick="openLB(this)">
+            <div class="mcard lg fu" data-type="image" data-src="src\assets\UE5AIHideAndSeekGame_Icon_1.jpg" data-title="UE5 AI Hide And Seek Game" data-desc="Описание изображения" onclick="openLB(this)">
               <img src="src\assets\UE5AIHideAndSeekGame_Icon_1.jpg" alt="">
               <div class="covlay"><h3>UE5 AI Hide And Seek Game</h3><p>UE5</p></div>
             </div>
 
             <div class="mcard md fu" data-type="youtube" data-youtube-id="7TR6tAux9ts" data-title="TPSUE5Gameplay" data-desc="Описание видео" onclick="openLB(this)">
-                  <div class="vthumb"><img src="src\assets\TPSUE5Gameplay_Icon_1.png" alt=""><div class="play-wrap"><div class="play-btn"></div></div></div>
-                  <div class="covlay"><h3>TPSUE5Gameplay</h3><p>UE5</p></div>
-                </div>
-
-            <div class="mcard md fu" data-type="image" data-src="src\assets\TPSUE5Gameplay_Icon_2.png" data-title="TPSUE5Gameplay" data-desc="Описание видео" onclick="openLB(this)">
-              <img src="src\assets\TPSUE5Gameplay_Icon_2.png" alt="">
-              <div class="covlay"><h3>TPSUE5Gameplay</h3><p>UE5</p></div>
+              <div class="vthumb"><img src="src\assets\TPSUE5Gameplay_Icon_1.png" alt=""><div class="play-wrap"><div class="play-btn"></div></div></div><div class="covlay"><h3>TPSUE5Gameplay</h3><p>UE5</p></div>
             </div>
 
-            <div class="mcard sm fu" data-type="image" data-src="src\assets\TPSUE5Gameplay_Icon_3.png" data-title="TPSUE5Gameplay" data-desc="Описание видео" onclick="openLB(this)">
+            <div class="mcard md fu" data-type="image" data-src="src\assets\TPSUE5Gameplay_Icon_2.png" data-title="TPSUE5Gameplay" data-desc="Описание изображения" onclick="openLB(this)">
+              <img src="src\assets\TPSUE5Gameplay_Icon_2.png" alt="">
+              <div class="covlay">
+                <h3>TPSUE5Gameplay</h3>
+                <p>UE5</p>
+              </div>
+            </div>
+
+            <div class="mcard sm fu" data-type="image" data-src="src\assets\TPSUE5Gameplay_Icon_3.png" data-title="TPSUE5Gameplay" data-desc="Описание изображения" onclick="openLB(this)">
               <img src="src\assets\TPSUE5Gameplay_Icon_3.png" alt="">
-              <div class="covlay"><h3>TPSUE5Gameplay</h3><p>UE5</p></div>
+              <div class="covlay"><h3>TPSUE5Gameplay</h3>
+                <p>UE5</p>
+              </div>
             </div>
 
             <div class="mcard wd fu" data-type="youtube" data-youtube-id="F5lmJn4IcvU" data-title="UE5AIHideAndSeekGame" data-desc="Описание видео" onclick="openLB(this)">
-              <div class="vthumb"><img src="src\assets\UE5AIHideAndSeekGame_Icon_2.png" alt=""><div class="play-wrap"><div class="play-btn"></div></div></div>
-              <div class="covlay"><h3>UE5AIHideAndSeekGame</h3><p>UE5</p></div>
+              <div class="vthumb">
+                <img src="src\assets\UE5AIHideAndSeekGame_Icon_2.png" alt=""><div class="play-wrap"><div class="play-btn"></div></div></div><div class="covlay"><h3>UE5AIHideAndSeekGame</h3>
+                <p></p>
+              </div>
             </div>
 
             <div class="mcard tl fu" data-type="image" data-src="src\assets\FlappyMax_Icon_1.png" data-title="FlappyMax" data-desc="Описание изображения" onclick="openLB(this)">
               <img src="src\assets\FlappyMax_Icon_1.png" alt="">
-              <div class="covlay"><h3>FlappyMax</h3><p>Unity</p></div>
+              <div class="covlay">
+                <h3>FlappyMax</h3>
+                <p>Unity</p>
+              </div>
             </div>
 
             <div class="mcard wd lg fu" data-type="image" data-src="src\assets\DonkeyKirya_Icon_1.png" data-title="DonkeyKirya" data-desc="Описание изображения" onclick="openLB(this)">
               <img src="src\assets\DonkeyKirya_Icon_1.png" alt="">
-              <div class="covlay"><h3>DonkeyKirya</h3><p>Unity</p></div>
+              <div class="covlay">
+                <h3>DonkeyKirya</h3>
+                <p>Unity</p></div>
             </div>
-  
+
+
 
           </div>
         </div>
@@ -484,18 +478,33 @@ html,body{
         <div id="projects" class="inner-section">
           <div class="sec-header fu"><span class="sec-num">STAGE 02</span><h2 class="sec-title">COMMERCIAL PROJECTS</h2><div class="sec-line"></div></div>
           <div class="proj-grid">
+
             <div class="pcard fu">
-              <div class="proj-banner">⚔️</div>
+              <div class="proj-banner">
+                <div class="banner-img-wrap" id="skyforge-banner">
+                  <img src="src\assets\Skyforge_Icon_1.jpg" alt="" >
+                </div>
+              </div>
               <div class="proj-body"><p class="proj-studio">PIXEL SKY · 2024–2025</p><h3 class="proj-name">SKYFORGE</h3><p class="proj-desc"></p><div class="proj-meta"><span class="mtag">PC MMO</span><span class="mtag">LIVEOPS</span><span class="mtag">BALANCE</span><span class="mtag">EVENTS</span><span class="mtag">SQL</span></div></div>
               <div class="proj-stats"><div class="stat"><span class="sval">28%</span><span class="slbl">Возврат игроков</span></div><div class="stat"><span class="sval">90+</span><span class="slbl">Ребалансировано</span></div><div class="stat"><span class="sval">−30%</span><span class="slbl">Жалоб</span></div></div>
             </div>
+            
             <div class="pcard fu">
-              <div class="proj-banner">🐱</div>
+              <div class="proj-banner">
+                <div class="banner-img-wrap" id="knightcats-banner">
+                  <img src="src\assets\KnightCats2_Icon_1.webp" alt="" >
+                </div>
+              </div>
               <div class="proj-body"><p class="proj-studio">ELEPHANT GAMES · 2023</p><h3 class="proj-name">KNIGHT CATS 2</h3><p class="proj-desc"></p><div class="proj-meta"><span class="mtag">PC</span><span class="mtag">UNITY</span><span class="mtag">C#</span></div></div>
-              <div class="proj-stats"><div class="stat"><span class="sval">F2P</span><span class="slbl">Монетизация</span></div><div class="stat"><span class="sval">PC</span><span class="slbl">Платформа</span></div></div>
+              <div class="proj-stats"><div class="stat"><span class="sval">F2P</span><span class="slbl">Монетизация</span></div><div class="stat"><span class="sval">MOBILE</span><span class="slbl">Платформа</span></div></div>
             </div>
+
             <div class="pcard fu">
-              <div class="proj-banner">🚀</div>
+              <div class="proj-banner">
+                <div class="banner-img-wrap" id="rescue-banner">
+                  <img src="src\assets\RescueDash_Icon_1.jpg" alt="" >
+                </div>
+              </div>
               <div class="proj-body"><p class="proj-studio">WHALEBOX STUDIO · 2021–2022</p><h3 class="proj-name">RESCUE DASH</h3><p class="proj-desc"></p><div class="proj-meta"><span class="mtag">MOBILE F2P</span><span class="mtag">LEVEL DESIGN</span><span class="mtag">UNITY</span></div></div>
               <div class="proj-stats"><div class="stat"><span class="sval">100+</span><span class="slbl">Уровней</span></div><div class="stat"><span class="sval">UNITY</span><span class="slbl">Движок</span></div></div>
             </div>
@@ -532,14 +541,61 @@ html,body{
   <!-- CONTROL PANEL -->
   <div id="ctrl-panel">
 
-    <!-- Joystick -->
+    <!-- Joystick — Ball-top SVG -->
     <div class="joystick-wrap">
       <div id="joystick-base">
-        <div id="j-shadow"></div>
-        <div id="j-stick">
-          <div id="j-ball-el"></div>
-          <div id="j-shaft-el"></div>
-        </div>
+        <svg id="joystick-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="jBase" cx="40%" cy="35%" r="62%">
+              <stop offset="0%" stop-color="#252838"/>
+              <stop offset="100%" stop-color="#0d0e12"/>
+            </radialGradient>
+            <radialGradient id="jBall" cx="34%" cy="28%" r="58%">
+              <stop offset="0%" stop-color="#ff9999"/>
+              <stop offset="52%" stop-color="#cc2222"/>
+              <stop offset="100%" stop-color="#881111"/>
+            </radialGradient>
+            <linearGradient id="jShaft" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%"   stop-color="#2a2a2a"/>
+              <stop offset="28%"  stop-color="#888"/>
+              <stop offset="50%"  stop-color="#ccc"/>
+              <stop offset="72%"  stop-color="#777"/>
+              <stop offset="100%" stop-color="#2a2a2a"/>
+            </linearGradient>
+            <radialGradient id="jBaseInner" cx="42%" cy="38%" r="58%">
+              <stop offset="0%" stop-color="#1e2130"/>
+              <stop offset="100%" stop-color="#080a0f"/>
+            </radialGradient>
+          </defs>
+          <!-- Base outer ring -->
+          <ellipse cx="50" cy="82" rx="44" ry="16" fill="#0a0b10" stroke="#3a3e52" stroke-width="1.2"/>
+          <!-- Base inner surface -->
+          <ellipse cx="50" cy="82" rx="36" ry="12" fill="url(#jBaseInner)" stroke="#1e2130" stroke-width="0.8"/>
+          <!-- Base cross guides -->
+          <line x1="20" y1="82" x2="80" y2="82" stroke="rgba(255,255,255,0.05)" stroke-width="0.6"/>
+          <line x1="50" y1="72" x2="50" y2="92" stroke="rgba(255,255,255,0.05)" stroke-width="0.6"/>
+          <!-- Shaft shadow on base -->
+          <ellipse cx="50" cy="79" rx="6" ry="3" fill="rgba(0,0,0,0.55)"/>
+          <!-- Shaft -->
+          <rect x="45.5" y="38" width="9" height="46" rx="3.5" fill="url(#jShaft)"/>
+          <!-- Shaft highlight -->
+          <rect x="46.5" y="40" width="3" height="40" rx="1.5" fill="rgba(255,255,255,0.13)"/>
+          <!-- Shaft bottom taper -->
+          <ellipse cx="50" cy="84" rx="4.5" ry="2" fill="#444"/>
+          <!-- Ball shadow underneath -->
+          <ellipse cx="50" cy="41" rx="14" ry="5" fill="rgba(0,0,0,0.45)"/>
+          <!-- Ball body -->
+          <circle cx="50" cy="26" r="20" fill="#881111" stroke="#661111" stroke-width="1.2"/>
+          <circle cx="50" cy="26" r="20" fill="url(#jBall)"/>
+          <!-- Ball primary specular -->
+          <ellipse cx="41" cy="17" rx="7" ry="5.5" fill="rgba(255,255,255,0.3)"/>
+          <!-- Ball micro specular -->
+          <ellipse cx="39" cy="15" rx="3.5" ry="2.5" fill="rgba(255,255,255,0.18)"/>
+          <!-- Ball edge shadow bottom-right -->
+          <path d="M 62 34 Q 68 28 64 20" fill="none" stroke="rgba(0,0,0,0.25)" stroke-width="3" stroke-linecap="round"/>
+          <!-- Glow ring around ball -->
+          <circle cx="50" cy="26" r="21" fill="none" stroke="rgba(204,34,34,0.25)" stroke-width="2"/>
+        </svg>
       </div>
     </div>
 
@@ -736,44 +792,19 @@ function insertCoin(){
   else if(coinCount===10)showAch('🤑','ARCADE ADDICT — 10 COINS','coin_10');
 }
 
-/* =====================
-   JOYSTICK — translate only, 3D shadow effect
-   ===================== */
-const jBase   = document.getElementById('joystick-base');
-const jStick  = document.getElementById('j-stick');
-const jShadow = document.getElementById('j-shadow');
-const jBall   = document.getElementById('j-ball-el');
-const JOY_MAX = 18; // px radius
-
-document.addEventListener('mousemove', e => {
-  const rect = jBase.getBoundingClientRect();
-  const cx = rect.left + rect.width  / 2;
-  const cy = rect.top  + rect.height / 2;
-  let dx = e.clientX - cx;
-  let dy = e.clientY - cy;
-  const dist = Math.sqrt(dx*dx + dy*dy);
-  if(dist > JOY_MAX){ dx = dx/dist*JOY_MAX; dy = dy/dist*JOY_MAX; }
-  const ratio = Math.min(dist / (JOY_MAX * 3), 1); // 0–1 for intensity
-
-  // stick moves toward cursor
-  jStick.style.transform = `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px))`;
-
-  // shadow moves opposite direction, shrinks when centered
-  const sdx = -dx * 0.6;
-  const sdy = -dy * 0.3 + 8; // always slightly below center
-  const scaleX = 1 - ratio * 0.3;
-  const scaleY = 1 - ratio * 0.2;
-  jShadow.style.transform = `translate(calc(-50% + ${sdx}px), calc(-50% + ${sdy}px)) scale(${scaleX}, ${scaleY})`;
-
-  // ball highlight shifts opposite to movement (simulates light source at top-left)
-  const hx = 35 - dx * 1.2;
-  const hy = 30 - dy * 1.2;
-  jBall.style.background = `radial-gradient(circle at ${hx}% ${hy}%, #ff9999, #cc2222 58%, #881111)`;
-
-  // stronger shadow glow when leaning
-  const glowStr = 12 + ratio * 14;
-  jBall.style.boxShadow = `0 0 ${glowStr}px rgba(204,34,34,${0.45 + ratio*0.3}), inset -3px -3px 6px rgba(0,0,0,0.5), inset 3px 3px 6px rgba(255,120,120,0.25)`;
-});
+/* BANNER UPLOAD */
+function triggerBannerUpload(inputId){
+  document.getElementById(inputId).click();
+}
+function loadBannerImg(input,wrapperId){
+  if(!input.files||!input.files[0])return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const wrap=document.getElementById(wrapperId);
+    wrap.innerHTML=`<img src="${e.target.result}" alt=""><div class="banner-change-hint">сменить</div>`;
+  };
+  reader.readAsDataURL(input.files[0]);
+}
 
 /* HOVER */
 document.querySelectorAll('.mcard,.pcard,.tag').forEach(el=>el.addEventListener('mouseenter',()=>hvSnd()));
