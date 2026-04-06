@@ -483,11 +483,18 @@ html,body{
 
             <div class="mcard lg fu" data-type="image" data-src="src/assets/images/UE5AIHideAndSeekGame_Icon_1.jpg" data-title="UE5 AI Hide And Seek Game" data-desc="Implementation of the hide and seek game, where the bots themselves play with each other" onclick="openLB(this)">
               <img src="src/assets/images/UE5AIHideAndSeekGame_Icon_1.jpg" alt="">
-              <div class="covlay"><h3>UE5 AI Hide And Seek Game</h3><p>UE5</p></div>
+              <div class="covlay">
+                <h3>UE5 AI Hide And Seek Game</h3>
+                <p>UE5</p>
+              </div>
             </div>
 
             <div class="mcard md fu" data-type="youtube" data-youtube-id="7TR6tAux9ts" data-title="TPSUE5Gameplay" data-desc="Implementation of a boss battle" onclick="openLB(this)">
-              <div class="vthumb"><img src="src/assets/images/TPSUE5Gameplay_Icon_1.png" alt=""><div class="play-wrap"><div class="play-btn"></div></div></div><div class="covlay"><h3>TPSUE5Gameplay</h3><p>UE5</p></div>
+              <div class="vthumb"><img src="src/assets/images/TPSUE5Gameplay_Icon_1.png" alt=""><div class="play-wrap"><div class="play-btn"></div></div></div>
+              <div class="covlay">
+                <h3>TPSUE5Gameplay</h3>
+                <p>UE5</p>
+              </div>
             </div>
 
             <div class="mcard md fu" data-type="image" data-src="src/assets/images/TPSUE5Gameplay_Icon_2.png" data-title="TPSUE5Gameplay" data-desc="Implementation of a boss battle" onclick="openLB(this)">
@@ -512,7 +519,7 @@ html,body{
               </div>
             </div>
 
-            <div class="mcard tl fu" data-type="image" data-src="src/assets/images/FlappyMax_Icon_1.png" data-title="FlappyMax" data-desc="Implementation of a Flappy Bird parody in Unity" onclick="openLB(this)">
+            <div class="mcard tl fu" data-type="image" data-src="src/assets/images/FlappyMax_Icon_1.png" data-title="FlappyMax" data-desc="Implementation of a Flappy Bird parody in Unity.<br><a href='https://fikek.itch.io/flappymax' target='_blank' class='desc-link'>Link</a>" onclick="openLB(this)">
               <img src="src/assets/images/FlappyMax_Icon_1.png" alt="">
               <div class="covlay">
                 <h3>FlappyMax</h3>
@@ -520,7 +527,7 @@ html,body{
               </div>
             </div>
 
-            <div class="mcard wd lg fu" data-type="image" data-src="src/assets/images/DonkeyKirya_Icon_1.png" data-title="DonkeyKirya" data-desc="Implementation of a Donkey Kong parody in Unity" onclick="openLB(this)">
+            <div class="mcard wd lg fu" data-type="image" data-src="src/assets/images/DonkeyKirya_Icon_1.png" data-title="DonkeyKirya" data-desc="Implementation of a Donkey Kong parody in Unity.<br><a href='https://fikek.itch.io/donkeykirya' target='_blank' class='desc-link'>Link</a>" onclick="openLB(this)">
               <img src="src/assets/images/DonkeyKirya_Icon_1.png" alt="">
               <div class="covlay">
                 <h3>DonkeyKirya</h3>
@@ -804,7 +811,7 @@ function openLB(card){
   openSnd();scoreAdd(100);
   const m=document.getElementById('lb-media');
   document.getElementById('lb-title').textContent=card.dataset.title||'';
-  document.getElementById('lb-desc').textContent=card.dataset.desc||'';
+  document.getElementById('lb-desc').innerHTML=card.dataset.desc||'';
   if(card.dataset.type==='youtube'){
     m.innerHTML=`<iframe src="https://www.youtube.com/embed/${card.dataset.youtubeId}?autoplay=1&rel=0" allow="autoplay;fullscreen" allowfullscreen></iframe>`;
   } else {
