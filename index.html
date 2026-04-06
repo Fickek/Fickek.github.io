@@ -4,9 +4,65 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PAVLOV.EXE — Game Designer</title>
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<!-- <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Share+Tech+Mono&display=swap" rel="stylesheet"> -->
 <link rel="icon" href="src\assets\ghost-red.svg">
 <style>
+
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Press Start 2P';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('src/assets/fonts/e3t4euO8T-267oIAQAu6jDQyK3nYivN04w.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Press Start 2P';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('src/assets/fonts/e3t4euO8T-267oIAQAu6jDQyK3nRivN04w.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'Press Start 2P';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('src/assets/fonts/e3t4euO8T-267oIAQAu6jDQyK3nWivN04w.woff2') format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Press Start 2P';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('src/assets/fonts/e3t4euO8T-267oIAQAu6jDQyK3nbivN04w.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Press Start 2P';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('src/assets/fonts/e3t4euO8T-267oIAQAu6jDQyK3nVivM.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin */
+@font-face {
+  font-family: 'Share Tech Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('src/assets/fonts/J7aHnp1uDWRBEqV98dVQztYldFcLowEF.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 :root {
   --ph:#c8ff00;--ph2:#8ab800;--ph3:#4a6600;--amber:#ffb300;--red:#ff4444;
   --bg:#060608;--bg2:#0c0d10;--bg3:#111318;
@@ -425,25 +481,25 @@ html,body{
           <div class="sec-header fu"><span class="sec-num">STAGE 01</span><h2 class="sec-title">PORTFOLIO</h2><div class="sec-line"></div></div>
           <div class="port-grid">
 
-            <div class="mcard lg fu" data-type="image" data-src="src\assets\UE5AIHideAndSeekGame_Icon_1.jpg" data-title="UE5 AI Hide And Seek Game" data-desc="Implementation of the hide and seek game, where the bots themselves play with each other" onclick="openLB(this)">
-              <img src="src\assets\UE5AIHideAndSeekGame_Icon_1.jpg" alt="">
+            <div class="mcard lg fu" data-type="image" data-src="src/assets/images/UE5AIHideAndSeekGame_Icon_1.jpg" data-title="UE5 AI Hide And Seek Game" data-desc="Implementation of the hide and seek game, where the bots themselves play with each other" onclick="openLB(this)">
+              <img src="src/assets/images/UE5AIHideAndSeekGame_Icon_1.jpg" alt="">
               <div class="covlay"><h3>UE5 AI Hide And Seek Game</h3><p>UE5</p></div>
             </div>
 
             <div class="mcard md fu" data-type="youtube" data-youtube-id="7TR6tAux9ts" data-title="TPSUE5Gameplay" data-desc="Implementation of a boss battle" onclick="openLB(this)">
-              <div class="vthumb"><img src="src\assets\TPSUE5Gameplay_Icon_1.png" alt=""><div class="play-wrap"><div class="play-btn"></div></div></div><div class="covlay"><h3>TPSUE5Gameplay</h3><p>UE5</p></div>
+              <div class="vthumb"><img src="src/assets/images/TPSUE5Gameplay_Icon_1.png" alt=""><div class="play-wrap"><div class="play-btn"></div></div></div><div class="covlay"><h3>TPSUE5Gameplay</h3><p>UE5</p></div>
             </div>
 
-            <div class="mcard md fu" data-type="image" data-src="src\assets\TPSUE5Gameplay_Icon_2.png" data-title="TPSUE5Gameplay" data-desc="Implementation of a boss battle" onclick="openLB(this)">
-              <img src="src\assets\TPSUE5Gameplay_Icon_2.png" alt="">
+            <div class="mcard md fu" data-type="image" data-src="src/assets/images/TPSUE5Gameplay_Icon_2.png" data-title="TPSUE5Gameplay" data-desc="Implementation of a boss battle" onclick="openLB(this)">
+              <img src="src/assets/images/TPSUE5Gameplay_Icon_2.png" alt="">
               <div class="covlay">
                 <h3>TPSUE5Gameplay</h3>
                 <p>UE5</p>
               </div>
             </div>
 
-            <div class="mcard sm fu" data-type="image" data-src="src\assets\TPSUE5Gameplay_Icon_3.png" data-title="TPSUE5Gameplay" data-desc="Implementation of a boss battle" onclick="openLB(this)">
-              <img src="src\assets\TPSUE5Gameplay_Icon_3.png" alt="">
+            <div class="mcard sm fu" data-type="image" data-src="src/assets/images/TPSUE5Gameplay_Icon_3.png" data-title="TPSUE5Gameplay" data-desc="Implementation of a boss battle" onclick="openLB(this)">
+              <img src="src/assets/images/TPSUE5Gameplay_Icon_3.png" alt="">
               <div class="covlay"><h3>TPSUE5Gameplay</h3>
                 <p>UE5</p>
               </div>
@@ -451,21 +507,21 @@ html,body{
 
             <div class="mcard wd fu" data-type="youtube" data-youtube-id="F5lmJn4IcvU" data-title="UE5AIHideAndSeekGame" data-desc="Implementation of the hide and seek game, where the bots themselves play with each other" onclick="openLB(this)">
               <div class="vthumb">
-                <img src="src\assets\UE5AIHideAndSeekGame_Icon_2.png" alt=""><div class="play-wrap"><div class="play-btn"></div></div></div><div class="covlay"><h3>UE5AIHideAndSeekGame</h3>
+                <img src="src/assets/images/UE5AIHideAndSeekGame_Icon_2.png" alt=""><div class="play-wrap"><div class="play-btn"></div></div></div><div class="covlay"><h3>UE5AIHideAndSeekGame</h3>
                 <p></p>
               </div>
             </div>
 
-            <div class="mcard tl fu" data-type="image" data-src="src\assets\FlappyMax_Icon_1.png" data-title="FlappyMax" data-desc="Implementation of a Flappy Bird parody in Unity" onclick="openLB(this)">
-              <img src="src\assets\FlappyMax_Icon_1.png" alt="">
+            <div class="mcard tl fu" data-type="image" data-src="src/assets/images/FlappyMax_Icon_1.png" data-title="FlappyMax" data-desc="Implementation of a Flappy Bird parody in Unity" onclick="openLB(this)">
+              <img src="src/assets/images/FlappyMax_Icon_1.png" alt="">
               <div class="covlay">
                 <h3>FlappyMax</h3>
                 <p>Unity</p>
               </div>
             </div>
 
-            <div class="mcard wd lg fu" data-type="image" data-src="src\assets\DonkeyKirya_Icon_1.png" data-title="DonkeyKirya" data-desc="Implementation of a Donkey Kong parody in Unity" onclick="openLB(this)">
-              <img src="src\assets\DonkeyKirya_Icon_1.png" alt="">
+            <div class="mcard wd lg fu" data-type="image" data-src="src/assets/images/DonkeyKirya_Icon_1.png" data-title="DonkeyKirya" data-desc="Implementation of a Donkey Kong parody in Unity" onclick="openLB(this)">
+              <img src="src/assets/images/DonkeyKirya_Icon_1.png" alt="">
               <div class="covlay">
                 <h3>DonkeyKirya</h3>
                 <p>Unity</p></div>
@@ -483,7 +539,7 @@ html,body{
             <div class="pcard fu">
               <div class="proj-banner">
                 <div class="banner-img-wrap" id="skyforge-banner">
-                  <img src="src\assets\Skyforge_Icon_1.jpg" alt="" >
+                  <img src="src/assets/images/Skyforge_Icon_1.jpg" alt="" >
                 </div>
               </div>
               <div class="proj-body"><p class="proj-studio">PIXEL SKY · 2024–2025</p><h3 class="proj-name">SKYFORGE</h3><p class="proj-desc"></p><div class="proj-meta"><span class="mtag">PC MMO</span><span class="mtag">LIVEOPS</span><span class="mtag">BALANCE</span><span class="mtag">EVENTS</span><span class="mtag">SQL</span></div></div>
@@ -510,7 +566,7 @@ html,body{
             <div class="pcard fu">
               <div class="proj-banner">
                 <div class="banner-img-wrap" id="knightcats-banner">
-                  <img src="src\assets\KnightCats2_Icon_1.webp" alt="" >
+                  <img src="src/assets/images/KnightCats2_Icon_1.webp" alt="" >
                 </div>
               </div>
               <div class="proj-body"><p class="proj-studio">ELEPHANT GAMES · 2023</p><h3 class="proj-name">KNIGHT CATS 2</h3><p class="proj-desc"></p><div class="proj-meta"><span class="mtag">PC</span><span class="mtag">UNITY</span><span class="mtag">C#</span></div></div>
@@ -524,7 +580,7 @@ html,body{
             <div class="pcard fu">
               <div class="proj-banner">
                 <div class="banner-img-wrap" id="rescue-banner">
-                  <img src="src\assets\RescueDash_Icon_1.jpg" alt="" >
+                  <img src="src/assets/images/RescueDash_Icon_1.jpg" alt="" >
                 </div>
               </div>
               <div class="proj-body"><p class="proj-studio">WHALEBOX STUDIO · 2021–2022</p><h3 class="proj-name">RESCUE DASH</h3><p class="proj-desc"></p><div class="proj-meta"><span class="mtag">MOBILE F2P</span><span class="mtag">LEVEL DESIGN</span><span class="mtag">UNITY</span></div></div>
