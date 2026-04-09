@@ -928,7 +928,7 @@ document.querySelectorAll('.mcard,.pcard,.tag').forEach(el=>el.addEventListener(
 const K=['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
 let ki=0;
 document.addEventListener('keydown',e=>{
-  if(e.key===K[ki]){ki++;if(ki===K.length){ki=0;scoreAdd(9999);showAch('⭐','30 LIVES UNLOCKED!','konami');[0,80,160,240].forEach((t,i)=>setTimeout(()=>beep(660+i*220,.1,'square',.07),t));}}
+  if(e.key===K[ki]){ki++;if(ki===K.length){ki=0;scoreAdd(9999);showAch('⭐','C-C-C-COMBO!','konami');[0,80,160,240].forEach((t,i)=>setTimeout(()=>beep(660+i*220,.1,'square',.07),t));}}
   else ki=0;
 });
 
