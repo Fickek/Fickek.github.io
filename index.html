@@ -900,6 +900,20 @@ function loadBannerImg(input,wrapperId){
   reader.readAsDataURL(input.files[0]);
 }
 
+/* JOYSTICK PENDULUM — rotates around base pivot relative to screen center */
+(function(){
+  const MAX_DEG = 25;
+  const pendulum = document.getElementById('j-pendulum');
+  if (!pendulum) return;
+  document.addEventListener('mousemove', e => {
+    const cx = window.innerWidth / 2;
+    const dx = e.clientX - cx;
+    const ratio = Math.max(-1, Math.min(1, dx / cx));
+    const deg = ratio * MAX_DEG;
+    pendulum.style.transform = `rotate(${deg}deg)`;
+  });
+})();
+
 /* HOVER */
 document.querySelectorAll('.mcard,.pcard,.tag').forEach(el=>el.addEventListener('mouseenter',()=>hvSnd()));
 
