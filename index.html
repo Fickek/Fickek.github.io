@@ -496,7 +496,7 @@ html,body{
           <div class="sec-header fu"><span class="sec-num">STAGE 01</span><h2 class="sec-title">PORTFOLIO</h2><div class="sec-line"></div></div>
           <div class="port-grid">
 
-            <div class="mcard lg fu" data-type="image" data-src="src/assets/images/UE5AIHideAndSeekGame_Icon_1.jpg" data-title="UE5 AI Hide And Seek Game" data-desc="Implementation of the hide and seek game, where the bots themselves play with each other" onclick="openLB(this)">
+            <div class="mcard lg fu" data-type="image" data-src="src/assets/images/UE5AIHideAndSeekGame_Icon_1.jpg" data-title="UE5 AI Hide And Seek Game" data-desc="Implementation of the hide and seek game, where the bots themselves play with each other" onclick="openLB(this); checkPortfolioAch();">
               <img src="src/assets/images/UE5AIHideAndSeekGame_Icon_1.jpg" alt="">
               <div class="covlay">
                 <h3>UE5 AI Hide And Seek Game</h3>
@@ -504,7 +504,7 @@ html,body{
               </div>
             </div>
 
-            <div class="mcard md fu" data-type="youtube" data-youtube-id="7TR6tAux9ts" data-title="TPSUE5Gameplay" data-desc="Implementation of a boss battle" onclick="openLB(this)">
+            <div class="mcard md fu" data-type="youtube" data-youtube-id="7TR6tAux9ts" data-title="TPSUE5Gameplay" data-desc="Implementation of a boss battle" onclick="openLB(this); checkPortfolioAch();">
               <div class="vthumb"><img src="src/assets/images/TPSUE5Gameplay_Icon_1.png" alt=""><div class="play-wrap"><div class="play-btn"></div></div></div>
               <div class="covlay">
                 <h3>TPSUE5Gameplay</h3>
@@ -512,7 +512,7 @@ html,body{
               </div>
             </div>
 
-            <div class="mcard md fu" data-type="image" data-src="src/assets/images/TPSUE5Gameplay_Icon_2.png" data-title="TPSUE5Gameplay" data-desc="Implementation of a boss battle" onclick="openLB(this)">
+            <div class="mcard md fu" data-type="image" data-src="src/assets/images/TPSUE5Gameplay_Icon_2.png" data-title="TPSUE5Gameplay" data-desc="Implementation of a boss battle" onclick="openLB(this); checkPortfolioAch(); ">
               <img src="src/assets/images/TPSUE5Gameplay_Icon_2.png" alt="">
               <div class="covlay">
                 <h3>TPSUE5Gameplay</h3>
@@ -520,21 +520,21 @@ html,body{
               </div>
             </div>
 
-            <div class="mcard sm fu" data-type="image" data-src="src/assets/images/TPSUE5Gameplay_Icon_3.png" data-title="TPSUE5Gameplay" data-desc="Implementation of a boss battle" onclick="openLB(this)">
+            <div class="mcard sm fu" data-type="image" data-src="src/assets/images/TPSUE5Gameplay_Icon_3.png" data-title="TPSUE5Gameplay" data-desc="Implementation of a boss battle" onclick="openLB(this); checkPortfolioAch();">
               <img src="src/assets/images/TPSUE5Gameplay_Icon_3.png" alt="">
               <div class="covlay"><h3>TPSUE5Gameplay</h3>
                 <p>UE5</p>
               </div>
             </div>
 
-            <div class="mcard wd fu" data-type="youtube" data-youtube-id="F5lmJn4IcvU" data-title="UE5AIHideAndSeekGame" data-desc="Implementation of the hide and seek game, where the bots themselves play with each other" onclick="openLB(this)">
+            <div class="mcard wd fu" data-type="youtube" data-youtube-id="F5lmJn4IcvU" data-title="UE5AIHideAndSeekGame" data-desc="Implementation of the hide and seek game, where the bots themselves play with each other" onclick="openLB(this); checkPortfolioAch();">
               <div class="vthumb">
                 <img src="src/assets/images/UE5AIHideAndSeekGame_Icon_2.png" alt=""><div class="play-wrap"><div class="play-btn"></div></div></div><div class="covlay"><h3>UE5AIHideAndSeekGame</h3>
                 <p></p>
               </div>
             </div>
 
-            <div class="mcard tl fu" data-type="image" data-src="src/assets/images/FlappyMax_Icon_1.png" data-title="FlappyMax" data-desc="Implementation of a Flappy Bird parody in Unity.<br><a href='https://fikek.itch.io/flappymax' target='_blank' class='desc-link'>Link</a>" onclick="openLB(this)">
+            <div class="mcard tl fu" data-type="image" data-src="src/assets/images/FlappyMax_Icon_1.png" data-title="FlappyMax" data-desc="Implementation of a Flappy Bird parody in Unity.<br><a href='https://fikek.itch.io/flappymax' target='_blank' class='desc-link'>Link</a>" onclick="openLB(this); checkPortfolioAch();">
               <img src="src/assets/images/FlappyMax_Icon_1.png" alt="">
               <div class="covlay">
                 <h3>FlappyMax</h3>
@@ -542,7 +542,7 @@ html,body{
               </div>
             </div>
 
-            <div class="mcard wd lg fu" data-type="image" data-src="src/assets/images/DonkeyKirya_Icon_1.png" data-title="DonkeyKirya" data-desc="Implementation of a Donkey Kong parody in Unity.<br><a href='https://fikek.itch.io/donkeykirya' target='_blank' class='desc-link'>Link</a>" onclick="openLB(this)">
+            <div class="mcard wd lg fu" data-type="image" data-src="src/assets/images/DonkeyKirya_Icon_1.png" data-title="DonkeyKirya" data-desc="Implementation of a Donkey Kong parody in Unity.<br><a href='https://fikek.itch.io/donkeykirya' target='_blank' class='desc-link'>Link</a>" onclick="openLB(this); checkPortfolioAch();">
               <img src="src/assets/images/DonkeyKirya_Icon_1.png" alt="">
               <div class="covlay">
                 <h3>DonkeyKirya</h3>
@@ -882,7 +882,9 @@ function btnPress(color){
 /* COIN — also triggers enterSite on first insert */
 let coinCount=0;
 function insertCoin(){
-  coinSnd();scoreAdd(500);coinCount++;
+  coinSnd();
+  scoreAdd(500);
+  coinCount++;
   const wrap=document.querySelector('.coin-slot-wrap');
   const coin=document.createElement('div');coin.className='coin-anim';
   wrap.appendChild(coin);setTimeout(()=>coin.remove(),550);
@@ -891,6 +893,15 @@ function insertCoin(){
   if(coinCount===1)showAch('🪙','FIRST COIN INSERTED','coin_first');
   else if(coinCount===5)showAch('💰','HIGH ROLLER — 5 COINS','coin_5');
   else if(coinCount===10)showAch('🤑','ARCADE ADDICT — 10 COINS','coin_10');
+}
+
+let porfolioCheck=0;
+function checkPortfolioAch(){
+  porfolioCheck++;
+  if(porfolioCheck===1)showAch('🎨','JUNIOR','portfolio_junior');
+  else if(porfolioCheck===2)showAch('🖼️','MIDDLE','portfolio_middle');
+  else if(porfolioCheck===4)showAch('🎯','SENIOR','portfolio_senior');
+  else if(porfolioCheck>=7)showAch('🏆','PORTFOLIO COMPLETE','portfolio_complete');
 }
 
 /* BANNER UPLOAD */
