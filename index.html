@@ -840,7 +840,7 @@ function navClick(e,id){
   document.querySelectorAll('#screen-nav a').forEach(a=>a.classList.remove('active'));
   e.currentTarget.classList.add('active');
 }
-window.addEventListener('load',()=>{
+document.addEventListener('DOMContentLoaded',()=>{
   const sc=document.getElementById('screen-content');
   sc.addEventListener('scroll',()=>{
     const ids=['hero','portfolio','projects'];let cur='hero';
@@ -933,7 +933,7 @@ document.addEventListener('keydown',e=>{
   else ki=0;
 });
 
-window.addEventListener('load',runBoot);
+document.addEventListener('DOMContentLoaded',runBoot);
 </script>
 </body>
 </html>
