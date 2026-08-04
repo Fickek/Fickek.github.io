@@ -5,17 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PAVLOV.EXE — Game Designer</title>
 <!-- <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Share+Tech+Mono&display=swap" rel="stylesheet"> -->
-  <link rel="preload" as="image" href="src/assets/images/UE5AIHideAndSeekGame_Icon_1.jpg">
-  <link rel="preload" as="image" href="src/assets/images/TPSUE5Gameplay_Icon_1.png">
-  <link rel="preload" as="image" href="src/assets/images/TPSUE5Gameplay_Icon_2.png">
-  <link rel="preload" as="image" href="src/assets/images/TPSUE5Gameplay_Icon_3.png">
-  <link rel="preload" as="image" href="src/assets/images/UE5AIHideAndSeekGame_Icon_2.png">
-  <link rel="preload" as="image" href="src/assets/images/FlappyMax_Icon_1.png">
-  <link rel="preload" as="image" href="src/assets/images/DonkeyKirya_Icon_1.png">
-  <link rel="preload" as="image" href="src/assets/images/Skyforge_Icon_1.jpg">
-  <link rel="preload" as="image" href="src/assets/images/KnightCats2_Icon_1.webp">
-  <link rel="preload" as="image" href="src/assets/images/RescueDash_Icon_1.jpg">
-  <link rel="icon" href="src\assets\ghost-red.svg">
+<link rel="icon" href="src\assets\ghost-red.svg">
 <style>
 
 /* cyrillic-ext */
@@ -850,7 +840,7 @@ function navClick(e,id){
   document.querySelectorAll('#screen-nav a').forEach(a=>a.classList.remove('active'));
   e.currentTarget.classList.add('active');
 }
-document.addEventListener('DOMContentLoaded',()=>{
+window.addEventListener('load',()=>{
   const sc=document.getElementById('screen-content');
   sc.addEventListener('scroll',()=>{
     const ids=['hero','portfolio','projects'];let cur='hero';
@@ -943,7 +933,7 @@ document.addEventListener('keydown',e=>{
   else ki=0;
 });
 
-document.addEventListener('DOMContentLoaded',runBoot);
+window.addEventListener('load',runBoot);
 </script>
 </body>
 </html>
