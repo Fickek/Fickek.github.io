@@ -4,14 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PAVLOV.EXE — Game Designer</title>
-<!-- <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Share+Tech+Mono&display=swap" rel="stylesheet"> -->
 <link rel="icon" href="src/assets/ghost-red.svg">
 
+<!-- Предзагрузка ключевых картинок браузером -->
 <link rel="preload" as="image" href="src/assets/images/Skyforge_Icon_1.webp">
 <link rel="preload" as="image" href="src/assets/images/UE5AIHideAndSeekGame_Icon_1.webp">
 <link rel="preload" as="image" href="src/assets/images/TPSUE5Gameplay_Icon_1.webp">
 <link rel="preload" as="image" href="src/assets/images/RescueDash_Icon_1.webp">
 
+<!-- Предзагрузка шрифтов -->
 <link rel="preload" href="src/assets/fonts/e3t4euO8T-267oIAQAu6jDQyK3nRivN04w.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="src/assets/fonts/e3t4euO8T-267oIAQAu6jDQyK3nYivN04w.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="src/assets/fonts/e3t4euO8T-267oIAQAu6jDQyK3nWivN04w.woff2" as="font" type="font/woff2" crossorigin>
@@ -231,7 +232,6 @@ html,body{
    ===================== */
 #ctrl-panel{
   flex-shrink:0;
-  /*height:clamp(90px,13vh,130px);*/
   background:var(--cab2);
   border-radius:20px;
   border:2px solid var(--metal);
@@ -246,9 +246,7 @@ html,body{
 }
 #ctrl-panel::before{content:'';position:absolute;top:1px;left:20px;right:20px;height:1px;background:rgba(255,255,255,0.07);border-radius:10px;}
 
-/* =====================
-   JOYSTICK — Ball-top SVG illustration, static
-   ===================== */
+/* JOYSTICK */
 .joystick-wrap{display:flex;flex-direction:column;align-items:center;gap:4px;flex-shrink:0;}
 #joystick-base{
   width:clamp(72px,11vw,100px);
@@ -258,10 +256,7 @@ html,body{
 }
 #joystick-svg{width:100%;height:100%;overflow:visible;display:block;}
 
-/* =====================
-   BUTTONS — zigzag row
-   1(up) 2(down) 3(up) 4(down)
-   ===================== */
+/* BUTTONS */
 .btns-wrap{
   display:flex;
   flex-direction:row;
@@ -269,11 +264,9 @@ html,body{
   gap:clamp(6px,1.2vw,12px);
   flex-shrink:0;
 }
-/* each button has its own vertical offset */
 .btn-slot{
   display:flex;
   align-items:center;
-  /* total height = button + max shift, so container doesn't shift */
   height:clamp(60px,9vw,80px);
 }
 .btn-slot.up  { align-items:flex-start; }
@@ -287,7 +280,6 @@ html,body{
   transition:transform 0.08s, box-shadow 0.08s;
   flex-shrink:0;
 }
-/* specular highlight */
 .btn-arcade::before{
   content:'';position:absolute;top:12%;left:16%;
   width:32%;height:30%;
@@ -303,9 +295,7 @@ html,body{
 .btn-arcade:active.btn-blue  {box-shadow:0 1px 0 #112288;}
 .btn-arcade:active.btn-yellow{box-shadow:0 1px 0 #776600;}
 
-/* =====================
-   COIN AREA
-   ===================== */
+/* COIN AREA */
 .coin-area{
   display:flex;
   flex-direction:column;
@@ -345,7 +335,6 @@ html,body{
 }
 .coin-slot-btn:active{box-shadow:inset 0 6px 10px rgba(0,0,0,0.95);}
 
-/* coin flies up from below into slit */
 @keyframes coinFlyUp{
   0%  {transform:translateX(-50%) translateY(0);   opacity:1;}
   65% {transform:translateX(-50%) translateY(-88%);opacity:1;}
@@ -367,7 +356,6 @@ html,body{
   z-index:20;
 }
 
-/* coin label — bright amber */
 .coin-label{
   font-family:var(--font);
   font-size:clamp(5px,0.9vw,7px);
@@ -414,7 +402,7 @@ html,body{
 }
 .proj-banner:hover .banner-change-hint{opacity:1;}
 
-/* MOBILE — safe area + compact layout */
+/* MOBILE */
 @media(max-width:600px){
   html,body{height:100%;height:100dvh;}
   #cabinet
@@ -447,18 +435,12 @@ html,body{
   .port-grid{grid-template-columns:repeat(2,1fr);}
   .mcard.lg,.mcard.wd,.mcard.tl,.mcard.md,.mcard.sm{grid-column:span 2;grid-row:span 1;}
 }
-/* Link inside lightbox description */
 .desc-link{color:var(--ph);text-decoration:none;font-family:var(--font);font-size:clamp(6px,1vw,8px);border-bottom:1px solid var(--ph3);padding-bottom:1px;transition:border-color 0.15s,color 0.15s;}
 .desc-link:hover{color:var(--amber);border-color:var(--amber);}
-/* Coin slot disabled */
 .coin-slot-btn:disabled{opacity:0.3;pointer-events:none;}
-/* ctrl-panel: coin left, rest centered */
 #ctrl-panel{justify-content:space-between;gap:clamp(8px,1.5vw,20px);}
 .ctrl-center{display:flex;align-items:center;gap:clamp(6px,1.2vw,14px);flex:1;justify-content:center;}
-
-.mcard {
-  background: var(--bg3);
-}
+.mcard { background: var(--bg3); }
 
 </style>
 </head>
@@ -476,7 +458,7 @@ html,body{
         <div class="boot-bar-wrap"><div class="boot-bar" id="boot-bar"></div></div>
       </div>
 
-      <!-- INSERT COIN — no button, use physical coin slot -->
+      <!-- INSERT COIN -->
       <div id="insert-coin">
         <h2>INSERT COIN</h2>
         <p class="ic-sub">Use the coin slot below</p>
@@ -569,8 +551,6 @@ html,body{
                 <p>Unity</p></div>
             </div>
 
-
-
           </div>
         </div>
 
@@ -638,7 +618,7 @@ html,body{
     </div><!-- /screen-content -->
   </div><!-- /screen-wrap -->
 
-  <!-- LIGHTBOX outside screen -->
+  <!-- LIGHTBOX -->
   <div id="lb" onclick="closeLBbg(event)">
     <div class="lb-inner">
       <div class="lb-frame">
@@ -653,11 +633,7 @@ html,body{
   <!-- CONTROL PANEL -->
   <div id="ctrl-panel">
 
-
-
-    <!-- Center group: joystick + buttons -->
     <div class="ctrl-center">
-    
       <!-- Joystick -->
       <div class="joystick-wrap">
         <div id="joystick-base">
@@ -680,19 +656,14 @@ html,body{
                 <stop offset="100%" stop-color="#080a0f"/>
               </radialGradient>
             </defs>
-            <!-- Static base — never moves -->
             <ellipse cx="50" cy="82" rx="44" ry="16" fill="#0a0b10" stroke="#3a3e52" stroke-width="1.2"/>
             <ellipse cx="50" cy="82" rx="36" ry="12" fill="url(#jBaseInner)" stroke="#1e2130" stroke-width="0.8"/>
             <line x1="20" y1="82" x2="80" y2="82" stroke="rgba(255,255,255,0.05)" stroke-width="0.6"/>
             <line x1="50" y1="72" x2="50" y2="92" stroke="rgba(255,255,255,0.05)" stroke-width="0.6"/>
-            <!-- Pendulum group: shaft + ball, pivot at base centre (50,82) -->
             <g id="j-pendulum" style="transform-origin:50px 82px;transform:rotate(0deg);transition:transform 0.12s ease-out;">
-              <!-- Shaft -->
               <rect x="45.5" y="38" width="9" height="44" rx="3.5" fill="url(#jShaft)"/>
               <rect x="46.5" y="40" width="3" height="38" rx="1.5" fill="rgba(255,255,255,0.13)"/>
-              <!-- Ball shadow -->
               <ellipse cx="50" cy="41" rx="14" ry="5" fill="rgba(0,0,0,0.45)"/>
-              <!-- Ball -->
               <circle cx="50" cy="26" r="20" fill="#881111" stroke="#661111" stroke-width="1.2"/>
               <circle cx="50" cy="26" r="20" fill="url(#jBall)"/>
               <ellipse cx="41" cy="17" rx="7" ry="5.5" fill="rgba(255,255,255,0.3)"/>
@@ -704,32 +675,30 @@ html,body{
         </div>
       </div>
 
-    <!-- Right side of joystick: remaining buttons -->
-    <div class="btns-wrap">
-      <div class="btn-slot up">
-        <button class="btn-arcade btn-red"    onclick="btnPress('red')"></button>
+      <!-- Buttons -->
+      <div class="btns-wrap">
+        <div class="btn-slot up">
+          <button class="btn-arcade btn-red"    onclick="btnPress('red')"></button>
+        </div>
+        <div class="btn-slot down">
+          <button class="btn-arcade btn-blue"   onclick="btnPress('blue')"></button>
+        </div>
+        <div class="btn-slot up">
+          <button class="btn-arcade btn-green"  onclick="btnPress('green')"></button>
+        </div>
+        <div class="btn-slot down">
+          <button class="btn-arcade btn-yellow" onclick="btnPress('yellow')"></button>
+        </div>
       </div>
-      <div class="btn-slot down">
-        <button class="btn-arcade btn-blue"   onclick="btnPress('blue')"></button>
-      </div>
-      <div class="btn-slot up">
-        <button class="btn-arcade btn-green"  onclick="btnPress('green')"></button>
-      </div>
-      <div class="btn-slot down">
-        <button class="btn-arcade btn-yellow" onclick="btnPress('yellow')"></button>
-      </div>
-    </div><!-- /btns-wrap -->
+    </div>
 
-    </div><!-- /ctrl-center -->
-
-        <!-- Coin slot — LEFT EDGE -->
+    <!-- Coin slot -->
     <div class="coin-area">
       <div class="coin-slot-wrap">
         <button class="coin-slot-btn" id="coin-slot" onclick="insertCoin()" disabled></button>
       </div>
       <div class="coin-label">INSERT<br>COIN</div>
     </div>
-
 
   </div><!-- /ctrl-panel -->
 </div><!-- /cabinet -->
@@ -770,7 +739,28 @@ let score=0;
 const sEl=document.getElementById('score-val');
 function scoreAdd(n){score+=n;sEl.textContent=String(score).padStart(6,'0');sEl.classList.remove('tick');void sEl.offsetWidth;sEl.classList.add('tick');}
 
-/* BOOT */
+/* 1. ФОНОВАЯ ЗАГРУЗКА КАРТИНОК */
+const imageUrls = [
+  "src/assets/images/Skyforge_Icon_1.webp",
+  "src/assets/images/UE5AIHideAndSeekGame_Icon_1.webp",
+  "src/assets/images/TPSUE5Gameplay_Icon_1.webp",
+  "src/assets/images/TPSUE5Gameplay_Icon_2.webp",
+  "src/assets/images/TPSUE5Gameplay_Icon_3.webp",
+  "src/assets/images/UE5AIHideAndSeekGame_Icon_2.webp",
+  "src/assets/images/FlappyMax_Icon_1.webp",
+  "src/assets/images/DonkeyKirya_Icon_1.webp",
+  "src/assets/images/KnightCats2_Icon_1.webp",
+  "src/assets/images/RescueDash_Icon_1.webp"
+];
+
+function preloadImages() {
+  imageUrls.forEach(url => {
+    const img = new Image();
+    img.src = url;
+  });
+}
+
+/* BOOT LOGIC */
 const LINES=[
   {t:'> PAVLOV PORTFOLIO v2.0',d:260},
   {t:'> CHECKING HARDWARE...',d:180},
@@ -782,6 +772,7 @@ const LINES=[
   {t:'> RESCUE DASH MODULE        [OK]',d:120},
   {t:'> ALL SYSTEMS READY.',d:280},
 ];
+
 function runBoot(){
   const log=document.getElementById('boot-log'),bar=document.getElementById('boot-bar');
   let i=0;
@@ -802,7 +793,6 @@ function showInsertCoin(){
     const c=document.getElementById('insert-coin');
     c.style.opacity='1';
     c.style.pointerEvents='all';
-    // NOW enable coin slot
     const slot=document.getElementById('coin-slot');
     slot.disabled=false;
     slot.style.borderColor='var(--amber)';
@@ -817,7 +807,6 @@ function enterSite(){
   gameStarted=true;
   const c=document.getElementById('insert-coin');c.style.opacity='0';c.style.pointerEvents='none';
   setTimeout(()=>c.style.display='none',500);
-  // reset coin slot highlight
   const slot=document.getElementById('coin-slot');
   slot.style.borderColor='';slot.style.boxShadow='';
   const m=document.getElementById('main');m.style.display='block';
@@ -858,21 +847,11 @@ function navClick(e,id){
   document.querySelectorAll('#screen-nav a').forEach(a=>a.classList.remove('active'));
   e.currentTarget.classList.add('active');
 }
-document.addEventListener('DOMContentLoaded',()=>{
-  const sc=document.getElementById('screen-content');
-  sc.addEventListener('scroll',()=>{
-    const ids=['hero','portfolio','projects'];let cur='hero';
-    ids.forEach(id=>{const el=document.getElementById(id);if(el&&sc.scrollTop>=el.offsetTop-80)cur=id;});
-    document.querySelectorAll('#screen-nav a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+cur));
-    scoreAdd(1);
-  });
-});
 
-/* SCROLL ANIM */
+/* SCROLL & OBSERVER */
 const obs=new IntersectionObserver(es=>{
   es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');scoreAdd(10);}});
 },{threshold:.1,root:document.getElementById('screen-content')});
-document.querySelectorAll('.fu').forEach(el=>obs.observe(el));
 
 /* BUTTONS */
 const btnCfg={
@@ -887,7 +866,7 @@ function btnPress(color){
   showAch(cfg.icon,cfg.name,cfg.key);
 }
 
-/* COIN — also triggers enterSite on first insert */
+/* COIN */
 let coinCount=0;
 function insertCoin(){
   coinSnd();
@@ -896,7 +875,6 @@ function insertCoin(){
   const wrap=document.querySelector('.coin-slot-wrap');
   const coin=document.createElement('div');coin.className='coin-anim';
   wrap.appendChild(coin);setTimeout(()=>coin.remove(),550);
-  // first coin starts the game
   if(!gameStarted) enterSite();
   if(coinCount===1)showAch('🪙','FIRST COIN INSERTED','coin_first');
   else if(coinCount===5)showAch('💰','HIGH ROLLER — 5 COINS','coin_5');
@@ -912,21 +890,7 @@ function checkPortfolioAch(){
   else if(porfolioCheck>=7)showAch('🏆','RETENTION 100%','portfolio_complete');
 }
 
-/* BANNER UPLOAD */
-function triggerBannerUpload(inputId){
-  document.getElementById(inputId).click();
-}
-function loadBannerImg(input,wrapperId){
-  if(!input.files||!input.files[0])return;
-  const reader=new FileReader();
-  reader.onload=e=>{
-    const wrap=document.getElementById(wrapperId);
-    wrap.innerHTML=`<img src="${e.target.result}" alt=""><div class="banner-change-hint">сменить</div>`;
-  };
-  reader.readAsDataURL(input.files[0]);
-}
-
-/* JOYSTICK PENDULUM — rotates around base pivot relative to screen center */
+/* JOYSTICK */
 (function(){
   const MAX_DEG = 25;
   const pendulum = document.getElementById('j-pendulum');
@@ -940,10 +904,9 @@ function loadBannerImg(input,wrapperId){
   });
 })();
 
-/* HOVER */
+/* HOVER & KONAMI */
 document.querySelectorAll('.mcard,.pcard,.tag').forEach(el=>el.addEventListener('mouseenter',()=>hvSnd()));
 
-/* KONAMI */
 const K=['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
 let ki=0;
 document.addEventListener('keydown',e=>{
@@ -951,7 +914,31 @@ document.addEventListener('keydown',e=>{
   else ki=0;
 });
 
-document.addEventListener('DOMContentLoaded',runBoot);
+/* 2. ИНИЦИАЛИЗАЦИЯ И ПОРЯДОК ЗАГРУЗКИ */
+document.addEventListener('DOMContentLoaded', () => {
+  // А) Сразу отправляем картинки качаться в фоне
+  preloadImages();
+
+  // Б) Привязываем scroll observer
+  const sc=document.getElementById('screen-content');
+  sc.addEventListener('scroll',()=>{
+    const ids=['hero','portfolio','projects'];let cur='hero';
+    ids.forEach(id=>{const el=document.getElementById(id);if(el&&sc.scrollTop>=el.offsetTop-80)cur=id;});
+    document.querySelectorAll('#screen-nav a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+cur));
+    scoreAdd(1);
+  });
+  document.querySelectorAll('.fu').forEach(el=>obs.observe(el));
+
+  // В) Ждем полной прогрузки кастомных шрифтов и ТОЛЬКО ПОТОМ выводим логи/загрузку
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => {
+      runBoot();
+    });
+  } else {
+    // Резервный запуск для старых браузеров
+    runBoot();
+  }
+});
 </script>
 </body>
 </html>
