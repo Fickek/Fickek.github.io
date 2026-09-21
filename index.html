@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -96,12 +96,12 @@ html,body{
 #cabinet::before{content:'';position:absolute;inset:4px;border-radius:24px;background:repeating-linear-gradient(135deg,transparent,transparent 4px,rgba(255,255,255,0.012) 4px,rgba(255,255,255,0.012) 5px);pointer-events:none;z-index:0;}
 
 /* SCREEN */
-#screen-wrap{flex:1;min-height:0;border-radius:16px;background:#08090c;border:3px solid var(--metal);box-shadow:inset 0 0 40px rgba(0,0,0,0.9),inset 0 0 0 1px rgba(200,255,0,0.08);position:relative;overflow:hidden;z-index:1;}
-#screen-wrap::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,0.12) 0px,rgba(0,0,0,0.12) 1px,transparent 1px,transparent 3px);pointer-events:none;z-index:99;border-radius:14px;}
-#screen-wrap::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 52%,rgba(0,0,0,0.6) 100%);pointer-events:none;z-index:98;border-radius:14px;}
+#screen-wrap{flex:1;min-height:0;border-radius:20px;background:#08090c;border:3px solid var(--metal);box-shadow:inset 0 0 56px rgba(0,0,0,0.92),inset 0 0 0 1px rgba(200,255,0,0.08);position:relative;overflow:hidden;z-index:1;}
+#screen-wrap::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,0.12) 0px,rgba(0,0,0,0.12) 1px,transparent 1px,transparent 3px);pointer-events:none;z-index:99;border-radius:17px;}
+#screen-wrap::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 46%,rgba(0,0,0,0.7) 100%);pointer-events:none;z-index:98;border-radius:17px;}
 .screw{position:absolute;width:10px;height:10px;background:var(--metal);border-radius:50%;border:1px solid var(--metal2);z-index:101;}
 .screw::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(45deg);width:5px;height:1px;background:#111318;}
-.screw.tl{top:6px;left:6px;}.screw.tr{top:6px;right:6px;}.screw.bl{bottom:6px;left:6px;}.screw.br{bottom:6px;right:6px;}
+.screw.tl{top:8px;left:8px;}.screw.tr{top:8px;right:8px;}.screw.bl{bottom:8px;left:8px;}.screw.br{bottom:8px;right:8px;}
 @keyframes flicker{0%,88%,94%,100%{opacity:1}90%,92%{opacity:0.87}}
 #screen-content{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;z-index:1;animation:flicker 11s infinite;}
 #screen-content.no-scroll{overflow:hidden;}
@@ -185,10 +185,6 @@ html,body{
 .mcard:hover .covlay{opacity:1;}
 .covlay h3{font-family:var(--font);font-size:clamp(5px,1vw,8px);color:var(--ph);margin-bottom:3px;line-height:1.6;}
 .covlay p{font-family:var(--mono);font-size:clamp(9px,1.2vw,12px);color:var(--ph2);}
-.card-add{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border:1.5px dashed var(--ph3);transition:all 0.15s;cursor:default;}
-.card-add:hover{border-color:var(--ph);}
-.card-add .plus{font-family:var(--font);font-size:14px;color:var(--ph3);}
-.card-add span{font-family:var(--font);font-size:clamp(5px,0.9vw,7px);color:var(--ph3);text-align:center;line-height:2;}
 
 /* PROJECTS */
 .proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;}
@@ -378,29 +374,11 @@ html,body{
 .fu{opacity:0;transform:translateY(14px);transition:opacity 0.45s,transform 0.45s;}
 .fu.vis{opacity:1;transform:translateY(0);}
 
-/* BANNER UPLOAD */
+/* PROJECT BANNERS */
 .proj-banner{position:relative;overflow:hidden;}
-.proj-banner:hover .banner-placeholder{border-color:var(--ph);}
 .banner-img-wrap{width:100%;height:100%;position:relative;}
-.banner-placeholder{
-  width:100%;height:100%;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:6px;
-  border:2px dashed var(--ph3);
-  transition:border-color 0.2s;
-}
-.banner-plus{font-family:var(--font);font-size:18px;color:var(--ph3);}
-.banner-hint{font-family:var(--font);font-size:clamp(4px,0.8vw,6px);color:var(--ph3);letter-spacing:1px;}
 .banner-img-wrap img{width:100%;height:100%;object-fit:cover;filter:saturate(0.85);transition:filter 0.2s;}
-.proj-banner:hover .banner-img-wrap img{filter:saturate(1);}
-.banner-change-hint{
-  position:absolute;inset:0;
-  background:rgba(0,0,0,0.55);
-  display:flex;align-items:center;justify-content:center;
-  opacity:0;transition:opacity 0.2s;
-  font-family:var(--font);font-size:clamp(5px,0.9vw,7px);color:var(--ph);letter-spacing:1px;
-}
-.proj-banner:hover .banner-change-hint{opacity:1;}
+.proj-banner:hover .banner-img-wrap img{filter:saturate(1);} 
 
 /* MOBILE */
 @media(max-width:600px){
@@ -431,7 +409,7 @@ html,body{
   .coin-label{font-size:4px;}
   #hud{padding:3px 8px;gap:4px;flex-wrap:nowrap;overflow:hidden;}
   .hud-sep{height:16px;}
-  .hud-item:nth-child(9),.hud-sep:nth-child(8){display:none;}
+  .hud-item:nth-child(11),.hud-sep:nth-child(10){display:none;}
   .port-grid{grid-template-columns:repeat(2,1fr);}
   .mcard.lg,.mcard.wd,.mcard.tl,.mcard.md,.mcard.sm{grid-column:span 2;grid-row:span 1;}
 }
@@ -442,6 +420,185 @@ html,body{
 .ctrl-center{display:flex;align-items:center;gap:clamp(6px,1.2vw,14px);flex:1;justify-content:center;}
 .mcard { background: var(--bg3); }
 
+/* =====================================================
+   v3 ADDITIONS
+   ===================================================== */
+:focus-visible{outline:2px solid var(--amber);outline-offset:2px;}
+.mcard:focus-visible{outline-offset:-2px;z-index:6;}
+
+/* ---------- MARQUEE (neon sign on top of the cabinet) ---------- */
+#marquee{flex-shrink:0;position:relative;z-index:1;height:clamp(26px,5vh,40px);border-radius:12px;background:linear-gradient(#0a0b0f,#15161c);border:2px solid var(--metal);box-shadow:inset 0 0 16px rgba(0,0,0,0.9),0 0 0 1px var(--metal2);display:flex;align-items:center;justify-content:center;gap:clamp(10px,2.5vw,28px);overflow:hidden;}
+.mq-lamps{display:flex;gap:clamp(6px,1.2vw,12px);}
+.mq-lamps i{width:6px;height:6px;border-radius:50%;background:#3a2d00;animation:lampChase 1.2s steps(1) infinite;}
+.mq-lamps i:nth-child(3n+2){animation-delay:0.4s;}
+.mq-lamps i:nth-child(3n){animation-delay:0.8s;}
+@keyframes lampChase{0%{background:var(--amber);box-shadow:0 0 8px rgba(255,179,0,0.9);}33%,100%{background:#3a2d00;box-shadow:none;}}
+.mq-title{font-family:var(--font);font-size:clamp(9px,1.8vw,15px);color:var(--ph);letter-spacing:3px;text-shadow:0 0 6px var(--ph),0 0 18px var(--glow),0 0 40px rgba(200,255,0,0.25);animation:neon 9s infinite;}
+@keyframes neon{0%,18%,22%,62%,64%,100%{opacity:1;}20%,63%{opacity:0.35;}21%{opacity:0.9;}}
+
+/* ---------- SCREEN GLASS ---------- */
+.glare{position:absolute;inset:0;pointer-events:none;z-index:100;border-radius:17px;background:linear-gradient(115deg,rgba(255,255,255,0.055) 0 13%,transparent 13% 17%,rgba(255,255,255,0.028) 17% 20%,transparent 20%);}
+
+/* ---------- BUTTON LIGHT-UP ---------- */
+.btn-red{--lit:rgba(255,90,90,0.95);}
+.btn-green{--lit:rgba(70,235,120,0.95);}
+.btn-blue{--lit:rgba(90,130,255,0.95);}
+.btn-yellow{--lit:rgba(255,235,60,0.95);}
+.btn-arcade.lit{filter:brightness(1.45) saturate(1.2);box-shadow:0 2px 0 rgba(0,0,0,0.5),0 0 22px 6px var(--lit);}
+
+/* ---------- HUD ---------- */
+.hud-click{cursor:inherit;}
+.hud-click:hover .hud-val{color:var(--amber);text-shadow:0 0 8px rgba(255,179,0,0.5);}
+.hud-xp{position:absolute;left:0;right:0;bottom:-1px;height:2px;background:rgba(74,102,0,0.35);}
+#xp-fill{height:100%;width:0;background:var(--ph);box-shadow:0 0 8px var(--glow);transition:width 0.12s linear;}
+.heart{transition:opacity 0.15s,transform 0.15s;}
+.heart.lost{opacity:0.18;transform:scale(0.8);filter:grayscale(1);}
+
+/* ---------- HERO ---------- */
+.hero>*:not(.hero-grid):not(.ghost-lane){position:relative;z-index:1;}
+.hero-grid{inset:-40px;transform:translate3d(var(--px,0px),var(--py,0px),0);transition:transform 0.25s ease-out;will-change:transform;}
+.hero-desc{min-height:calc(2 * 1.9em);}
+.hero-desc .cur{display:inline-block;width:0.6em;height:1em;background:var(--ph);margin-left:3px;vertical-align:-0.12em;box-shadow:0 0 8px var(--glow);animation:blink 1s step-end infinite;}
+
+/* RGB-split glitch on the name */
+.hero h1.glitch span{display:block;position:relative;}
+.hero h1.glitch span::before,.hero h1.glitch span::after{content:attr(data-text);position:absolute;inset:0;pointer-events:none;opacity:0;text-shadow:none;mix-blend-mode:screen;}
+.hero h1.glitch span::before{color:#ff2a6d;animation:glA 7s steps(1) infinite;}
+.hero h1.glitch span::after{color:#00e5ff;animation:glB 7s steps(1) infinite;}
+.hero h1.glitch span:nth-child(2)::before{animation-delay:0.09s;}
+.hero h1.glitch span:nth-child(2)::after{animation-delay:0.09s;}
+@keyframes glA{0%,93%,100%{opacity:0;}94%{opacity:0.9;transform:translate(-4px,1px);clip-path:inset(12% 0 58% 0);}96%{opacity:0.9;transform:translate(3px,-1px);clip-path:inset(60% 0 8% 0);}98%{opacity:0.9;transform:translate(-2px,0);clip-path:inset(30% 0 40% 0);}}
+@keyframes glB{0%,93.5%,100%{opacity:0;}95%{opacity:0.9;transform:translate(4px,-1px);clip-path:inset(50% 0 20% 0);}97%{opacity:0.9;transform:translate(-3px,1px);clip-path:inset(5% 0 70% 0);}99%{opacity:0.9;transform:translate(2px,0);clip-path:inset(72% 0 6% 0);}}
+@keyframes glH{0%,100%{opacity:0.85;transform:translate(-3px,0);clip-path:inset(20% 0 55% 0);}33%{opacity:0.85;transform:translate(3px,1px);clip-path:inset(55% 0 15% 0);}66%{opacity:0.85;transform:translate(-2px,-1px);clip-path:inset(5% 0 75% 0);}}
+.hero h1.glitch:hover span::before{animation:glH 0.45s steps(1) infinite;}
+.hero h1.glitch:hover span::after{animation:glH 0.45s steps(1) infinite reverse;}
+
+/* Pac-Man ghosts */
+.ghost-lane{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:2;}
+.ghost{position:absolute;left:0;width:clamp(20px,3vw,30px);height:clamp(20px,3vw,30px);opacity:0.5;pointer-events:auto;cursor:inherit;animation:ghostRun var(--dur,16s) linear infinite;animation-delay:var(--del,0s);will-change:transform;}
+.ghost.rev{animation-direction:reverse;}
+.ghost:hover{opacity:0.9;}
+.gf{width:100%;height:100%;}
+.ghost.rev .gf{transform:scaleX(-1);}
+.gf svg{width:100%;height:100%;display:block;shape-rendering:crispEdges;animation:ghostBob 0.5s steps(1) infinite;}
+.ghost.eaten{pointer-events:none;}
+.ghost.eaten .gf{animation:eaten 0.4s steps(4) forwards;}
+@keyframes ghostRun{from{transform:translateX(-60px);}to{transform:translateX(calc(var(--hw,900px) + 60px));}}
+@keyframes ghostBob{0%{transform:translateY(0);}50%{transform:translateY(-2px);}}
+@keyframes eaten{to{transform:scale(0);opacity:0;}}
+
+/* ---------- PORTFOLIO / PROJECT CARDS ---------- */
+.mcard::after,.pcard::after{content:'';position:absolute;inset:4px;pointer-events:none;z-index:6;opacity:0;transition:opacity 0.15s;
+  background:
+    linear-gradient(var(--ph),var(--ph)) left top/12px 2px no-repeat,
+    linear-gradient(var(--ph),var(--ph)) left top/2px 12px no-repeat,
+    linear-gradient(var(--ph),var(--ph)) right top/12px 2px no-repeat,
+    linear-gradient(var(--ph),var(--ph)) right top/2px 12px no-repeat,
+    linear-gradient(var(--ph),var(--ph)) left bottom/12px 2px no-repeat,
+    linear-gradient(var(--ph),var(--ph)) left bottom/2px 12px no-repeat,
+    linear-gradient(var(--ph),var(--ph)) right bottom/12px 2px no-repeat,
+    linear-gradient(var(--ph),var(--ph)) right bottom/2px 12px no-repeat;}
+.mcard:hover::after,.mcard:focus-visible::after,.pcard:hover::after{opacity:1;}
+.pix{position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated;pointer-events:none;z-index:1;display:none;}
+.badge{position:absolute;top:8px;left:8px;z-index:5;font-family:var(--font);font-size:clamp(4px,0.8vw,6px);padding:4px 6px;background:rgba(0,0,0,0.78);border:1px solid var(--amber);color:var(--amber);letter-spacing:1px;pointer-events:none;}
+.badge.boss{border-color:var(--red);color:var(--red);}
+.proj-banner{height:clamp(110px,13vw,210px);}
+
+/* ---------- STAGE 03: PLAYER STATS ---------- */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:20px;}
+.kpi{border:1px solid var(--ph3);border-left:3px solid var(--amber);background:var(--bg2);padding:clamp(12px,2vw,20px);}
+.kpi-num{font-family:var(--font);font-size:clamp(20px,4vw,40px);color:var(--ph);text-shadow:0 0 18px var(--glow);line-height:1.2;margin-bottom:12px;}
+.kpi-lbl{font-family:var(--font);font-size:clamp(5px,0.9vw,7px);color:var(--amber);letter-spacing:1px;line-height:1.9;margin-bottom:6px;}
+.kpi-sub{font-family:var(--mono);font-size:clamp(10px,1.2vw,12px);color:var(--ph2);line-height:1.6;}
+.sheet{border:1px solid var(--ph3);background:var(--bg2);padding:clamp(14px,2.5vw,26px);}
+.sheet-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 16px;padding-bottom:14px;margin-bottom:18px;border-bottom:1px dashed var(--ph3);font-family:var(--font);font-size:clamp(6px,1vw,8px);line-height:1.8;}
+.sheet-class{color:var(--ph);}
+.sheet-lv{color:var(--amber);}
+.sheet-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px clamp(20px,4vw,48px);}
+.sheet-h{font-family:var(--font);font-size:clamp(6px,1vw,8px);color:var(--amber);letter-spacing:2px;margin-bottom:14px;}
+.skill{display:grid;grid-template-columns:minmax(84px,34%) minmax(0,1fr) 34px;align-items:center;gap:10px;margin-bottom:12px;}
+.sk-name{font-family:var(--font);font-size:clamp(5px,0.9vw,7px);color:var(--ph2);line-height:1.8;overflow-wrap:anywhere;}
+.sk-val{font-family:var(--mono);font-size:clamp(10px,1.2vw,12px);color:var(--ph3);text-align:right;}
+.seg{display:flex;gap:2px;}
+.seg i{flex:1;height:10px;background:#0d0f07;border:1px solid var(--ph3);transition:background 0.12s,box-shadow 0.12s,border-color 0.12s;}
+.skill.d .seg i.on{background:var(--ph);border-color:var(--ph);box-shadow:0 0 6px var(--glow);}
+.skill.t .seg i.on{background:var(--amber);border-color:var(--amber);box-shadow:0 0 6px rgba(255,179,0,0.4);}
+.moves-h{margin:28px 0 12px;}
+.moves{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;}
+.move{border:1px dashed var(--ph3);padding:clamp(12px,2vw,16px);}
+.move h4{font-family:var(--font);font-size:clamp(6px,1vw,8px);color:var(--ph);line-height:1.8;margin-bottom:8px;font-weight:400;}
+.move p{font-family:var(--mono);font-size:clamp(10px,1.2vw,12px);color:var(--ph2);line-height:1.7;}
+
+/* ---------- STAGE BANNER ---------- */
+#stage-banner{position:absolute;left:0;right:0;top:38%;z-index:97;display:flex;flex-direction:column;align-items:center;gap:10px;pointer-events:none;opacity:0;}
+#stage-banner::before{content:'';position:absolute;left:0;right:0;top:-16px;bottom:-16px;background:linear-gradient(transparent,rgba(0,0,0,0.75) 25%,rgba(0,0,0,0.75) 75%,transparent);z-index:-1;}
+#stage-banner.go{animation:stageIn 2s steps(1) forwards;}
+.sb-num{font-family:var(--font);font-size:clamp(16px,4.5vw,40px);color:#fff700;text-shadow:0 0 20px #fff700,0 0 50px rgba(255,247,0,0.4);letter-spacing:4px;text-align:center;}
+.sb-name{font-family:var(--font);font-size:clamp(7px,1.4vw,12px);color:var(--ph);text-shadow:0 0 12px var(--glow);letter-spacing:3px;text-align:center;}
+@keyframes stageIn{0%{opacity:0;}5%{opacity:1;}20%{opacity:0.2;}25%{opacity:1;}30%{opacity:0.2;}35%,80%{opacity:1;}90%{opacity:0.4;}100%{opacity:0;}}
+@keyframes stageFade{0%{opacity:0;}10%,80%{opacity:1;}100%{opacity:0;}}
+
+/* ---------- LIGHTBOX GALLERY ---------- */
+.lb-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:clamp(30px,5vw,44px);height:clamp(44px,8vw,64px);background:rgba(0,0,0,0.75);border:1.5px solid var(--ph);color:var(--ph);font-family:var(--font);font-size:clamp(9px,1.6vw,13px);cursor:inherit;display:none;align-items:center;justify-content:center;transition:background 0.12s,color 0.12s;}
+.lb-arrow:hover{background:var(--ph);color:#000;}
+.lb-arrow.prev{left:clamp(6px,2vw,24px);}
+.lb-arrow.next{right:clamp(6px,2vw,24px);}
+#lb.multi .lb-arrow{display:flex;}
+.lb-count{font-family:var(--font);font-size:clamp(6px,1vw,8px);color:var(--amber);letter-spacing:2px;margin-bottom:8px;min-height:1em;}
+
+/* ---------- TROPHIES PANEL ---------- */
+#tp{position:fixed;inset:0;background:rgba(0,0,0,0.94);z-index:9000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.2s;padding:16px;}
+#tp.open{opacity:1;pointer-events:all;}
+.tp-box{position:relative;width:min(520px,100%);max-height:86vh;overflow-y:auto;border:2px solid var(--ph);box-shadow:0 0 30px rgba(200,255,0,0.25);background:var(--bg);padding:clamp(16px,3vw,24px);}
+.tp-box .lb-close{top:8px;right:8px;}
+.tp-head{display:flex;align-items:baseline;gap:12px;margin-bottom:16px;padding-right:32px;}
+.tp-head h2{font-family:var(--font);font-size:clamp(8px,1.4vw,11px);color:var(--ph);text-shadow:0 0 12px var(--glow);font-weight:400;}
+#tp-count{color:var(--amber);}
+#tp-list{list-style:none;display:flex;flex-direction:column;gap:8px;}
+#tp-list li{display:flex;gap:12px;align-items:center;padding:8px 10px;border:1px solid var(--ph3);}
+#tp-list li.got{border-color:var(--amber);background:rgba(255,179,0,0.05);}
+.tp-ico{font-size:18px;width:24px;text-align:center;flex-shrink:0;}
+.tp-txt{display:flex;flex-direction:column;gap:4px;min-width:0;}
+.tp-txt b{font-family:var(--font);font-size:clamp(6px,1vw,8px);color:var(--ph);font-weight:400;line-height:1.6;}
+#tp-list li.lock b{color:var(--ph3);}
+.tp-txt small{font-family:var(--mono);font-size:clamp(10px,1.2vw,12px);color:var(--ph2);}
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:700px){
+  .sheet-cols{grid-template-columns:1fr;}
+}
+@media(max-width:600px){
+  #marquee{height:22px;border-radius:8px;border-width:1px;}
+  .mq-title{font-size:8px;letter-spacing:2px;}
+  .mq-lamps i:nth-child(n+4){display:none;}
+  #screen-wrap::before,#screen-wrap::after,.glare{border-radius:5px;}
+  #stage-banner{top:34%;}
+}
+@media(max-height:520px){
+  #marquee{display:none;}
+}
+
+/* ---------- REDUCED MOTION ---------- */
+@media (prefers-reduced-motion:reduce){
+  #screen-content{animation:none;}
+  .mq-title,.mq-lamps i,.konami-hint,.coin-label,#insert-coin h2,.hero-desc .cur{animation:none;}
+  .hero h1.glitch span::before,.hero h1.glitch span::after,.hero h1.glitch:hover span::before,.hero h1.glitch:hover span::after{animation:none;}
+  .ghost-lane{display:none;}
+  .hero-grid{transition:none;}
+  .seg i{transition:none;}
+  #stage-banner.go{animation:stageFade 1.6s linear forwards;}
+}
+
+
+/* ---------- PIXEL MODE (см. PIXEL_MODE в скрипте) ---------- */
+.px-hide{visibility:hidden;}
+.px-cv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;image-rendering:pixelated;pointer-events:none;z-index:1;}
+.mcard .px-cv{filter:saturate(0.8) brightness(0.88);}
+.mcard:hover .px-cv{filter:saturate(1) brightness(1);}
+.banner-img-wrap .px-cv{filter:saturate(0.85);transition:filter 0.2s;}
+.proj-banner:hover .banner-img-wrap .px-cv{filter:saturate(1);}
+#lb-media{position:relative;}
+#lb-media .px-cv{object-fit:fill;filter:none;}
 </style>
 </head>
 <body>
@@ -450,6 +607,8 @@ html,body{
   <div id="screen-wrap">
     <div class="screw tl"></div><div class="screw tr"></div>
     <div class="screw bl"></div><div class="screw br"></div>
+    <div class="glare"></div>
+    <div id="stage-banner" aria-hidden="true"><div class="sb-num" id="sb-num"></div><div class="sb-name" id="sb-name"></div></div>
     <div id="screen-content">
 
       <div id="boot">
@@ -471,19 +630,23 @@ html,body{
           <div class="hud-sep"></div>
           <div class="hud-item"><span class="hud-lbl">PLAYER</span><span class="hud-val">D.PAVLOV</span></div>
           <div class="hud-sep"></div>
-          <div class="hud-item"><span class="hud-lbl">LIVES</span><div class="hud-lives"><div class="heart"></div><div class="heart"></div><div class="heart"></div></div></div>
+          <div class="hud-item"><span class="hud-lbl">LIVES</span><div class="hud-lives" id="lives"><div class="heart"></div><div class="heart"></div><div class="heart"></div></div></div>
           <div class="hud-sep"></div>
-          <div class="hud-item"><span class="hud-lbl">LEVEL</span><span class="hud-val">03</span></div>
+          <div class="hud-item"><span class="hud-lbl">LEVEL</span><span class="hud-val" id="level-val">01</span></div>
+          <div class="hud-sep"></div>
+          <div class="hud-item hud-click" id="trophy-btn" role="button" tabindex="0" aria-label="Open trophies"><span class="hud-lbl">TROPHIES</span><span class="hud-val" id="ach-count">0/16</span></div>
           <div class="hud-sep"></div>
           <div class="hud-item"><span class="hud-lbl">HI-SCORE</span><span class="hud-val">999999</span></div>
+          <div class="hud-xp" aria-hidden="true"><div id="xp-fill"></div></div>
         </div>
 
         <div id="hero" class="hero">
-          <div class="hero-grid"></div>
+          <div class="hero-grid" id="hero-grid"></div>
+          <div class="ghost-lane" id="ghosts" aria-hidden="true"></div>
           <p class="hero-label">&gt; GAME DESIGNER_</p>
-          <h1>DANIIL<br>PAVLOV</h1>
+          <h1 class="glitch" aria-label="Daniil Pavlov"><span data-text="DANIIL" aria-hidden="true">DANIIL</span><span data-text="PAVLOV" aria-hidden="true">PAVLOV</span></h1>
           <h2>3.5+ YRS · PC &amp; MOBILE F2P</h2>
-          <p class="hero-desc">Systems · LiveOps · Events · Economy<br>UE5 · Unity · C++ · Blueprint · SQL</p>
+          <p class="hero-desc" id="hero-desc"><span id="hero-type">Systems · LiveOps · Events · Economy<br>UE5 · Unity · C++ · Blueprint · SQL</span></p>
           <div class="hero-tags">
             <span class="tag">LIVEOPS</span><span class="tag">SYSTEMS</span><span class="tag">F2P</span>
             <span class="tag">UE5</span><span class="tag">UNITY</span><span class="tag">EVENTS</span>
@@ -498,54 +661,76 @@ html,body{
           </div>
           <div class="port-grid">
 
-            <div class="mcard lg fu" data-type="image" data-src="src/assets/images/UE5AIHideAndSeekGame_Icon_1.webp" data-title="UE5 AI Hide And Seek Game" data-desc="Implementation of the hide and seek game, where the bots themselves play with each other" onclick="openLB(this); checkPortfolioAch();">
-              <img src="src/assets/images/UE5AIHideAndSeekGame_Icon_1.webp" alt="">
+            <div class="mcard sm fu" data-group="c++" data-type="image"
+              data-src="src/assets/images/UE5CPPTPS.png" data-title="UE5 C++ TPS Rebuild"
+              data-desc="Implementation of the C++ third-person shooter template in UE5, with a focus on gameplay mechanics and character movement"
+              onclick="openLB(this); checkPortfolioAch();">
+              <img src="src/assets/images/UE5CPPTPS.png" alt="Screenshot: UE5 C++ TPS Rebuild">
+              <div class="covlay">
+                <h3>UE5 C++ TPS Rebuild</h3>
+                <p>UE5</p>
+              </div>
+            </div>
+
+            <div class="mcard wd fu" data-group="building" data-type="image" data-src="src/assets/images/UE5BuildingSim.png"
+              data-title="UE5 building simulator"
+              data-desc="Implementation of a building simulator in UE5, where the player can construct and manage various structures"
+              onclick="openLB(this); checkPortfolioAch();">
+              <img src="src/assets/images/UE5BuildingSim.png" alt="Screenshot: UE5 building simulator">
+              <div class="covlay">
+                <h3>UE5 building simulator</h3>
+                <p>UE5</p>
+              </div>
+            </div>
+
+            <div class="mcard lg fu" data-group="hide" data-type="image" data-src="src/assets/images/UE5AIHideAndSeekGame_Icon_1.webp" data-title="UE5 AI Hide And Seek Game" data-desc="Implementation of the hide and seek game, where the bots themselves play with each other" onclick="openLB(this); checkPortfolioAch();">
+              <img src="src/assets/images/UE5AIHideAndSeekGame_Icon_1.webp" alt="Screenshot: UE5 AI hide and seek game">
               <div class="covlay">
                 <h3>UE5 AI Hide And Seek Game</h3>
                 <p>UE5</p>
               </div>
             </div>
 
-            <div class="mcard md fu" data-type="youtube" data-youtube-id="7TR6tAux9ts" data-title="TPSUE5Gameplay" data-desc="Implementation of a boss battle" onclick="openLB(this); checkPortfolioAch();">
-              <div class="vthumb"><img src="src/assets/images/TPSUE5Gameplay_Icon_1.webp" alt=""><div class="play-wrap"><div class="play-btn"></div></div></div>
+            <div class="mcard md fu" data-group="tps" data-badge="BOSS" data-type="youtube" data-youtube-id="7TR6tAux9ts" data-title="TPSUE5Gameplay" data-desc="Implementation of a boss battle" onclick="openLB(this); checkPortfolioAch();">
+              <div class="vthumb"><img src="src/assets/images/TPSUE5Gameplay_Icon_1.webp" alt="Video preview: UE5 third-person boss battle"><div class="play-wrap"><div class="play-btn"></div></div></div>
               <div class="covlay">
                 <h3>TPSUE5Gameplay</h3>
                 <p>UE5</p>
               </div>
             </div>
 
-            <div class="mcard md fu" data-type="image" data-src="src/assets/images/TPSUE5Gameplay_Icon_2.webp" data-title="TPSUE5Gameplay" data-desc="Implementation of a boss battle" onclick="openLB(this); checkPortfolioAch(); ">
-              <img src="src/assets/images/TPSUE5Gameplay_Icon_2.webp" alt="">
+            <div class="mcard md fu" data-group="tps" data-badge="AI HIDE AND SEEK" data-type="image" data-src="src/assets/images/TPSUE5Gameplay_Icon_2.webp" data-title="TPSUE5Gameplay" data-desc="Implementation of a boss battle" onclick="openLB(this); checkPortfolioAch(); ">
+              <img src="src/assets/images/TPSUE5Gameplay_Icon_2.webp" alt="Screenshot: UE5 third-person boss battle">
               <div class="covlay">
                 <h3>TPSUE5Gameplay</h3>
                 <p>UE5</p>
               </div>
             </div>
 
-            <div class="mcard sm fu" data-type="image" data-src="src/assets/images/TPSUE5Gameplay_Icon_3.webp" data-title="TPSUE5Gameplay" data-desc="Implementation of a boss battle" onclick="openLB(this); checkPortfolioAch();">
-              <img src="src/assets/images/TPSUE5Gameplay_Icon_3.webp" alt="">
+            <div class="mcard sm fu" data-group="tps" data-badge="BOSS" data-type="image" data-src="src/assets/images/TPSUE5Gameplay_Icon_3.webp" data-title="TPSUE5Gameplay" data-desc="Implementation of a boss battle" onclick="openLB(this); checkPortfolioAch();">
+              <img src="src/assets/images/TPSUE5Gameplay_Icon_3.webp" alt="Screenshot: UE5 third-person boss battle">
               <div class="covlay"><h3>TPSUE5Gameplay</h3>
                 <p>UE5</p>
               </div>
             </div>
 
-            <div class="mcard wd fu" data-type="youtube" data-youtube-id="F5lmJn4IcvU" data-title="UE5AIHideAndSeekGame" data-desc="Implementation of the hide and seek game, where the bots themselves play with each other" onclick="openLB(this); checkPortfolioAch();">
+            <div class="mcard wd fu" data-group="hide" data-type="youtube" data-youtube-id="F5lmJn4IcvU" data-title="UE5AIHideAndSeekGame" data-desc="Implementation of the hide and seek game, where the bots themselves play with each other" onclick="openLB(this); checkPortfolioAch();">
               <div class="vthumb">
-                <img src="src/assets/images/UE5AIHideAndSeekGame_Icon_2.webp" alt=""><div class="play-wrap"><div class="play-btn"></div></div></div><div class="covlay"><h3>UE5AIHideAndSeekGame</h3>
-                <p></p>
+                <img src="src/assets/images/UE5AIHideAndSeekGame_Icon_2.webp" alt="Video preview: UE5 AI hide and seek game"><div class="play-wrap"><div class="play-btn"></div></div></div><div class="covlay"><h3>UE5AIHideAndSeekGame</h3>
+                <p>UE5</p>
               </div>
             </div>
 
-            <div class="mcard tl fu" data-type="image" data-src="src/assets/images/FlappyMax_Icon_1.webp" data-title="FlappyMax" data-desc="Implementation of a Flappy Bird parody in Unity.<br><a href='https://fikek.itch.io/flappymax' target='_blank' class='desc-link'>Link</a>" onclick="openLB(this); checkPortfolioAch();">
-              <img src="src/assets/images/FlappyMax_Icon_1.webp" alt="">
+            <div class="mcard tl fu" data-badge="PLAYABLE" data-type="image" data-src="src/assets/images/FlappyMax_Icon_1.webp" data-title="FlappyMax" data-desc="Implementation of a Flappy Bird parody in Unity.<br><a href='https://fikek.itch.io/flappymax' target='_blank' class='desc-link'>Link</a>" onclick="openLB(this); checkPortfolioAch();">
+              <img src="src/assets/images/FlappyMax_Icon_1.webp" alt="Screenshot: FlappyMax, a Flappy Bird parody made in Unity">
               <div class="covlay">
                 <h3>FlappyMax</h3>
                 <p>Unity</p>
               </div>
             </div>
 
-            <div class="mcard wd lg fu" data-type="image" data-src="src/assets/images/DonkeyKirya_Icon_1.webp" data-title="DonkeyKirya" data-desc="Implementation of a Donkey Kong parody in Unity.<br><a href='https://fikek.itch.io/donkeykirya' target='_blank' class='desc-link'>Link</a>" onclick="openLB(this); checkPortfolioAch();">
-              <img src="src/assets/images/DonkeyKirya_Icon_1.webp" alt="">
+            <div class="mcard wd lg fu" data-badge="PLAYABLE" data-type="image" data-src="src/assets/images/DonkeyKirya_Icon_1.webp" data-title="DonkeyKirya" data-desc="Implementation of a Donkey Kong parody in Unity.<br><a href='https://fikek.itch.io/donkeykirya' target='_blank' class='desc-link'>Link</a>" onclick="openLB(this); checkPortfolioAch();">
+              <img src="src/assets/images/DonkeyKirya_Icon_1.webp" alt="Screenshot: DonkeyKirya, a Donkey Kong parody made in Unity">
               <div class="covlay">
                 <h3>DonkeyKirya</h3>
                 <p>Unity</p></div>
@@ -557,14 +742,35 @@ html,body{
         <div id="projects" class="inner-section">
           <div class="sec-header fu"><span class="sec-num">STAGE 02</span><h2 class="sec-title">COMMERCIAL PROJECTS</h2><div class="sec-line"></div></div>
           <div class="proj-grid">
+            
+            <div class="pcard fu">
+              <div class="proj-banner">
+                <div class="banner-img-wrap" id="TBA-banner">
+                  <img src="src/assets/images/TBA.png" alt="TBA project banner">
+                </div>
+              </div>
+              <div class="proj-body">
+                <p class="proj-studio">TBA · 2026 - TBA</p>
+                <h3 class="proj-name">TBA</h3>
+                <p class="proj-desc">Game Design</p>
+                <div class="proj-meta"><span class="mtag">PC</span><span class="mtag">UNREAL</span><span class="mtag">C++</span>
+                </div>
+              </div>
+              <div class="proj-stats">
+                <div class="stat">
+                  <span class="sval">Game Designer</span>
+                  <span class="slbl">Specialization</span>
+                </div>
+              </div>
+            </div>
 
             <div class="pcard fu">
               <div class="proj-banner">
                 <div class="banner-img-wrap" id="skyforge-banner">
-                  <img src="src/assets/images/Skyforge_Icon_1.webp" alt="" >
+                  <img src="src/assets/images/Skyforge_Icon_1.webp" alt="Skyforge project banner">
                 </div>
               </div>
-              <div class="proj-body"><p class="proj-studio">PIXEL SKY · 2024–2025</p><h3 class="proj-name">SKYFORGE</h3><p class="proj-desc"></p><div class="proj-meta"><span class="mtag">PC MMO</span><span class="mtag">LIVEOPS</span><span class="mtag">BALANCE</span><span class="mtag">EVENTS</span><span class="mtag">SQL</span></div></div>
+              <div class="proj-body"><p class="proj-studio">PIXEL SKY · 2024–2025</p><h3 class="proj-name">SKYFORGE</h3><p class="proj-desc">LiveOps events, weapon and economy balance, and SQL work for a PC MMO.</p><div class="proj-meta"><span class="mtag">PC MMO</span><span class="mtag">LIVEOPS</span><span class="mtag">BALANCE</span><span class="mtag">EVENTS</span><span class="mtag">SQL</span></div></div>
               <div class="proj-stats">
               <div class="stat">
                 <span class="sval">Technical Game Designer</span>
@@ -576,10 +782,10 @@ html,body{
             <div class="pcard fu">
               <div class="proj-banner">
                 <div class="banner-img-wrap" id="knightcats-banner">
-                  <img src="src/assets/images/KnightCats2_Icon_1.webp" alt="" >
+                  <img src="src/assets/images/KnightCats2_Icon_1.webp" alt="Knight Cats 2 project banner">
                 </div>
               </div>
-              <div class="proj-body"><p class="proj-studio">ELEPHANT GAMES · 2023</p><h3 class="proj-name">KNIGHT CATS 2</h3><p class="proj-desc"></p><div class="proj-meta"><span class="mtag">PC</span><span class="mtag">UNITY</span><span class="mtag">C#</span></div></div>
+              <div class="proj-body"><p class="proj-studio">ELEPHANT GAMES · 2023</p><h3 class="proj-name">KNIGHT CATS 2</h3><p class="proj-desc">Technical design and gameplay implementation in Unity and C#.</p><div class="proj-meta"><span class="mtag">PC</span><span class="mtag">UNITY</span><span class="mtag">C#</span></div></div>
               <div class="proj-stats"><div class="stat">
                 <span class="sval">Technical Designer</span>
                 <span class="slbl">Specialization</span>
@@ -590,12 +796,11 @@ html,body{
             <div class="pcard fu">
               <div class="proj-banner">
                 <div class="banner-img-wrap" id="rescue-banner">
-                  <img src="src/assets/images/RescueDash_Icon_1.webp" alt="" >
+                  <img src="src/assets/images/RescueDash_Icon_1.webp" alt="Rescue Dash project banner">
                 </div>
               </div>
-              <div class="proj-body"><p class="proj-studio">WHALEBOX STUDIO · 2021–2022</p><h3 class="proj-name">RESCUE DASH</h3><p class="proj-desc"></p><div class="proj-meta"><span class="mtag">MOBILE F2P</span><span class="mtag">LEVEL DESIGN</span><span class="mtag">UNITY</span></div></div>
+              <div class="proj-body"><p class="proj-studio">WHALEBOX STUDIO · 2021–2022</p><h3 class="proj-name">RESCUE DASH</h3><p class="proj-desc">Game and level design for a mobile F2P game built in Unity.</p><div class="proj-meta"><span class="mtag">MOBILE F2P</span><span class="mtag">LEVEL DESIGN</span><span class="mtag">UNITY</span></div></div>
               <div class="proj-stats"><div class="stat">
-              </div><div class="stat">
                 <span class="sval">Game/Level Designer</span>
                 <span class="slbl">Specialization</span>
               </div></div>
@@ -612,6 +817,7 @@ html,body{
           <a href="#hero"      class="active" onclick="navClick(event,'hero')">HOME</a>
           <a href="#portfolio"              onclick="navClick(event,'portfolio')">WORKS</a>
           <a href="#projects"               onclick="navClick(event,'projects')">CREDITS</a>
+          <a href="#stats"                  onclick="navClick(event,'stats')">STATS</a>
         </nav>
       </div><!-- /main -->
 
@@ -619,14 +825,25 @@ html,body{
   </div><!-- /screen-wrap -->
 
   <!-- LIGHTBOX -->
-  <div id="lb" onclick="closeLBbg(event)">
+  <div id="lb" onclick="closeLBbg(event)" role="dialog" aria-modal="true" aria-label="Project viewer">
+    <button class="lb-arrow prev" onclick="lbStep(-1)" aria-label="Previous">&#9664;</button>
+    <button class="lb-arrow next" onclick="lbStep(1)" aria-label="Next">&#9654;</button>
     <div class="lb-inner">
       <div class="lb-frame">
         <div class="lbc tl"></div><div class="lbc tr"></div><div class="lbc bl"></div><div class="lbc br"></div>
         <div id="lb-media"></div>
       </div>
-      <div class="lb-info"><h2 id="lb-title"></h2><p id="lb-desc"></p></div>
-      <button class="lb-close" onclick="closeLB()">X</button>
+      <div class="lb-info"><div class="lb-count" id="lb-count"></div><h2 id="lb-title"></h2><p id="lb-desc"></p></div>
+      <button class="lb-close" onclick="closeLB()" aria-label="Close">X</button>
+    </div>
+  </div>
+
+  <!-- TROPHIES -->
+  <div id="tp" onclick="closeTPbg(event)" role="dialog" aria-modal="true" aria-label="Trophies">
+    <div class="tp-box">
+      <div class="tp-head"><h2>TROPHIES <span id="tp-count"></span></h2></div>
+      <button class="lb-close" onclick="closeTP()" aria-label="Close">X</button>
+      <ul id="tp-list"></ul>
     </div>
   </div>
 
@@ -709,6 +926,28 @@ html,body{
 </div>
 
 <script>
+const REDUCED=!!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+/* =====================================================================
+   PIXEL MODE: постоянная пикселизация всех картинок
+   (карточки, баннеры проектов и открытое окно с картинкой).
+   Включить:  enabled:true
+   Быстрая проверка без правки кода: index.html?pixel  или  ?pixel=32
+   (?pixel=off  или  ?pixel=0 выключает, даже если enabled:true).
+   blocks - сколько "пикселей" по ширине картинки.
+   Меньше = крупнее пиксели (32 очень грубо, 64 по умолчанию, 128 мягко).
+   Видео YouTube в открытом окне (iframe) пикселизировать нельзя.
+   ===================================================================== */
+const PIXEL_MODE={enabled:false,blocks:64};
+(function(){
+  const q=new URLSearchParams(window.location.search);
+  if(!q.has('pixel'))return;
+  const v=q.get('pixel');
+  PIXEL_MODE.enabled=(v!=='off'&&v!=='0');
+  const n=parseInt(v,10);
+  if(n>=8&&n<=512)PIXEL_MODE.blocks=n;
+})();
+
 /* AUDIO */
 let AC;
 function ac(){if(!AC)AC=new(window.AudioContext||window.webkitAudioContext)();return AC;}
@@ -720,24 +959,65 @@ function openSnd(){beep(660,.07);setTimeout(()=>beep(880,.09),55);}
 function closeSnd(){beep(440,.06);setTimeout(()=>beep(330,.07),45);}
 function achSnd(){[523,659,784,1047].forEach((f,i)=>setTimeout(()=>beep(f,.12,'square',.06),i*75));}
 function bootSnd(i){beep([220,330,440,550,660,770,880][i%7],.045,'square',.04);}
+function stageSnd(){[392,523,659,784,1047].forEach((f,i)=>setTimeout(()=>beep(f,.09,'square',.055),i*85));}
+function ghostSnd(){beep(880,.05,'square',.06);setTimeout(()=>beep(440,.12,'sawtooth',.05),50);}
+function lifeSnd(){beep(196,.2,'sawtooth',.05);}
+function tickEl(el){el.classList.remove('tick');void el.offsetWidth;el.classList.add('tick');}
 
-/* ACHIEVEMENTS */
+/* ACHIEVEMENTS (i = icon, n = name, h = hint shown in the trophy list) */
+const ACH={
+  boot:{i:'🎮',n:'PORTFOLIO LOADED',h:'Insert a coin to start'},
+  coin_first:{i:'🪙',n:'FIRST COIN INSERTED',h:'Use the coin slot'},
+  coin_5:{i:'💰',n:'HIGH ROLLER — 5 COINS',h:'Insert 5 coins'},
+  coin_10:{i:'🤑',n:'ARCADE ADDICT — 10 COINS',h:'Insert 10 coins'},
+  btn_red:{i:'🔴',n:'RED BUTTON PRESSED',h:'Press the red button'},
+  btn_green:{i:'🟢',n:'GREEN BUTTON PRESSED',h:'Press the green button'},
+  btn_blue:{i:'🔵',n:'BLUE BUTTON PRESSED',h:'Press the blue button'},
+  btn_yellow:{i:'🟡',n:'YELLOW BUTTON PRESSED',h:'Press the yellow button'},
+  portfolio_junior:{i:'🩸',n:'FIRST BLOOD',h:'Open a work in Stage 01'},
+  portfolio_middle:{i:'🧗🏻‍♀️',n:'TOMB VIEWER',h:'Open 3 works'},
+  portfolio_senior:{i:'🐺',n:'WATCHER 3: WILD PORTFOLIO',h:'Open 5 works'},
+  portfolio_complete:{i:'🏆',n:'RETENTION 100%',h:'Open 7 works'},
+  /* stage_stats:{i:'📜',n:'CHARACTER SHEET',h:'Reach the last stage'}, */
+  ghost_catch:{i:'👻',n:'GHOST BUSTER',h:'Catch a ghost on the home screen'},
+  game_over:{i:'💀',n:'GAME OVER... JUST KIDDING',h:'Lose all your lives'},
+  /* konami:{i:'⭐',n:'C-C-C-COMBO!',h:'↑ ↑ ↓ ↓ ← → ← → B A'} */
+};
 const earned=new Set();
-function showAch(icon,name,key){
-  if(key&&earned.has(key))return;
-  if(key)earned.add(key);
-  document.getElementById('ach-ico').textContent=icon;
-  document.getElementById('ach-name').textContent=name;
+function updAchCount(){
+  const el=document.getElementById('ach-count');
+  if(el){el.textContent=earned.size+'/'+Object.keys(ACH).length;tickEl(el);}
+  if(document.getElementById('tp').classList.contains('open'))renderTP();
+}
+function showAch(key){
+  const d=ACH[key];
+  if(!d||earned.has(key))return;
+  earned.add(key);
+  document.getElementById('ach-ico').textContent=d.i;
+  document.getElementById('ach-name').textContent=d.n;
   achSnd();
   const el=document.getElementById('ach');
   el.classList.remove('show');void el.offsetWidth;el.classList.add('show');
   clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('show'),3500);
+  updAchCount();
 }
 
 /* SCORE */
 let score=0;
 const sEl=document.getElementById('score-val');
-function scoreAdd(n){score+=n;sEl.textContent=String(score).padStart(6,'0');sEl.classList.remove('tick');void sEl.offsetWidth;sEl.classList.add('tick');}
+function scoreAdd(n){score+=n;sEl.textContent=String(score).padStart(6,'0');tickEl(sEl);}
+
+/* LIVES */
+let lives=3;
+function renderLives(){document.querySelectorAll('#lives .heart').forEach((h,i)=>h.classList.toggle('lost',i>=lives));}
+function loseLife(){
+  if(lives<=0)return;
+  lives--;renderLives();lifeSnd();
+  if(lives===0){
+    showAch('game_over');
+    setTimeout(()=>{lives=3;renderLives();coinSnd();},2200);
+  }
+}
 
 /* 1. ФОНОВАЯ ЗАГРУЗКА КАРТИНОК */
 const imageUrls = [
@@ -800,6 +1080,90 @@ function showInsertCoin(){
   },650);
 }
 
+/* HERO: typewriter for the description */
+const HERO_LINES=['Systems · LiveOps · Events · Economy','UE5 · Unity · C++ · Blueprint · SQL'];
+function typeHero(){
+  const el=document.getElementById('hero-type');
+  if(!el||REDUCED)return;
+  el.textContent='';
+  const nodes=[document.createTextNode(''),document.createTextNode('')];
+  const cur=document.createElement('span');cur.className='cur';
+  el.append(nodes[0],document.createElement('br'),nodes[1]);
+  nodes[0].after(cur);
+  let line=0,ch=0,n=0;
+  const iv=setInterval(()=>{
+    const txt=HERO_LINES[line];
+    ch++;n++;
+    nodes[line].nodeValue=txt.slice(0,ch);
+    if(n%3===0)beep(1500,.012,'square',.012);
+    if(ch>=txt.length){
+      line++;ch=0;
+      if(line>=HERO_LINES.length){clearInterval(iv);return;}
+      nodes[line].after(cur);
+    }
+  },26);
+}
+
+/* HERO: Pac-Man ghosts */
+const GHOST_MAP=['....######....','..##########..','.############.','.############.','.############.','##############','##############','##############','##############','##############','##############','##############','###..####..###','##....##....##'];
+function ghostSVG(){
+  let r='';
+  GHOST_MAP.forEach((row,y)=>{
+    let x=0;
+    while(x<row.length){
+      if(row[x]==='#'){let s=x;while(x<row.length&&row[x]==='#')x++;r+=`<rect x="${s}" y="${y}" width="${x-s}" height="1"/>`;}
+      else x++;
+    }
+  });
+  return `<svg viewBox="0 0 14 14" aria-hidden="true"><g style="fill:var(--gc)">${r}</g><g fill="#fff"><rect x="3" y="4" width="3" height="4"/><rect x="8" y="4" width="3" height="4"/></g><g fill="#2244cc"><rect x="4" y="6" width="2" height="2"/><rect x="9" y="6" width="2" height="2"/></g></svg>`;
+}
+const GHOSTS=[
+  {c:'#ff4444',top:5,dur:17,del:-4,rev:false},
+  {c:'#ff8ad8',top:30,dur:23,del:-12,rev:true},
+  {c:'#33e0ff',top:68,dur:14,del:-2,rev:false},
+  {c:'#ffa640',top:90,dur:20,del:-9,rev:true}
+];
+function sizeHero(){
+  const h=document.getElementById('hero');
+  if(h&&h.offsetWidth>0)h.style.setProperty('--hw',h.offsetWidth+'px');
+}
+function catchGhost(d){
+  if(d.classList.contains('eaten'))return;
+  d.classList.add('eaten');scoreAdd(200);ghostSnd();showAch('ghost_catch');
+  setTimeout(()=>d.classList.remove('eaten'),5000);
+}
+function initGhosts(){
+  const lane=document.getElementById('ghosts');
+  if(!lane||REDUCED)return;
+  GHOSTS.forEach(g=>{
+    const d=document.createElement('div');
+    d.className='ghost'+(g.rev?' rev':'');
+    d.style.cssText=`top:${g.top}%;--gc:${g.c};--dur:${g.dur}s;--del:${g.del}s`;
+    d.innerHTML='<div class="gf">'+ghostSVG()+'</div>';
+    d.addEventListener('click',()=>catchGhost(d));
+    lane.appendChild(d);
+  });
+  sizeHero();
+  window.addEventListener('resize',sizeHero);
+  if('ResizeObserver' in window)new ResizeObserver(sizeHero).observe(document.getElementById('hero'));
+}
+
+/* HERO: parallax grid follows the mouse */
+(function(){
+  const grid=document.getElementById('hero-grid');
+  if(!grid||REDUCED)return;
+  let raf=0,nx=0,ny=0;
+  document.addEventListener('mousemove',e=>{
+    nx=e.clientX/window.innerWidth-.5;ny=e.clientY/window.innerHeight-.5;
+    if(raf)return;
+    raf=requestAnimationFrame(()=>{
+      raf=0;
+      grid.style.setProperty('--px',(nx*-28).toFixed(1)+'px');
+      grid.style.setProperty('--py',(ny*-28).toFixed(1)+'px');
+    });
+  });
+})();
+
 /* INSERT COIN triggers enterSite */
 let gameStarted=false;
 function enterSite(){
@@ -811,32 +1175,93 @@ function enterSite(){
   slot.style.borderColor='';slot.style.boxShadow='';
   const m=document.getElementById('main');m.style.display='block';
   requestAnimationFrame(()=>requestAnimationFrame(()=>m.classList.add('visible')));
+  sizeHero();
   scoreAdd(1000);
-  setTimeout(()=>showAch('🎮','PORTFOLIO LOADED','boot'),1200);
+  setTimeout(typeHero,750);
+  setTimeout(()=>showAch('boot'),1200);
 }
 
-/* LIGHTBOX */
+/* LIGHTBOX (gallery within one project group) */
+let lbList=[],lbIdx=0;
 function openLB(card){
   openSnd();scoreAdd(100);
+  const g=card.dataset.group;
+  lbList=g?Array.from(document.querySelectorAll('.mcard[data-group="'+g+'"]')):[card];
+  lbIdx=Math.max(0,lbList.indexOf(card));
+  renderLB();
+  document.getElementById('screen-content').classList.add('no-scroll');
+  document.getElementById('lb').classList.add('open');
+}
+function renderLB(){
+  const card=lbList[lbIdx];
+  if(!card)return;
   const m=document.getElementById('lb-media');
   document.getElementById('lb-title').textContent=card.dataset.title||'';
   document.getElementById('lb-desc').innerHTML=card.dataset.desc||'';
   if(card.dataset.type==='youtube'){
     m.innerHTML=`<iframe src="https://www.youtube.com/embed/${card.dataset.youtubeId}?autoplay=1&rel=0" allow="autoplay;fullscreen" allowfullscreen></iframe>`;
   } else {
-    m.innerHTML=`<img src="${card.dataset.src}" alt="">`;
+    m.innerHTML=`<img src="${card.dataset.src}" alt="${card.dataset.title||''}">`;
+    applyPixel(m.querySelector('img'));
   }
-  document.getElementById('screen-content').classList.add('no-scroll');
-  document.getElementById('lb').classList.add('open');
+  const multi=lbList.length>1;
+  document.getElementById('lb-count').textContent=multi?(lbIdx+1)+' / '+lbList.length:'';
+  document.getElementById('lb').classList.toggle('multi',multi);
+}
+function lbStep(d){
+  if(lbList.length<2)return;
+  lbIdx=(lbIdx+d+lbList.length)%lbList.length;
+  selSnd();renderLB();
 }
 function closeLB(){
+  const lb=document.getElementById('lb');
+  if(!lb.classList.contains('open'))return;
   closeSnd();
-  document.getElementById('lb').classList.remove('open');
+  lb.classList.remove('open','multi');
   document.getElementById('lb-media').innerHTML='';
+  lbList=[];
   document.getElementById('screen-content').classList.remove('no-scroll');
 }
 function closeLBbg(e){if(e.target===document.getElementById('lb'))closeLB();}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLB();});
+
+/* TROPHIES PANEL */
+function renderTP(){
+  document.getElementById('tp-list').innerHTML=Object.keys(ACH).map(k=>{
+    const d=ACH[k],got=earned.has(k);
+    return `<li class="${got?'got':'lock'}"><span class="tp-ico">${got?d.i:'🔒'}</span><span class="tp-txt"><b>${got?d.n:'???'}</b><small>${d.h}</small></span></li>`;
+  }).join('');
+  document.getElementById('tp-count').textContent=earned.size+'/'+Object.keys(ACH).length;
+}
+function openTP(){
+  openSnd();renderTP();
+  document.getElementById('screen-content').classList.add('no-scroll');
+  document.getElementById('tp').classList.add('open');
+}
+function closeTP(){
+  const t=document.getElementById('tp');
+  if(!t.classList.contains('open'))return;
+  closeSnd();
+  t.classList.remove('open');
+  document.getElementById('screen-content').classList.remove('no-scroll');
+}
+function closeTPbg(e){if(e.target===document.getElementById('tp'))closeTP();}
+
+document.addEventListener('keydown',e=>{
+  const lbOpen=document.getElementById('lb').classList.contains('open');
+  if(e.key==='Escape'){closeLB();closeTP();}
+  else if(lbOpen&&e.key==='ArrowLeft')lbStep(-1);
+  else if(lbOpen&&e.key==='ArrowRight')lbStep(1);
+});
+(function(){
+  const lb=document.getElementById('lb');
+  let x0=null;
+  lb.addEventListener('touchstart',e=>{x0=e.touches[0].clientX;},{passive:true});
+  lb.addEventListener('touchend',e=>{
+    if(x0===null)return;
+    const dx=e.changedTouches[0].clientX-x0;x0=null;
+    if(Math.abs(dx)>50)lbStep(dx<0?1:-1);
+  });
+})();
 
 /* NAV */
 function navClick(e,id){
@@ -848,22 +1273,199 @@ function navClick(e,id){
   e.currentTarget.classList.add('active');
 }
 
+/* STAGES, LEVEL AND XP BAR */
+const STAGES=[
+  /*{id:'hero',lvl:1},
+  {id:'portfolio',lvl:2,num:'STAGE 01',name:'PORTFOLIO'},
+  {id:'projects',lvl:3,num:'STAGE 02',name:'COMMERCIAL PROJECTS'},
+  {id:'stats',lvl:4,num:'STAGE 03',name:'PLAYER STATS'}*/
+];
+let curStage=0,stageTimer=0;
+const stagesSeen=new Set([0]);
+
+function updateProgress(){
+  const sc=document.getElementById('screen-content');
+  const max=sc.scrollHeight-sc.clientHeight;
+  const p=max>0?Math.min(1,sc.scrollTop/max):0;
+  document.getElementById('xp-fill').style.width=(p*100).toFixed(1)+'%';
+  let idx=0;
+  STAGES.forEach((s,i)=>{const el=document.getElementById(s.id);if(el&&sc.scrollTop>=el.offsetTop-80)idx=i;});
+  if(max>0&&sc.scrollTop>=max-4)idx=STAGES.length-1;
+  return idx;
+}
+function navActive(idx){
+  /*document.querySelectorAll('#screen-nav a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+STAGES[idx].id));*/
+}
+function showStage(s){
+  const b=document.getElementById('stage-banner');
+  document.getElementById('sb-num').textContent=s.num;
+  document.getElementById('sb-name').textContent=s.name;
+  stageSnd();
+  b.classList.remove('go');void b.offsetWidth;b.classList.add('go');
+}
+function onStageChange(idx){
+  if(idx===curStage)return;
+  curStage=idx;
+  clearTimeout(stageTimer);
+  if(stagesSeen.has(idx))return;
+  stageTimer=setTimeout(()=>{
+    if(curStage!==idx)return;
+    stagesSeen.add(idx);
+    const lv=document.getElementById('level-val');
+    lv.textContent=String(STAGES[idx].lvl).padStart(2,'0');tickEl(lv);
+    showStage(STAGES[idx]);
+    scoreAdd(250);
+    if(idx===STAGES.length-1)showAch('stage_stats');
+  },400);
+}
+
 /* SCROLL & OBSERVER */
 const obs=new IntersectionObserver(es=>{
   es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');scoreAdd(10);}});
 },{threshold:.1,root:document.getElementById('screen-content')});
 
+/* STATS: counters and skill bars */
+function runCount(el){
+  if(!el)return;
+  const to=+el.dataset.to,pre=el.dataset.pre||'',suf=el.dataset.suf||'';
+  if(REDUCED){el.textContent=pre+to+suf;return;}
+  const dur=1200,t0=performance.now();
+  (function f(t){
+    const p=Math.min(1,Math.max(0,(t-t0)/dur)),e=1-Math.pow(1-p,3);
+    el.textContent=pre+Math.round(to*e)+suf;
+    if(p<1)requestAnimationFrame(f);else scoreAdd(100);
+  })(t0);
+}
+function fillBars(sheet){
+  sheet.querySelectorAll('.skill').forEach(s=>{
+    const n=+s.dataset.lvl;
+    s.querySelectorAll('.seg i').forEach((b,i)=>{if(i<n)b.classList.add('on');});
+  });
+}
+function initStats(){
+  document.querySelectorAll('.skill .seg').forEach(seg=>{
+    for(let i=0;i<10;i++){const b=document.createElement('i');b.style.transitionDelay=(i*70)+'ms';seg.appendChild(b);}
+  });
+  const counts=document.querySelectorAll('.count');
+  if(REDUCED||!('IntersectionObserver' in window)){
+    counts.forEach(runCount);
+    document.querySelectorAll('.sheet').forEach(fillBars);
+    return;
+  }
+  counts.forEach(c=>{c.textContent=(c.dataset.pre||'')+'0'+(c.dataset.suf||'');});
+  const so=new IntersectionObserver(es=>{
+    es.forEach(e=>{
+      if(!e.isIntersecting)return;
+      so.unobserve(e.target);
+      if(e.target.classList.contains('sheet'))fillBars(e.target);
+      else runCount(e.target.querySelector('.count'));
+    });
+  },{threshold:.25,root:document.getElementById('screen-content')});
+  document.querySelectorAll('.kpi,.sheet').forEach(el=>so.observe(el));
+}
+
+/* PIXEL MODE: downscale once, show it as a hard-edged canvas on top of the <img> */
+const PX_CACHE=new Map();
+function pixelSmall(img){
+  const key=(img.currentSrc||img.src)+'|'+PIXEL_MODE.blocks;
+  if(PX_CACHE.has(key))return PX_CACHE.get(key);
+  const nw=img.naturalWidth,nh=img.naturalHeight;
+  if(!nw||!nh)return null;
+  const w=Math.max(1,Math.min(PIXEL_MODE.blocks,nw));
+  const h=Math.max(1,Math.round(w*nh/nw));
+  let cur=img,cw=nw,ch=nh;
+  // halve step by step so big images are averaged instead of aliased
+  while(cw>w*2){
+    const w2=Math.max(w,Math.floor(cw/2)),h2=Math.max(h,Math.floor(ch/2));
+    const t=document.createElement('canvas');t.width=w2;t.height=h2;
+    const tc=t.getContext('2d');
+    if(!tc)return null;
+    tc.imageSmoothingQuality='high';tc.drawImage(cur,0,0,w2,h2);
+    cur=t;cw=w2;ch=h2;
+  }
+  const out=document.createElement('canvas');out.width=w;out.height=h;
+  const oc=out.getContext('2d');
+  if(!oc)return null;
+  oc.imageSmoothingQuality='high';oc.drawImage(cur,0,0,w,h);
+  PX_CACHE.set(key,out);
+  return out;
+}
+function applyPixel(img){
+  if(!PIXEL_MODE.enabled||!img||img._px)return;
+  const go=()=>{
+    if(img._px)return;
+    const small=pixelSmall(img);
+    if(!small)return;                       // on any failure the original image stays visible
+    const cv=document.createElement('canvas');
+    cv.className='px-cv';cv.width=small.width;cv.height=small.height;
+    cv.getContext('2d').drawImage(small,0,0);
+    img.parentElement.appendChild(cv);
+    img.classList.add('px-hide');
+    img._px=cv;
+  };
+  if(img.complete&&img.naturalWidth)go();
+  else img.addEventListener('load',go,{once:true});
+}
+
+/* CARDS: pixel "focus" on hover, badges, keyboard access */
+function pixelFocus(card){
+  if(REDUCED||PIXEL_MODE.enabled)return;
+  const img=card.querySelector('img');
+  if(!img||!img.complete||!img.naturalWidth)return;
+  const box=img.getBoundingClientRect();
+  const w=Math.round(box.width),h=Math.round(box.height);
+  if(!w||!h)return;
+  let cv=card._pv;
+  if(!cv){cv=document.createElement('canvas');cv.className='pix';img.parentElement.appendChild(cv);card._pv=cv;}
+  cv.width=w;cv.height=h;cv.style.display='block';
+  const ctx=cv.getContext('2d');
+  if(!ctx){cv.style.display='none';return;}
+  const ir=img.naturalWidth/img.naturalHeight,br=w/h;
+  let sw,sh,sx,sy;
+  if(ir>br){sh=img.naturalHeight;sw=sh*br;sx=(img.naturalWidth-sw)/2;sy=0;}
+  else{sw=img.naturalWidth;sh=sw/br;sx=0;sy=(img.naturalHeight-sh)/2;}
+  const tmp=document.createElement('canvas'),tctx=tmp.getContext('2d');
+  const token=card._pt=(card._pt||0)+1;
+  const steps=[28,16,9,5,2];
+  let i=0;
+  (function step(){
+    if(card._pt!==token)return;
+    if(i>=steps.length){cv.style.display='none';return;}
+    const px=steps[i++];
+    const tw=Math.max(1,Math.round(w/px)),th=Math.max(1,Math.round(h/px));
+    tmp.width=tw;tmp.height=th;
+    tctx.drawImage(img,sx,sy,sw,sh,0,0,tw,th);
+    ctx.imageSmoothingEnabled=false;
+    ctx.clearRect(0,0,w,h);
+    ctx.drawImage(tmp,0,0,tw,th,0,0,w,h);
+    setTimeout(step,55);
+  })();
+}
+function initCards(){
+  document.querySelectorAll('.mcard[data-badge]').forEach(c=>{
+    const b=document.createElement('span');
+    b.className='badge'+(c.dataset.badge==='BOSS'?' boss':'');
+    b.textContent=c.dataset.badge;
+    c.appendChild(b);
+  });
+  document.querySelectorAll('.mcard').forEach(c=>{
+    c.tabIndex=0;
+    c.setAttribute('role','button');
+    c.setAttribute('aria-label',c.dataset.title||'Open project');
+    c.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();c.click();}});
+  });
+  document.querySelectorAll('.mcard,.pcard').forEach(el=>el.addEventListener('mouseenter',()=>pixelFocus(el)));
+  if(PIXEL_MODE.enabled)document.querySelectorAll('.mcard img,.pcard img').forEach(applyPixel);
+}
+
 /* BUTTONS */
-const btnCfg={
-  red:   {note:440,icon:'🔴',name:'RED BUTTON PRESSED',  key:'btn_red'},
-  green: {note:660,icon:'🟢',name:'GREEN BUTTON PRESSED',key:'btn_green'},
-  blue:  {note:550,icon:'🔵',name:'BLUE BUTTON PRESSED', key:'btn_blue'},
-  yellow:{note:330,icon:'🟡',name:'YELLOW BUTTON PRESSED',key:'btn_yellow'},
-};
+const BTN_NOTE={red:440,green:660,blue:550,yellow:330};
 function btnPress(color){
-  const cfg=btnCfg[color];
-  beep(cfg.note,.09,'square',.07);scoreAdd(25);
-  showAch(cfg.icon,cfg.name,cfg.key);
+  beep(BTN_NOTE[color],.09,'square',.07);scoreAdd(25);
+  const b=document.querySelector('.btn-'+color);
+  if(b){b.classList.add('lit');clearTimeout(b._t);b._t=setTimeout(()=>b.classList.remove('lit'),280);}
+  showAch('btn_'+color);
+  if(color==='red')loseLife();
 }
 
 /* COIN */
@@ -876,18 +1478,18 @@ function insertCoin(){
   const coin=document.createElement('div');coin.className='coin-anim';
   wrap.appendChild(coin);setTimeout(()=>coin.remove(),550);
   if(!gameStarted) enterSite();
-  if(coinCount===1)showAch('🪙','FIRST COIN INSERTED','coin_first');
-  else if(coinCount===5)showAch('💰','HIGH ROLLER — 5 COINS','coin_5');
-  else if(coinCount===10)showAch('🤑','ARCADE ADDICT — 10 COINS','coin_10');
+  if(coinCount===1)showAch('coin_first');
+  else if(coinCount===5)showAch('coin_5');
+  else if(coinCount===10)showAch('coin_10');
 }
 
-let porfolioCheck=0;
+let portfolioCheck=0;
 function checkPortfolioAch(){
-  porfolioCheck++;
-  if(porfolioCheck===1)showAch('🩸','FIRST BLOOD','portfolio_junior');
-  else if(porfolioCheck===3)showAch('🧗🏻‍♀️','TOMB VIEWER','portfolio_middle');
-  else if(porfolioCheck===5)showAch('🐺','WATCHER 3: WILD PORTFOLIO','portfolio_senior');
-  else if(porfolioCheck>=7)showAch('🏆','RETENTION 100%','portfolio_complete');
+  portfolioCheck++;
+  if(portfolioCheck===1)showAch('portfolio_junior');
+  else if(portfolioCheck===3)showAch('portfolio_middle');
+  else if(portfolioCheck===5)showAch('portfolio_senior');
+  else if(portfolioCheck>=7)showAch('portfolio_complete');
 }
 
 /* JOYSTICK */
@@ -910,32 +1512,44 @@ document.querySelectorAll('.mcard,.pcard,.tag').forEach(el=>el.addEventListener(
 const K=['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
 let ki=0;
 document.addEventListener('keydown',e=>{
-  if(e.key===K[ki]){ki++;if(ki===K.length){ki=0;scoreAdd(9999);showAch('⭐','C-C-C-COMBO!','konami');[0,80,160,240].forEach((t,i)=>setTimeout(()=>beep(660+i*220,.1,'square',.07),t));}}
+  if(e.key===K[ki]){ki++;if(ki===K.length){ki=0;scoreAdd(9999);showAch('konami');[0,80,160,240].forEach((t,i)=>setTimeout(()=>beep(660+i*220,.1,'square',.07),t));}}
   else ki=0;
 });
 
-/* 2. ИНИЦИАЛИЗАЦИЯ И ПОРЯДОК ЗАГРУЗКИ */
 document.addEventListener('DOMContentLoaded', () => {
-  // А) Сразу отправляем картинки качаться в фоне
+
   preloadImages();
 
-  // Б) Привязываем scroll observer
   const sc=document.getElementById('screen-content');
+  let scTick=false;
   sc.addEventListener('scroll',()=>{
-    const ids=['hero','portfolio','projects'];let cur='hero';
-    ids.forEach(id=>{const el=document.getElementById(id);if(el&&sc.scrollTop>=el.offsetTop-80)cur=id;});
-    document.querySelectorAll('#screen-nav a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+cur));
     scoreAdd(1);
-  });
+    if(scTick)return;
+    scTick=true;
+    requestAnimationFrame(()=>{
+      scTick=false;
+      const idx=updateProgress();
+      navActive(idx);
+      onStageChange(idx);
+    });
+  },{passive:true});
+  window.addEventListener('resize',updateProgress);
   document.querySelectorAll('.fu').forEach(el=>obs.observe(el));
 
-  // В) Ждем полной прогрузки кастомных шрифтов и ТОЛЬКО ПОТОМ выводим логи/загрузку
+  initCards();
+  initGhosts();
+  initStats();
+  renderLives();
+  updAchCount();
+  const tb=document.getElementById('trophy-btn');
+  tb.addEventListener('click',openTP);
+  tb.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openTP();}});
+
   if (document.fonts && document.fonts.ready) {
     document.fonts.ready.then(() => {
       runBoot();
     });
   } else {
-    // Резервный запуск для старых браузеров
     runBoot();
   }
 });
