@@ -504,8 +504,7 @@ body {
     linear-gradient(var(--ph),var(--ph)) right bottom/2px 12px no-repeat;}
 .mcard:hover::after,.mcard:focus-visible::after,.pcard:hover::after{opacity:1;}
 .pix{position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated;pointer-events:none;z-index:1;display:none;}
-.badge{position:absolute;top:8px;left:8px;z-index:5;font-family:var(--font);font-size:clamp(4px,0.8vw,6px);padding:4px 6px;background:rgba(0,0,0,0.78);border:1px solid var(--amber);color:var(--amber);letter-spacing:1px;pointer-events:none;}
-.badge.boss{border-color:var(--red);color:var(--red);}
+.badge{position:absolute;top:8px;left:8px;z-index:5;font-family:var(--font);font-size:clamp(4px,0.8vw,6px);padding:4px 6px;background:var(--bb,rgba(0,0,0,0.78));border:1px solid var(--bc,var(--amber));color:var(--bc,var(--amber));letter-spacing:1px;pointer-events:none;}
 .proj-banner{height:clamp(110px,13vw,210px);}
 
 /* ---------- STAGE 03: PLAYER STATS ---------- */
@@ -663,9 +662,16 @@ body {
           <div class="sec-header fu"><span class="sec-num">STAGE 01</span><h2 class="sec-title">PORTFOLIO</h2>
             <div class="sec-line"></div>
           </div>
+          <!-- Настройки карточки (все необязательные, пишутся в тег .mcard / .pcard):
+               data-pixel="on|off|32"       пикселизация картинки (число = blocks); по умолчанию берётся PIXEL_MODE
+               data-pixel-open="on|off|32"  то же, но только для открытого окна (если нет, берётся data-pixel)
+               data-badge="TEXT"            плашка в левом верхнем углу (только .mcard)
+               data-badge-color="#ff3333"   цвет текста и рамки плашки (hex, rgb(), название цвета)
+               data-badge-bg="#220000"      цвет фона плашки
+          -->
           <div class="port-grid">
 
-            <div class="mcard sm fu" data-group="c++" data-badge="IN PROGRESS" data-type="image"
+            <div class="mcard sm fu" data-group="c++" data-badge="IN PROGRESS" data-badge-color="#2dd11b" data-badge-bg="#001a22" data-pixel="on" data-pixel="128" data-type="image"
               data-src="src/assets/images/UE5CPPTPS.png" data-title="UE5 C++ TPS Rebuild"
               data-desc="Implementation of the C++ third-person shooter template in UE5, with a focus on gameplay mechanics and character movement"
               onclick="openLB(this); checkPortfolioAch();">
@@ -676,7 +682,7 @@ body {
               </div>
             </div>
 
-            <div class="mcard wd fu" data-group="building" data-badge="IN PROGRESS" data-type="image" data-src="src/assets/images/UE5BuildingSim.png"
+            <div class="mcard wd fu" data-group="building" data-badge="IN PROGRESS" data-badge-color="#2dd11b" data-badge-bg="#001a22" data-pixel="on" data-pixel="128" data-type="image" data-src="src/assets/images/UE5BuildingSim.png"
               data-title="UE5 building simulator"
               data-desc="Implementation of a building simulator in UE5, where the player can construct and manage various structures"
               onclick="openLB(this); checkPortfolioAch();">
@@ -695,7 +701,7 @@ body {
               </div>
             </div>
 
-            <div class="mcard md fu" data-group="tps" data-badge="BOSS" data-type="youtube" data-youtube-id="7TR6tAux9ts" data-title="TPSUE5Gameplay" data-desc="Implementation of a boss battle" onclick="openLB(this); checkPortfolioAch();">
+            <div class="mcard md fu" data-group="tps" data-badge="BOSS" data-badge-color="#ff3333" data-type="youtube" data-youtube-id="7TR6tAux9ts" data-title="TPSUE5Gameplay" data-desc="Implementation of a boss battle" onclick="openLB(this); checkPortfolioAch();">
               <div class="vthumb"><img src="src/assets/images/TPSUE5Gameplay_Icon_1.webp" alt="Video preview: UE5 third-person boss battle"><div class="play-wrap"><div class="play-btn"></div></div></div>
               <div class="covlay">
                 <h3>TPSUE5Gameplay</h3>
@@ -703,7 +709,7 @@ body {
               </div>
             </div>
 
-            <div class="mcard md fu" data-group="tps" data-badge="BOSS" data-type="image" data-src="src/assets/images/TPSUE5Gameplay_Icon_2.webp" data-title="TPSUE5Gameplay" data-desc="Implementation of a boss battle" onclick="openLB(this); checkPortfolioAch(); ">
+            <div class="mcard md fu" data-group="tps" data-badge="BOSS" data-badge-color="#ff3333" data-type="image" data-src="src/assets/images/TPSUE5Gameplay_Icon_2.webp" data-title="TPSUE5Gameplay" data-desc="Implementation of a boss battle" onclick="openLB(this); checkPortfolioAch(); ">
               <img src="src/assets/images/TPSUE5Gameplay_Icon_2.webp" alt="Screenshot: UE5 third-person boss battle">
               <div class="covlay">
                 <h3>TPSUE5Gameplay</h3>
@@ -711,7 +717,7 @@ body {
               </div>
             </div>
 
-            <div class="mcard sm fu" data-group="tps" data-badge="BOSS" data-type="image" data-src="src/assets/images/TPSUE5Gameplay_Icon_3.webp" data-title="TPSUE5Gameplay" data-desc="Implementation of a boss battle" onclick="openLB(this); checkPortfolioAch();">
+            <div class="mcard sm fu" data-group="tps" data-badge="BOSS" data-badge-color="#ff3333" data-type="image" data-src="src/assets/images/TPSUE5Gameplay_Icon_3.webp" data-title="TPSUE5Gameplay" data-desc="Implementation of a boss battle" onclick="openLB(this); checkPortfolioAch();">
               <img src="src/assets/images/TPSUE5Gameplay_Icon_3.webp" alt="Screenshot: UE5 third-person boss battle">
               <div class="covlay"><h3>TPSUE5Gameplay</h3>
                 <p>UE5</p>
@@ -725,7 +731,7 @@ body {
               </div>
             </div>
 
-            <div class="mcard tl fu" data-badge="PLAYABLE" data-type="image" data-src="src/assets/images/FlappyMax_Icon_1.webp" data-title="FlappyMax" data-desc="Implementation of a Flappy Bird parody in Unity.<br><a href='https://fikek.itch.io/flappymax' target='_blank' class='desc-link'>Link</a>" onclick="openLB(this); checkPortfolioAch();">
+            <div class="mcard tl fu" data-badge="PLAYABLE" data-badge-color="#33e0ff" data-badge-bg="#001a22" data-type="image" data-src="src/assets/images/FlappyMax_Icon_1.webp" data-title="FlappyMax" data-desc="Implementation of a Flappy Bird parody in Unity.<br><a href='https://fikek.itch.io/flappymax' target='_blank' class='desc-link'>Link</a>" onclick="openLB(this); checkPortfolioAch();">
               <img src="src/assets/images/FlappyMax_Icon_1.webp" alt="Screenshot: FlappyMax, a Flappy Bird parody made in Unity">
               <div class="covlay">
                 <h3>FlappyMax</h3>
@@ -733,7 +739,7 @@ body {
               </div>
             </div>
 
-            <div class="mcard wd lg fu" data-badge="PLAYABLE" data-type="image" data-src="src/assets/images/DonkeyKirya_Icon_1.webp" data-title="DonkeyKirya" data-desc="Implementation of a Donkey Kong parody in Unity.<br><a href='https://fikek.itch.io/donkeykirya' target='_blank' class='desc-link'>Link</a>" onclick="openLB(this); checkPortfolioAch();">
+            <div class="mcard wd lg fu" data-badge="PLAYABLE" data-badge-color="#33e0ff" data-badge-bg="#001a22" data-type="image" data-src="src/assets/images/DonkeyKirya_Icon_1.webp" data-title="DonkeyKirya" data-desc="Implementation of a Donkey Kong parody in Unity.<br><a href='https://fikek.itch.io/donkeykirya' target='_blank' class='desc-link'>Link</a>" onclick="openLB(this); checkPortfolioAch();">
               <img src="src/assets/images/DonkeyKirya_Icon_1.webp" alt="Screenshot: DonkeyKirya, a Donkey Kong parody made in Unity">
               <div class="covlay">
                 <h3>DonkeyKirya</h3>
@@ -937,24 +943,51 @@ body {
 const REDUCED=!!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 
 /* =====================================================================
-   PIXEL MODE: постоянная пикселизация всех картинок
-   (карточки, баннеры проектов и открытое окно с картинкой).
-   Включить:  enabled:true
-   Быстрая проверка без правки кода: index.html?pixel  или  ?pixel=32
-   (?pixel=off  или  ?pixel=0 выключает, даже если enabled:true).
-   blocks - сколько "пикселей" по ширине картинки.
-   Меньше = крупнее пиксели (32 очень грубо, 64 по умолчанию, 128 мягко).
+   PIXEL MODE: пикселизация картинок (миниатюра карточки, баннер проекта
+   и картинка в открытом окне).
+
+   НАСТРОЙКА ПО КАЖДОЙ КАРТИНКЕ (пишется в тег карточки .mcard / .pcard):
+     data-pixel="on"         пикселизировать (blocks берётся из PIXEL_MODE)
+     data-pixel="32"         пикселизировать, 32 блока по ширине картинки
+     data-pixel="off"        не пикселизировать
+     data-pixel-open="..."   то же самое, но только для открытого окна
+                             (если не указан, берётся значение data-pixel)
+   Если data-pixel не указан, картинка ведёт себя по значению по умолчанию:
+     enabled:false  - выключено   |   enabled:true - включено для всех
+   blocks - сколько "пикселей" по ширине картинки. Меньше = крупнее пиксели
+   (32 очень грубо, 64 по умолчанию, 128 мягко).
+
+   БЫСТРАЯ ПРОВЕРКА без правки кода (в адресе страницы):
+     index.html?pixel        включить по умолчанию для всех
+     index.html?pixel=32     то же, с 32 блоками
+     index.html?pixel=off    выключить ВСЁ (даже картинки с data-pixel)
+
    Видео YouTube в открытом окне (iframe) пикселизировать нельзя.
    ===================================================================== */
-const PIXEL_MODE={enabled:false,blocks:64};
+const PIXEL_MODE={enabled:false,blocks:64,forceOff:false};
 (function(){
   const q=new URLSearchParams(window.location.search);
   if(!q.has('pixel'))return;
   const v=q.get('pixel');
-  PIXEL_MODE.enabled=(v!=='off'&&v!=='0');
+  if(v==='off'||v==='0'){PIXEL_MODE.forceOff=true;return;}
+  PIXEL_MODE.enabled=true;
   const n=parseInt(v,10);
   if(n>=8&&n<=512)PIXEL_MODE.blocks=n;
 })();
+
+/* Сколько блоков применить к картинке этой карточки (0 = не пикселизировать).
+   open=true - для картинки в открытом окне. */
+function pixelBlocksFor(card,open){
+  if(PIXEL_MODE.forceOff)return 0;
+  const def=PIXEL_MODE.enabled?PIXEL_MODE.blocks:0;
+  let v=(open&&card.dataset.pixelOpen!==undefined)?card.dataset.pixelOpen:card.dataset.pixel;
+  if(v===undefined)return def;
+  v=String(v).trim().toLowerCase();
+  if(v==='off'||v==='false'||v==='no'||v==='0')return 0;
+  if(v==='on'||v==='true'||v==='yes')return PIXEL_MODE.blocks;
+  const n=parseInt(v,10);
+  return (n>=8&&n<=512)?n:def;
+}
 
 /* AUDIO */
 let AC;
@@ -1210,7 +1243,7 @@ function renderLB(){
     m.innerHTML=`<iframe src="https://www.youtube.com/embed/${card.dataset.youtubeId}?autoplay=1&rel=0" allow="autoplay;fullscreen" allowfullscreen></iframe>`;
   } else {
     m.innerHTML=`<img src="${card.dataset.src}" alt="${card.dataset.title||''}">`;
-    applyPixel(m.querySelector('img'));
+    applyPixel(m.querySelector('img'),pixelBlocksFor(card,true));
   }
   const multi=lbList.length>1;
   document.getElementById('lb-count').textContent=multi?(lbIdx+1)+' / '+lbList.length:'';
@@ -1374,12 +1407,12 @@ function initStats(){
 
 /* PIXEL MODE: downscale once, show it as a hard-edged canvas on top of the <img> */
 const PX_CACHE=new Map();
-function pixelSmall(img){
-  const key=(img.currentSrc||img.src)+'|'+PIXEL_MODE.blocks;
+function pixelSmall(img,blocks){
+  const key=(img.currentSrc||img.src)+'|'+blocks;
   if(PX_CACHE.has(key))return PX_CACHE.get(key);
   const nw=img.naturalWidth,nh=img.naturalHeight;
   if(!nw||!nh)return null;
-  const w=Math.max(1,Math.min(PIXEL_MODE.blocks,nw));
+  const w=Math.max(1,Math.min(blocks,nw));
   const h=Math.max(1,Math.round(w*nh/nw));
   let cur=img,cw=nw,ch=nh;
   // halve step by step so big images are averaged instead of aliased
@@ -1398,11 +1431,11 @@ function pixelSmall(img){
   PX_CACHE.set(key,out);
   return out;
 }
-function applyPixel(img){
-  if(!PIXEL_MODE.enabled||!img||img._px)return;
+function applyPixel(img,blocks){
+  if(!blocks||!img||img._px)return;
   const go=()=>{
     if(img._px)return;
-    const small=pixelSmall(img);
+    const small=pixelSmall(img,blocks);
     if(!small)return;                       // on any failure the original image stays visible
     const cv=document.createElement('canvas');
     cv.className='px-cv';cv.width=small.width;cv.height=small.height;
@@ -1417,7 +1450,7 @@ function applyPixel(img){
 
 /* CARDS: pixel "focus" on hover, badges, keyboard access */
 function pixelFocus(card){
-  if(REDUCED||PIXEL_MODE.enabled)return;
+  if(REDUCED||pixelBlocksFor(card,false))return;
   const img=card.querySelector('img');
   if(!img||!img.complete||!img.naturalWidth)return;
   const box=img.getBoundingClientRect();
@@ -1452,8 +1485,12 @@ function pixelFocus(card){
 function initCards(){
   document.querySelectorAll('.mcard[data-badge]').forEach(c=>{
     const b=document.createElement('span');
-    b.className='badge'+(c.dataset.badge==='BOSS'?' boss':'');
+    b.className='badge';
     b.textContent=c.dataset.badge;
+    // data-badge-color: цвет текста и рамки, data-badge-bg: цвет фона (любой CSS-цвет)
+    const okColor=v=>!!v&&(!(window.CSS&&window.CSS.supports)||window.CSS.supports('color',v));
+    if(okColor(c.dataset.badgeColor))b.style.setProperty('--bc',c.dataset.badgeColor);
+    if(okColor(c.dataset.badgeBg))b.style.setProperty('--bb',c.dataset.badgeBg);
     c.appendChild(b);
   });
   document.querySelectorAll('.mcard').forEach(c=>{
@@ -1463,7 +1500,10 @@ function initCards(){
     c.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();c.click();}});
   });
   document.querySelectorAll('.mcard,.pcard').forEach(el=>el.addEventListener('mouseenter',()=>pixelFocus(el)));
-  if(PIXEL_MODE.enabled)document.querySelectorAll('.mcard img,.pcard img').forEach(applyPixel);
+  document.querySelectorAll('.mcard,.pcard').forEach(card=>{
+    const blocks=pixelBlocksFor(card,false);
+    if(blocks)applyPixel(card.querySelector('img'),blocks);
+  });
 }
 
 /* BUTTONS */
