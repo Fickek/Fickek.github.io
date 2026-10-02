@@ -550,14 +550,23 @@ body {
 .lb-count{font-family:var(--font);font-size:clamp(6px,1vw,8px);color:var(--amber);letter-spacing:2px;margin-bottom:8px;min-height:1em;}
 
 /* ---------- TROPHIES PANEL ---------- */
-#tp{position:fixed;inset:0;background:rgba(0,0,0,0.94);z-index:9000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.2s;padding:16px;}
+#tp{position:absolute;inset:0;background:rgba(0,0,0,0.82);z-index:151;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.2s;padding:clamp(10px,3vw,24px);}
 #tp.open{opacity:1;pointer-events:all;}
-.tp-box{position:relative;width:min(520px,100%);max-height:86vh;overflow-y:auto;border:2px solid var(--ph);box-shadow:0 0 30px rgba(200,255,0,0.25);background:var(--bg);padding:clamp(16px,3vw,24px);}
-.tp-box .lb-close{top:8px;right:8px;}
-.tp-head{display:flex;align-items:baseline;gap:12px;margin-bottom:16px;padding-right:32px;}
+.tp-box{position:relative;display:flex;flex-direction:column;width:min(480px,100%);max-height:86%;border:2px solid var(--ph);box-shadow:0 0 30px rgba(200,255,0,0.25);background:var(--bg);}
+.tp-box::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,0.13) 0,rgba(0,0,0,0.13) 1px,transparent 1px,transparent 3px);pointer-events:none;z-index:2;}
+.tp-scroll{position:relative;flex:1;min-height:0;overflow-y:auto;padding:clamp(16px,3vw,24px);scrollbar-width:thin;scrollbar-color:var(--ph) rgba(0,0,0,0.4);}
+.tp-scroll::-webkit-scrollbar{width:6px;}
+.tp-scroll::-webkit-scrollbar-track{background:rgba(0,0,0,0.4);border-radius:3px;box-shadow:inset 0 0 4px rgba(0,0,0,0.7);}
+.tp-scroll::-webkit-scrollbar-thumb{background:var(--ph);border-radius:3px;box-shadow:0 0 6px var(--glow);}
+.tp-page-btn{position:absolute;left:50%;bottom:10px;transform:translateX(-50%) translateY(6px);z-index:4;width:32px;height:22px;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.78);border:1px solid var(--ph);color:var(--ph);font-family:var(--font);font-size:10px;cursor:inherit;opacity:0;pointer-events:none;transition:opacity 0.2s,transform 0.2s,background 0.12s,color 0.12s;}
+.tp-page-btn.show{opacity:1;pointer-events:all;}
+.tp-page-btn:hover,.tp-page-btn:focus-visible{background:var(--ph);color:#000;}
+.tp-page-btn span{display:inline-block;animation:pulse-arrow 1.2s ease-in-out infinite;}
+.tp-box .lb-close{position:absolute;top:8px;right:8px;z-index:4;}
+.tp-head{position:relative;z-index:3;flex-shrink:0;display:flex;align-items:baseline;gap:12px;padding:clamp(16px,3vw,24px) 32px 0 clamp(16px,3vw,24px);margin-bottom:0;}
 .tp-head h2{font-family:var(--font);font-size:clamp(8px,1.4vw,11px);color:var(--ph);text-shadow:0 0 12px var(--glow);font-weight:400;}
 #tp-count{color:var(--amber);}
-#tp-list{list-style:none;display:flex;flex-direction:column;gap:8px;}
+#tp-list{position:relative;z-index:1;list-style:none;display:flex;flex-direction:column;gap:8px;}
 #tp-list li{display:flex;gap:12px;align-items:center;padding:8px 10px;border:1px solid var(--ph3);}
 #tp-list li.got{border-color:var(--amber);background:rgba(255,179,0,0.05);}
 .tp-ico{font-size:18px;width:24px;text-align:center;flex-shrink:0;}
@@ -602,6 +611,37 @@ body {
 .proj-banner:hover .banner-img-wrap .px-cv{filter:saturate(1);}
 #lb-media{position:relative;}
 #lb-media .px-cv{object-fit:fill;filter:none;}
+/* ---------- CASE FILES: модальный "картотечный шкаф" внутри экрана ---------- */
+#screen-nav .nav-count{color:var(--amber);text-shadow:0 0 6px rgba(255,179,0,0.6);margin-left:3px;}
+#cf{position:absolute;inset:0;z-index:150;background:rgba(0,0,0,0.72);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.2s;padding:clamp(10px,3vw,24px);}
+#cf.open{opacity:1;pointer-events:all;}
+.cf-box{position:relative;display:flex;flex-direction:column;width:min(54%,560px);min-width:260px;height:min(62%,560px);min-height:320px;background:var(--bg);border:2px solid var(--amber);box-shadow:0 0 30px rgba(255,179,0,0.3),inset 0 0 40px rgba(0,0,0,0.6);overflow:hidden;}
+.cf-box::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,0.13) 0,rgba(0,0,0,0.13) 1px,transparent 1px,transparent 3px);pointer-events:none;z-index:2;}
+.cf-head{position:relative;z-index:3;display:flex;align-items:baseline;gap:10px;padding:clamp(10px,2vw,16px) 40px clamp(10px,2vw,16px) clamp(12px,2vw,18px);border-bottom:1px dashed rgba(255,179,0,0.3);flex-shrink:0;}
+.cf-head h2{font-family:var(--font);font-size:clamp(8px,1.4vw,11px);color:var(--amber);text-shadow:0 0 12px rgba(255,179,0,0.5);font-weight:400;letter-spacing:1px;}
+.cf-head .cf-sub{font-family:var(--mono);font-size:clamp(9px,1.1vw,11px);color:var(--ph2);}
+.cf-close{position:absolute;top:8px;right:8px;z-index:4;width:26px;height:26px;background:none;border:1px solid var(--amber);color:var(--amber);font-family:var(--font);font-size:10px;cursor:inherit;transition:background 0.12s,color 0.12s;}
+.cf-close:hover{background:var(--amber);color:#000;}
+.cf-drawers{position:relative;z-index:3;flex:1;min-height:0;overflow-y:auto;padding:clamp(10px,2vw,16px);display:flex;flex-direction:column;gap:10px;}
+
+.cf-drawer{border:1px solid rgba(255,179,0,0.3);background:var(--bg2);flex-shrink:0;}
+.cf-drawer-face{display:flex;align-items:center;gap:12px;width:100%;padding:clamp(9px,1.6vw,13px) clamp(10px,2vw,16px);background:none;border:none;color:inherit;font:inherit;text-align:left;cursor:inherit;}
+.cf-handle{flex-shrink:0;width:26px;height:4px;border-radius:2px;background:var(--amber);box-shadow:0 0 6px rgba(255,179,0,0.5);}
+.cf-drawer-name{flex:1;min-width:0;font-family:var(--font);font-size:clamp(6px,1.1vw,9px);color:#ffe3a3;letter-spacing:0.5px;line-height:1.6;}
+.cf-drawer-count{flex-shrink:0;font-family:var(--mono);font-size:clamp(9px,1.1vw,11px);color:var(--ph2);}
+.cf-drawer-arrow{flex-shrink:0;font-family:var(--font);font-size:9px;color:var(--amber);transition:transform 0.2s;}
+.cf-drawer.open .cf-drawer-arrow{transform:rotate(90deg);}
+.cf-drawer-files{max-height:0;overflow:hidden;transition:max-height 0.28s ease;}
+.cf-drawer.open .cf-drawer-files{max-height:320px;}
+.cf-file{display:flex;align-items:center;gap:10px;padding:9px clamp(10px,2vw,16px) 9px 44px;border-top:1px dashed rgba(255,179,0,0.2);text-decoration:none;color:inherit;cursor:inherit;transition:background 0.12s;}
+.cf-file:hover,.cf-file:focus-visible{background:rgba(255,179,0,0.08);}
+.cf-file-name{flex:1;min-width:0;font-family:var(--mono);font-size:clamp(10px,1.2vw,12px);color:var(--ph2);line-height:1.5;}
+.cf-file-open{flex-shrink:0;font-family:var(--font);font-size:clamp(6px,1vw,8px);color:var(--amber);white-space:nowrap;}
+
+@media(max-width:600px){
+  .cf-box{width:100%;height:80%;}
+}
+
 </style>
 </head>
 <body>
@@ -749,7 +789,7 @@ body {
           </div>
         </div>
 
-        <div id="projects" class="inner-section">
+<div id="projects" class="inner-section">
           <div class="sec-header fu"><span class="sec-num">STAGE 02</span><h2 class="sec-title">COMMERCIAL PROJECTS</h2><div class="sec-line"></div></div>
           <div class="proj-grid">
             
@@ -829,13 +869,102 @@ body {
 
         <nav id="screen-nav">
           <a href="#hero"      class="active" onclick="navClick(event,'hero')">HOME</a>
-          <a href="#portfolio"              onclick="navClick(event,'portfolio')">WORKS</a>
-          <a href="#projects"               onclick="navClick(event,'projects')">CREDITS</a>
+          <a href="#portfolio"              onclick="navClick(event,'portfolio')">PORTFOLIO</a>
+          <a href="#projects"               onclick="navClick(event,'projects')">COMMERCIAL PROJECTS</a>
+          <a href="#" id="casefiles-tab"    onclick="openCF(event)">CASE FILES <span class="nav-count" id="cf-nav-count"></span></a>
         <!--  <a href="#stats"                  onclick="navClick(event,'stats')">STATS</a> -->
         </nav>
       </div><!-- /main -->
 
     </div><!-- /screen-content -->
+
+    <!-- ======================================================================
+         CASE FILES — модальный "шкаф" с тестовыми заданиями (ссылки на Google
+         Docs). Открывается вкладкой CASE FILES в нижнем меню, занимает часть
+         экрана и визуально остаётся ВНУТРИ монитора автомата (сидит внутри
+         #screen-wrap, а не поверх всего корпуса, как трофеи или лайтбокс).
+
+         Как добавить ящик: скопируй один <div class="cf-drawer">...</div>
+         целиком внутрь #cf-drawers.
+           .cf-drawer-name    -> название ящика/категории (например ECONOMY)
+           .cf-drawer-count   -> сколько файлов внутри, просто текст
+         Как добавить файл внутри ящика: скопируй один <a class="cf-file">...</a>
+         внутрь .cf-drawer-files того ящика.
+           href="#"           -> вставь сюда ссылку на Google Doc
+           .cf-file-name      -> название тестового задания
+         Счётчик "CASE FILES (N)" в нижнем меню пересчитывается сам при загрузке
+         страницы по количеству .cf-file — ничего отдельно обновлять не нужно.
+         ====================================================================== -->
+    <div id="cf" onclick="closeCFbg(event)" role="dialog" aria-modal="true" aria-label="Case files">
+      <div class="cf-box">
+        <div class="cf-head">
+          <h2>CASE FILES</h2>
+          <span class="cf-sub">TEST ASSIGNMENTS</span>
+        </div>
+        <button class="cf-close" onclick="closeCF()" aria-label="Close">X</button>
+
+        <div class="cf-drawers" id="cf-drawers">
+
+          <div class="cf-drawer">
+            <button class="cf-drawer-face" onclick="toggleDrawer(this)">
+              <span class="cf-handle"></span>
+              <span class="cf-drawer-name">OWLCAT STUDIO</span>
+              <span class="cf-drawer-count">1 FILE</span>
+              <span class="cf-drawer-arrow">&#9656;</span>
+            </button>
+            <div class="cf-drawer-files">
+              <a class="cf-file" href="https://docs.google.com/document/d/1rPSfuPtkdhh3SI1Uk8WA-xrNpae0uKoUU_xtre3udaU/edit?usp=sharing" target="_blank" rel="noopener" onclick="briefClick(event,this)">
+                <span class="cf-file-name">Тестовое задание GD Owlcat</span>
+                <span class="cf-file-open">OPEN DOC &#8599;</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="cf-drawer">
+            <button class="cf-drawer-face" onclick="toggleDrawer(this)">
+              <span class="cf-handle"></span>
+              <span class="cf-drawer-name">HOLIDAY STUDIOS</span>
+              <span class="cf-drawer-count">1 FILE</span>
+              <span class="cf-drawer-arrow">&#9656;</span>
+            </button>
+            <div class="cf-drawer-files">
+              <a class="cf-file" href="https://docs.google.com/document/d/1m1G6UqonOSJ16EyOXLbQGmZZfU_zFgcaIYBtlEit-Dc/edit?usp=sharing" target="_blank" rel="noopener" onclick="briefClick(event,this)">
+                <span class="cf-file-name">Test Assignment GD Holiday Studios</span>
+                <span class="cf-file-open">OPEN DOC &#8599;</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="cf-drawer">
+            <button class="cf-drawer-face" onclick="toggleDrawer(this)">
+              <span class="cf-handle"></span>
+              <span class="cf-drawer-name">WIZARDY</span>
+              <span class="cf-drawer-count">1 FILE</span>
+              <span class="cf-drawer-arrow">&#9656;</span>
+            </button>
+            <div class="cf-drawer-files">
+              <a class="cf-file" href="https://docs.google.com/document/d/1aZNF6EtpbhoXoLz7vkOQtQ7DqwGWYenoHCSN51nRDWI/edit?usp=sharing" target="_blank" rel="noopener" onclick="briefClick(event,this)">
+                <span class="cf-file-name">Тестовое задание GD Wizardy</span>
+                <span class="cf-file-open">OPEN DOC &#8599;</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- TROPHIES — теперь тоже внутри #screen-wrap, открывается на мониторе автомата -->
+    <div id="tp" onclick="closeTPbg(event)" role="dialog" aria-modal="true" aria-label="Trophies">
+      <div class="tp-box">
+        <div class="tp-head"><h2>TROPHIES <span id="tp-count"></span></h2></div>
+        <button class="lb-close" onclick="closeTP()" aria-label="Close">X</button>
+        <div class="tp-scroll" id="tp-scroll">
+          <ul id="tp-list"></ul>
+        </div>
+        <button class="tp-page-btn" id="tp-page-btn" onclick="tpPageDown()" aria-label="Scroll down"><span>&#9660;</span></button>
+      </div>
+    </div>
   </div><!-- /screen-wrap -->
 
   <!-- LIGHTBOX -->
@@ -849,15 +978,6 @@ body {
       </div>
       <div class="lb-info"><div class="lb-count" id="lb-count"></div><h2 id="lb-title"></h2><p id="lb-desc"></p></div>
       <button class="lb-close" onclick="closeLB()" aria-label="Close">X</button>
-    </div>
-  </div>
-
-  <!-- TROPHIES -->
-  <div id="tp" onclick="closeTPbg(event)" role="dialog" aria-modal="true" aria-label="Trophies">
-    <div class="tp-box">
-      <div class="tp-head"><h2>TROPHIES <span id="tp-count"></span></h2></div>
-      <button class="lb-close" onclick="closeTP()" aria-label="Close">X</button>
-      <ul id="tp-list"></ul>
     </div>
   </div>
 
@@ -1272,11 +1392,13 @@ function renderTP(){
     return `<li class="${got?'got':'lock'}"><span class="tp-ico">${got?d.i:'🔒'}</span><span class="tp-txt"><b>${got?d.n:'???'}</b><small>${d.h}</small></span></li>`;
   }).join('');
   document.getElementById('tp-count').textContent=earned.size+'/'+Object.keys(ACH).length;
+  requestAnimationFrame(tpUpdateScrollBtn);
 }
 function openTP(){
   openSnd();renderTP();
   document.getElementById('screen-content').classList.add('no-scroll');
   document.getElementById('tp').classList.add('open');
+  requestAnimationFrame(tpUpdateScrollBtn);
 }
 function closeTP(){
   const t=document.getElementById('tp');
@@ -1286,10 +1408,23 @@ function closeTP(){
   document.getElementById('screen-content').classList.remove('no-scroll');
 }
 function closeTPbg(e){if(e.target===document.getElementById('tp'))closeTP();}
+function tpUpdateScrollBtn(){
+  const sc=document.getElementById('tp-scroll'),btn=document.getElementById('tp-page-btn');
+  if(!sc||!btn)return;
+  const need=sc.scrollHeight>sc.clientHeight+4;
+  const atBottom=sc.scrollTop+sc.clientHeight>=sc.scrollHeight-4;
+  btn.classList.toggle('show',need&&!atBottom);
+}
+function tpPageDown(){
+  const sc=document.getElementById('tp-scroll');
+  if(!sc)return;
+  selSnd();
+  sc.scrollBy({top:sc.clientHeight*0.8,behavior:'smooth'});
+}
 
 document.addEventListener('keydown',e=>{
   const lbOpen=document.getElementById('lb').classList.contains('open');
-  if(e.key==='Escape'){closeLB();closeTP();}
+  if(e.key==='Escape'){closeLB();closeTP();closeCF();}
   else if(lbOpen&&e.key==='ArrowLeft')lbStep(-1);
   else if(lbOpen&&e.key==='ArrowRight')lbStep(1);
 });
@@ -1555,7 +1690,42 @@ function checkPortfolioAch(){
 })();
 
 /* HOVER & KONAMI */
-document.querySelectorAll('.mcard,.pcard,.tag').forEach(el=>el.addEventListener('mouseenter',()=>hvSnd()));
+document.querySelectorAll('.mcard,.pcard,.tag,.cf-drawer-face,.cf-file').forEach(el=>el.addEventListener('mouseenter',()=>hvSnd()));
+
+/* CASE FILES — клики по файлам внутри ящиков: пока href="#" (ссылка-заглушка),
+   засчитываем звук/очки, но никуда не уходим. Как только вставишь настоящую
+   ссылку на Google Doc в href, переход заработает сам. */
+function briefClick(e,a){
+  selSnd();scoreAdd(75);
+  if(!a.getAttribute('href')||a.getAttribute('href')==='#')e.preventDefault();
+}
+
+/* CASE FILES — модальный шкаф, живёт внутри #screen-wrap (не поверх всего автомата) */
+function openCF(e){
+  e.preventDefault();openSnd();
+  document.getElementById('screen-content').classList.add('no-scroll');
+  document.getElementById('cf').classList.add('open');
+}
+function closeCF(){
+  const cf=document.getElementById('cf');
+  if(!cf.classList.contains('open'))return;
+  closeSnd();
+  cf.classList.remove('open');
+  document.getElementById('screen-content').classList.remove('no-scroll');
+}
+function closeCFbg(e){if(e.target===document.getElementById('cf'))closeCF();}
+function toggleDrawer(btn){
+  const dr=btn.closest('.cf-drawer');
+  const wasOpen=dr.classList.contains('open');
+  selSnd();
+  document.querySelectorAll('.cf-drawer.open').forEach(d=>d.classList.remove('open'));
+  if(!wasOpen)dr.classList.add('open');
+}
+function updCFCount(){
+  const n=document.querySelectorAll('.cf-file').length;
+  const el=document.getElementById('cf-nav-count');
+  if(el)el.textContent='('+n+')';
+}
 
 const K=['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
 let ki=0;
@@ -1592,6 +1762,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const tb=document.getElementById('trophy-btn');
   tb.addEventListener('click',openTP);
   tb.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openTP();}});
+  updCFCount();
+  document.getElementById('tp-scroll').addEventListener('scroll',tpUpdateScrollBtn,{passive:true});
+  window.addEventListener('resize',tpUpdateScrollBtn);
 
   if (document.fonts && document.fonts.ready) {
     document.fonts.ready.then(() => {
