@@ -953,6 +953,23 @@ body {
           <div class="cf-drawer">
             <button class="cf-drawer-face" onclick="toggleDrawer(this)">
               <span class="cf-handle"></span>
+              <span class="cf-drawer-name">INDIE</span>
+              <span class="cf-drawer-count">1 FILE</span>
+              <span class="cf-drawer-arrow">&#9656;</span>
+            </button>
+            <div class="cf-drawer-files">
+              <a class="cf-file"
+                href="https://docs.google.com/document/d/1Yby7939eKmgygqroCJ54rFYBxdmQn71xPxFYJPyv1iE/edit?usp=sharing"
+                target="_blank" rel="noopener" onclick="briefClick(event,this)">
+                <span class="cf-file-name">Тестовое задание GD INDIE</span>
+                <span class="cf-file-open">OPEN DOC &#8599;</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="cf-drawer">
+            <button class="cf-drawer-face" onclick="toggleDrawer(this)">
+              <span class="cf-handle"></span>
               <span class="cf-drawer-name">Forte Bank</span>
               <span class="cf-drawer-count">1 FILE</span>
               <span class="cf-drawer-arrow">&#9656;</span>
@@ -1025,7 +1042,7 @@ body {
     <!-- TROPHIES — теперь тоже внутри #screen-wrap, открывается на мониторе автомата -->
     <div id="tp" onclick="closeTPbg(event)" role="dialog" aria-modal="true" aria-label="Trophies">
       <div class="tp-box">
-        <div class="tp-head"><h2>TROPHIES <span id="tp-count"></span></h2></div>
+        <div class="tp-head"><h2>TROPHIES<span id="tp-count"></span></h2></div>
         <button class="lb-close" onclick="closeTP()" aria-label="Close">X</button>
         <div class="tp-scroll" id="tp-scroll">
           <ul id="tp-list"></ul>
