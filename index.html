@@ -871,7 +871,7 @@ body {
           <a href="#hero"      class="active" onclick="navClick(event,'hero')">HOME</a>
           <a href="#portfolio"              onclick="navClick(event,'portfolio')">PORTFOLIO</a>
           <a href="#projects"               onclick="navClick(event,'projects')">COMMERCIAL PROJECTS</a>
-          <a href="#" id="casefiles-tab"    onclick="openCF(event)">CASE FILES <span class="nav-count" id="cf-nav-count"></span></a>
+          <a href="#" id="casefiles-tab"    onclick="openCF(event)">TEST ASSIGNMENTS<span class="nav-count" id="cf-nav-count"></span></a>
         <!--  <a href="#stats"                  onclick="navClick(event,'stats')">STATS</a> -->
         </nav>
       </div><!-- /main -->
@@ -898,8 +898,8 @@ body {
     <div id="cf" onclick="closeCFbg(event)" role="dialog" aria-modal="true" aria-label="Case files">
       <div class="cf-box">
         <div class="cf-head">
-          <h2>CASE FILES</h2>
-          <span class="cf-sub">TEST ASSIGNMENTS</span>
+          <h2>TEST ASSIGNMENTS</h2>
+          <!-- <span class="cf-sub">TEST ASSIGNMENTS</span> -->
         </div>
         <button class="cf-close" onclick="closeCF()" aria-label="Close">X</button>
 
@@ -945,6 +945,74 @@ body {
             <div class="cf-drawer-files">
               <a class="cf-file" href="https://docs.google.com/document/d/1aZNF6EtpbhoXoLz7vkOQtQ7DqwGWYenoHCSN51nRDWI/edit?usp=sharing" target="_blank" rel="noopener" onclick="briefClick(event,this)">
                 <span class="cf-file-name">Тестовое задание GD Wizardy</span>
+                <span class="cf-file-open">OPEN DOC &#8599;</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="cf-drawer">
+            <button class="cf-drawer-face" onclick="toggleDrawer(this)">
+              <span class="cf-handle"></span>
+              <span class="cf-drawer-name">Forte Bank</span>
+              <span class="cf-drawer-count">1 FILE</span>
+              <span class="cf-drawer-arrow">&#9656;</span>
+            </button>
+            <div class="cf-drawer-files">
+              <a class="cf-file"
+                href="https://docs.google.com/document/d/1M8c9YNdZ2mZcBCgTzdLXJvvtN6qzzvhb0Ru8CZVWiUk/edit?usp=sharing"
+                target="_blank" rel="noopener" onclick="briefClick(event,this)">
+                <span class="cf-file-name">Тестовое задание GD Forte Bank</span>
+                <span class="cf-file-open">OPEN DOC &#8599;</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="cf-drawer">
+            <button class="cf-drawer-face" onclick="toggleDrawer(this)">
+              <span class="cf-handle"></span>
+              <span class="cf-drawer-name">Holiday Studios</span>
+              <span class="cf-drawer-count">1 FILE</span>
+              <span class="cf-drawer-arrow">&#9656;</span>
+            </button>
+            <div class="cf-drawer-files">
+              <a class="cf-file"
+                href="https://docs.google.com/document/d/1m1G6UqonOSJ16EyOXLbQGmZZfU_zFgcaIYBtlEit-Dc/edit?usp=sharing"
+                target="_blank" rel="noopener" onclick="briefClick(event,this)">
+                <span class="cf-file-name">Тестовое задание GD Holiday Studios</span>
+                <span class="cf-file-open">OPEN DOC &#8599;</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="cf-drawer">
+            <button class="cf-drawer-face" onclick="toggleDrawer(this)">
+              <span class="cf-handle"></span>
+              <span class="cf-drawer-name">White Beacon Games</span>
+              <span class="cf-drawer-count">1 FILE</span>
+              <span class="cf-drawer-arrow">&#9656;</span>
+            </button>
+            <div class="cf-drawer-files">
+              <a class="cf-file"
+                href="https://docs.google.com/document/d/1lTFQjzNGWl4M3LS3yp8xi_yUMpKkuVw-A9Ru6Yua6HA/edit?usp=sharing"
+                target="_blank" rel="noopener" onclick="briefClick(event,this)">
+                <span class="cf-file-name">Тестовое задание GD White Beacon Games</span>
+                <span class="cf-file-open">OPEN DOC &#8599;</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="cf-drawer">
+            <button class="cf-drawer-face" onclick="toggleDrawer(this)">
+              <span class="cf-handle"></span>
+              <span class="cf-drawer-name">GOODVILLE</span>
+              <span class="cf-drawer-count">1 FILE</span>
+              <span class="cf-drawer-arrow">&#9656;</span>
+            </button>
+            <div class="cf-drawer-files">
+              <a class="cf-file"
+                href="https://docs.google.com/document/d/1tDL5KhgmAvyKVZxUsxDkNQXv8WlGfxpAQWO_4s7O5eU/edit?usp=sharing"
+                target="_blank" rel="noopener" onclick="briefClick(event,this)">
+                <span class="cf-file-name">Тестовое задание GD GOODVILLE</span>
                 <span class="cf-file-open">OPEN DOC &#8599;</span>
               </a>
             </div>
