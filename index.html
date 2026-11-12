@@ -4,6 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PAVLOV.EXE — Game Designer</title>
+<meta name="description" content="Daniil Pavlov — Technical Game Designer. 3.5+ years in F2P PC &amp; mobile: LiveOps, economy, balance. UE5, Unity, C++, Blueprint, SQL.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fickek.github.io/">
+<meta property="og:title" content="Daniil Pavlov — Game Designer">
+<meta property="og:description" content="Technical Game Designer · LiveOps · Economy · Balance · UE5 · Unity · C++">
+<meta property="og:image" content="https://fickek.github.io/src/assets/images/TPSUE5Gameplay_Icon_1.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="src/assets/ghost-red.svg">
 
 <!-- Предзагрузка ключевых картинок браузером -->
@@ -613,33 +620,41 @@ body {
 #lb-media .px-cv{object-fit:fill;filter:none;}
 /* ---------- CASE FILES: модальный "картотечный шкаф" внутри экрана ---------- */
 #screen-nav .nav-count{color:var(--amber);text-shadow:0 0 6px rgba(255,179,0,0.6);margin-left:3px;}
-#cf{position:absolute;inset:0;z-index:150;background:rgba(0,0,0,0.72);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.2s;padding:clamp(10px,3vw,24px);}
+#cf{position:absolute;inset:0;z-index:150;background:rgba(0,0,0,0.82);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.2s;padding:clamp(10px,3vw,24px);}
 #cf.open{opacity:1;pointer-events:all;}
-.cf-box{position:relative;display:flex;flex-direction:column;width:min(54%,560px);min-width:260px;height:min(62%,560px);min-height:320px;background:var(--bg);border:2px solid var(--amber);box-shadow:0 0 30px rgba(255,179,0,0.3),inset 0 0 40px rgba(0,0,0,0.6);overflow:hidden;}
+/* окно тестовых — в том же стиле, что и TROPHIES (.tp-box) */
+.cf-box{position:relative;display:flex;flex-direction:column;width:min(480px,100%);max-height:86%;border:2px solid var(--ph);box-shadow:0 0 30px rgba(200,255,0,0.25);background:var(--bg);}
 .cf-box::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,0.13) 0,rgba(0,0,0,0.13) 1px,transparent 1px,transparent 3px);pointer-events:none;z-index:2;}
-.cf-head{position:relative;z-index:3;display:flex;align-items:baseline;gap:10px;padding:clamp(10px,2vw,16px) 40px clamp(10px,2vw,16px) clamp(12px,2vw,18px);border-bottom:1px dashed rgba(255,179,0,0.3);flex-shrink:0;}
-.cf-head h2{font-family:var(--font);font-size:clamp(8px,1.4vw,11px);color:var(--amber);text-shadow:0 0 12px rgba(255,179,0,0.5);font-weight:400;letter-spacing:1px;}
-.cf-head .cf-sub{font-family:var(--mono);font-size:clamp(9px,1.1vw,11px);color:var(--ph2);}
-.cf-close{position:absolute;top:8px;right:8px;z-index:4;width:26px;height:26px;background:none;border:1px solid var(--amber);color:var(--amber);font-family:var(--font);font-size:10px;cursor:inherit;transition:background 0.12s,color 0.12s;}
-.cf-close:hover{background:var(--amber);color:#000;}
-.cf-drawers{position:relative;z-index:3;flex:1;min-height:0;overflow-y:auto;padding:clamp(10px,2vw,16px);display:flex;flex-direction:column;gap:10px;}
-
-.cf-drawer{border:1px solid rgba(255,179,0,0.3);background:var(--bg2);flex-shrink:0;}
-.cf-drawer-face{display:flex;align-items:center;gap:12px;width:100%;padding:clamp(9px,1.6vw,13px) clamp(10px,2vw,16px);background:none;border:none;color:inherit;font:inherit;text-align:left;cursor:inherit;}
-.cf-handle{flex-shrink:0;width:26px;height:4px;border-radius:2px;background:var(--amber);box-shadow:0 0 6px rgba(255,179,0,0.5);}
-.cf-drawer-name{flex:1;min-width:0;font-family:var(--font);font-size:clamp(6px,1.1vw,9px);color:#ffe3a3;letter-spacing:0.5px;line-height:1.6;}
-.cf-drawer-count{flex-shrink:0;font-family:var(--mono);font-size:clamp(9px,1.1vw,11px);color:var(--ph2);}
+.cf-box .lb-close{position:absolute;top:8px;right:8px;z-index:4;}
+.cf-head{position:relative;z-index:3;flex-shrink:0;display:flex;align-items:baseline;gap:12px;padding:clamp(16px,3vw,24px) 32px 0 clamp(16px,3vw,24px);}
+.cf-head h2{font-family:var(--font);font-size:clamp(8px,1.4vw,11px);color:var(--ph);text-shadow:0 0 12px var(--glow);font-weight:400;}
+#cf-count{color:var(--amber);}
+.cf-drawers{position:relative;z-index:1;flex:1;min-height:0;overflow-y:auto;padding:clamp(16px,3vw,24px);display:flex;flex-direction:column;gap:8px;scrollbar-width:thin;scrollbar-color:var(--ph) rgba(0,0,0,0.4);}
+.cf-drawers::-webkit-scrollbar{width:6px;}
+.cf-drawers::-webkit-scrollbar-track{background:rgba(0,0,0,0.4);border-radius:3px;box-shadow:inset 0 0 4px rgba(0,0,0,0.7);}
+.cf-drawers::-webkit-scrollbar-thumb{background:var(--ph);border-radius:3px;box-shadow:0 0 6px var(--glow);}
+.cf-drawer{border:1px solid var(--ph3);flex-shrink:0;transition:border-color 0.12s,background 0.12s;}
+.cf-drawer.open,.cf-drawer:hover{border-color:var(--amber);background:rgba(255,179,0,0.05);}
+.cf-drawer-face{display:flex;align-items:center;gap:12px;width:100%;padding:8px 10px;background:none;border:none;color:inherit;font:inherit;text-align:left;cursor:inherit;}
+.cf-handle{flex-shrink:0;width:24px;text-align:center;font-size:18px;line-height:1;}
+.cf-handle::before{content:'📁';}
+.cf-drawer.open .cf-handle::before{content:'📂';}
+.cf-drawer-name{flex:1;min-width:0;font-family:var(--font);font-size:clamp(6px,1vw,8px);color:var(--ph);line-height:1.6;text-transform:uppercase;}
+.cf-drawer-count{flex-shrink:0;font-family:var(--mono);font-size:clamp(10px,1.2vw,12px);color:var(--ph2);}
 .cf-drawer-arrow{flex-shrink:0;font-family:var(--font);font-size:9px;color:var(--amber);transition:transform 0.2s;}
 .cf-drawer.open .cf-drawer-arrow{transform:rotate(90deg);}
 .cf-drawer-files{max-height:0;overflow:hidden;transition:max-height 0.28s ease;}
 .cf-drawer.open .cf-drawer-files{max-height:320px;}
-.cf-file{display:flex;align-items:center;gap:10px;padding:9px clamp(10px,2vw,16px) 9px 44px;border-top:1px dashed rgba(255,179,0,0.2);text-decoration:none;color:inherit;cursor:inherit;transition:background 0.12s;}
+.cf-file{display:flex;align-items:center;gap:10px;padding:8px 10px 8px 46px;border-top:1px solid var(--ph3);text-decoration:none;color:inherit;cursor:inherit;transition:background 0.12s;}
 .cf-file:hover,.cf-file:focus-visible{background:rgba(255,179,0,0.08);}
 .cf-file-name{flex:1;min-width:0;font-family:var(--mono);font-size:clamp(10px,1.2vw,12px);color:var(--ph2);line-height:1.5;}
 .cf-file-open{flex-shrink:0;font-family:var(--font);font-size:clamp(6px,1vw,8px);color:var(--amber);white-space:nowrap;}
+/* Konami — только для ПК: на сенсорных экранах подсказку прячем */
+@media (hover:none) and (pointer:coarse){.konami-hint{display:none;}}
+#tp-list li.secret{border-color:#ffd700;background:rgba(255,215,0,0.08);}
 
 @media(max-width:600px){
-  .cf-box{width:100%;height:80%;}
+  .cf-box{width:100%;}
 }
 
 </style>
@@ -677,7 +692,7 @@ body {
           <div class="hud-sep"></div>
           <div class="hud-item"><span class="hud-lbl">LEVEL</span><span class="hud-val" id="level-val">01</span></div>
           <div class="hud-sep"></div>
-          <div class="hud-item hud-click" id="trophy-btn" role="button" tabindex="0" aria-label="Open trophies"><span class="hud-lbl">TROPHIES</span><span class="hud-val" id="ach-count">0/16</span></div>
+          <div class="hud-item hud-click" id="trophy-btn" role="button" tabindex="0" aria-label="Open trophies"><span class="hud-lbl">TROPHIES</span><span class="hud-val" id="ach-count">0/14</span></div>
           <div class="hud-sep"></div>
           <div class="hud-item"><span class="hud-lbl">HI-SCORE</span><span class="hud-val">999999</span></div>
           <div class="hud-xp" aria-hidden="true"><div id="xp-fill"></div></div>
@@ -711,10 +726,10 @@ body {
           -->
           <div class="port-grid">
 
-            <div class="mcard sm fu" data-group="c++" data-badge="IN PROGRESS" data-badge-color="#2dd11b" data-badge-bg="#001a22" data-pixel="on" data-pixel="128" data-type="image"
+            <div class="mcard sm fu" data-group="c++" data-badge="IN PROGRESS" data-badge-color="#2dd11b" data-badge-bg="#001a22" data-pixel="128" data-type="image"
               data-src="src/assets/images/UE5CPPTPS.png" data-title="UE5 C++ TPS Rebuild"
-              data-desc="Implementation of the C++ third-person shooter template in UE5, with a focus on gameplay mechanics and character movement"
-              onclick="openLB(this); checkPortfolioAch();">
+              data-desc="Third-person shooter rebuilt in UE5 C++: stamina system with per-attack costs, health pickups, and takedown finishers with paired animations and Motion Warping"
+              onclick="openLB(this);">
               <img src="src/assets/images/UE5CPPTPS.png" alt="Screenshot: UE5 C++ TPS Rebuild">
               <div class="covlay">
                 <h3>UE5 C++ TPS Rebuild</h3>
@@ -722,10 +737,10 @@ body {
               </div>
             </div>
 
-            <div class="mcard wd fu" data-group="building" data-badge="IN PROGRESS" data-badge-color="#2dd11b" data-badge-bg="#001a22" data-pixel="on" data-pixel="128" data-type="image" data-src="src/assets/images/UE5BuildingSim.png"
+            <div class="mcard wd fu" data-group="building" data-badge="IN PROGRESS" data-badge-color="#2dd11b" data-badge-bg="#001a22" data-pixel="128" data-type="image" data-src="src/assets/images/UE5BuildingSim.png"
               data-title="UE5 building simulator"
               data-desc="Implementation of a building simulator in UE5, where the player can construct and manage various structures"
-              onclick="openLB(this); checkPortfolioAch();">
+              onclick="openLB(this);">
               <img src="src/assets/images/UE5BuildingSim.png" alt="Screenshot: UE5 building simulator">
               <div class="covlay">
                 <h3>UE5 building simulator</h3>
@@ -733,7 +748,7 @@ body {
               </div>
             </div>
 
-            <div class="mcard lg fu" data-group="hide" data-badge="AI HIDE AND SEEK" data-type="image" data-src="src/assets/images/UE5AIHideAndSeekGame_Icon_1.webp" data-title="UE5 AI Hide And Seek Game" data-desc="Implementation of the hide and seek game, where the bots themselves play with each other" onclick="openLB(this); checkPortfolioAch();">
+            <div class="mcard lg fu" data-group="hide" data-badge="AI HIDE AND SEEK" data-type="image" data-src="src/assets/images/UE5AIHideAndSeekGame_Icon_1.webp" data-title="UE5 AI Hide And Seek Game" data-desc="Implementation of the hide and seek game, where the bots themselves play with each other" onclick="openLB(this);">
               <img src="src/assets/images/UE5AIHideAndSeekGame_Icon_1.webp" alt="Screenshot: UE5 AI hide and seek game">
               <div class="covlay">
                 <h3>UE5 AI Hide And Seek Game</h3>
@@ -741,7 +756,7 @@ body {
               </div>
             </div>
 
-            <div class="mcard md fu" data-group="tps" data-badge="BOSS" data-badge-color="#ff3333" data-type="youtube" data-youtube-id="7TR6tAux9ts" data-title="TPSUE5Gameplay" data-desc="Implementation of a boss battle" onclick="openLB(this); checkPortfolioAch();">
+            <div class="mcard md fu" data-group="tps" data-badge="BOSS" data-badge-color="#ff3333" data-type="youtube" data-youtube-id="7TR6tAux9ts" data-title="TPSUE5Gameplay" data-desc="Implementation of a boss battle" onclick="openLB(this);">
               <div class="vthumb"><img src="src/assets/images/TPSUE5Gameplay_Icon_1.webp" alt="Video preview: UE5 third-person boss battle"><div class="play-wrap"><div class="play-btn"></div></div></div>
               <div class="covlay">
                 <h3>TPSUE5Gameplay</h3>
@@ -749,7 +764,7 @@ body {
               </div>
             </div>
 
-            <div class="mcard md fu" data-group="tps" data-badge="BOSS" data-badge-color="#ff3333" data-type="image" data-src="src/assets/images/TPSUE5Gameplay_Icon_2.webp" data-title="TPSUE5Gameplay" data-desc="Implementation of a boss battle" onclick="openLB(this); checkPortfolioAch(); ">
+            <div class="mcard md fu" data-group="tps" data-badge="BOSS" data-badge-color="#ff3333" data-type="image" data-src="src/assets/images/TPSUE5Gameplay_Icon_2.webp" data-title="TPSUE5Gameplay" data-desc="Implementation of a boss battle" onclick="openLB(this);">
               <img src="src/assets/images/TPSUE5Gameplay_Icon_2.webp" alt="Screenshot: UE5 third-person boss battle">
               <div class="covlay">
                 <h3>TPSUE5Gameplay</h3>
@@ -757,21 +772,21 @@ body {
               </div>
             </div>
 
-            <div class="mcard sm fu" data-group="tps" data-badge="BOSS" data-badge-color="#ff3333" data-type="image" data-src="src/assets/images/TPSUE5Gameplay_Icon_3.webp" data-title="TPSUE5Gameplay" data-desc="Implementation of a boss battle" onclick="openLB(this); checkPortfolioAch();">
+            <div class="mcard sm fu" data-group="tps" data-badge="BOSS" data-badge-color="#ff3333" data-type="image" data-src="src/assets/images/TPSUE5Gameplay_Icon_3.webp" data-title="TPSUE5Gameplay" data-desc="Implementation of a boss battle" onclick="openLB(this);">
               <img src="src/assets/images/TPSUE5Gameplay_Icon_3.webp" alt="Screenshot: UE5 third-person boss battle">
               <div class="covlay"><h3>TPSUE5Gameplay</h3>
                 <p>UE5</p>
               </div>
             </div>
 
-            <div class="mcard wd fu" data-group="hide" data-badge="AI HIDE AND SEEK" data-type="youtube" data-youtube-id="F5lmJn4IcvU" data-title="UE5AIHideAndSeekGame" data-desc="Implementation of the hide and seek game, where the bots themselves play with each other" onclick="openLB(this); checkPortfolioAch();">
+            <div class="mcard wd fu" data-group="hide" data-badge="AI HIDE AND SEEK" data-type="youtube" data-youtube-id="F5lmJn4IcvU" data-title="UE5AIHideAndSeekGame" data-desc="Implementation of the hide and seek game, where the bots themselves play with each other" onclick="openLB(this);">
               <div class="vthumb">
                 <img src="src/assets/images/UE5AIHideAndSeekGame_Icon_2.webp" alt="Video preview: UE5 AI hide and seek game"><div class="play-wrap"><div class="play-btn"></div></div></div><div class="covlay"><h3>UE5AIHideAndSeekGame</h3>
                 <p>UE5</p>
               </div>
             </div>
 
-            <div class="mcard tl fu" data-badge="PLAYABLE" data-badge-color="#33e0ff" data-badge-bg="#001a22" data-type="image" data-src="src/assets/images/FlappyMax_Icon_1.webp" data-title="FlappyMax" data-desc="Implementation of a Flappy Bird parody in Unity.<br><a href='https://fikek.itch.io/flappymax' target='_blank' class='desc-link'>Link</a>" onclick="openLB(this); checkPortfolioAch();">
+            <div class="mcard tl fu" data-badge="PLAYABLE" data-badge-color="#33e0ff" data-badge-bg="#001a22" data-type="image" data-src="src/assets/images/FlappyMax_Icon_1.webp" data-title="FlappyMax" data-desc="Implementation of a Flappy Bird parody in Unity.<br><a href='https://fikek.itch.io/flappymax' target='_blank' class='desc-link'>Link</a>" onclick="openLB(this);">
               <img src="src/assets/images/FlappyMax_Icon_1.webp" alt="Screenshot: FlappyMax, a Flappy Bird parody made in Unity">
               <div class="covlay">
                 <h3>FlappyMax</h3>
@@ -779,7 +794,7 @@ body {
               </div>
             </div>
 
-            <div class="mcard wd lg fu" data-badge="PLAYABLE" data-badge-color="#33e0ff" data-badge-bg="#001a22" data-type="image" data-src="src/assets/images/DonkeyKirya_Icon_1.webp" data-title="DonkeyKirya" data-desc="Implementation of a Donkey Kong parody in Unity.<br><a href='https://fikek.itch.io/donkeykirya' target='_blank' class='desc-link'>Link</a>" onclick="openLB(this); checkPortfolioAch();">
+            <div class="mcard wd lg fu" data-badge="PLAYABLE" data-badge-color="#33e0ff" data-badge-bg="#001a22" data-type="image" data-src="src/assets/images/DonkeyKirya_Icon_1.webp" data-title="DonkeyKirya" data-desc="Implementation of a Donkey Kong parody in Unity.<br><a href='https://fikek.itch.io/donkeykirya' target='_blank' class='desc-link'>Link</a>" onclick="openLB(this);">
               <img src="src/assets/images/DonkeyKirya_Icon_1.webp" alt="Screenshot: DonkeyKirya, a Donkey Kong parody made in Unity">
               <div class="covlay">
                 <h3>DonkeyKirya</h3>
@@ -898,10 +913,10 @@ body {
     <div id="cf" onclick="closeCFbg(event)" role="dialog" aria-modal="true" aria-label="Case files">
       <div class="cf-box">
         <div class="cf-head">
-          <h2>TEST ASSIGNMENTS</h2>
+          <h2>TEST ASSIGNMENTS<span id="cf-count"></span></h2>
           <!-- <span class="cf-sub">TEST ASSIGNMENTS</span> -->
         </div>
-        <button class="cf-close" onclick="closeCF()" aria-label="Close">X</button>
+        <button class="lb-close" onclick="closeCF()" aria-label="Close">X</button>
 
         <div class="cf-drawers" id="cf-drawers">
 
@@ -984,22 +999,6 @@ body {
             </div>
           </div>
 
-          <div class="cf-drawer">
-            <button class="cf-drawer-face" onclick="toggleDrawer(this)">
-              <span class="cf-handle"></span>
-              <span class="cf-drawer-name">Holiday Studios</span>
-              <span class="cf-drawer-count">1 FILE</span>
-              <span class="cf-drawer-arrow">&#9656;</span>
-            </button>
-            <div class="cf-drawer-files">
-              <a class="cf-file"
-                href="https://docs.google.com/document/d/1m1G6UqonOSJ16EyOXLbQGmZZfU_zFgcaIYBtlEit-Dc/edit?usp=sharing"
-                target="_blank" rel="noopener" onclick="briefClick(event,this)">
-                <span class="cf-file-name">Тестовое задание GD Holiday Studios</span>
-                <span class="cf-file-open">OPEN DOC &#8599;</span>
-              </a>
-            </div>
-          </div>
 
           <div class="cf-drawer">
             <button class="cf-drawer-face" onclick="toggleDrawer(this)">
@@ -1036,6 +1035,7 @@ body {
           </div>
 
         </div>
+        <button class="tp-page-btn" id="cf-page-btn" onclick="cfPageDown()" aria-label="Scroll down"><span>&#9660;</span></button>
       </div>
     </div>
 
@@ -1196,7 +1196,7 @@ function pixelBlocksFor(card,open){
 
 /* AUDIO */
 let AC;
-function ac(){if(!AC)AC=new(window.AudioContext||window.webkitAudioContext)();return AC;}
+function ac(){if(!AC)AC=new(window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume();return AC;}
 function beep(f,d,t='square',v=0.07){try{const c=ac(),o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.type=t;o.frequency.value=f;g.gain.setValueAtTime(v,c.currentTime);g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+d);o.start();o.stop(c.currentTime+d);}catch(e){}}
 function coinSnd(){beep(988,.08,'square',.1);setTimeout(()=>beep(1318,.12,'square',.1),80);setTimeout(()=>beep(1568,.15,'square',.1),160);}
 function selSnd(){beep(440,.06,'square',.05);}
@@ -1214,8 +1214,8 @@ function tickEl(el){el.classList.remove('tick');void el.offsetWidth;el.classList
 const ACH={
   boot:{i:'🎮',n:'PORTFOLIO LOADED',h:'Insert a coin to start'},
   coin_first:{i:'🪙',n:'FIRST COIN INSERTED',h:'Use the coin slot'},
-  coin_5:{i:'💰',n:'HIGH ROLLER — 5 COINS',h:'Insert 5 coins'},
-  coin_10:{i:'🤑',n:'ARCADE ADDICT — 10 COINS',h:'Insert 10 coins'},
+  coin_5:{i:'💰',n:'HIGH ROLLER',h:'Insert 5 coins'},
+  coin_10:{i:'🤑',n:'ARCADE ADDICT',h:'Insert 10 coins'},
   btn_red:{i:'🔴',n:'RED BUTTON PRESSED',h:'Press the red button'},
   btn_green:{i:'🟢',n:'GREEN BUTTON PRESSED',h:'Press the green button'},
   btn_blue:{i:'🔵',n:'BLUE BUTTON PRESSED',h:'Press the blue button'},
@@ -1226,13 +1226,20 @@ const ACH={
   portfolio_complete:{i:'🏆',n:'RETENTION 100%',h:'Open 7 works'},
   /* stage_stats:{i:'📜',n:'CHARACTER SHEET',h:'Reach the last stage'}, */
   ghost_catch:{i:'👻',n:'GHOST BUSTER',h:'Catch a ghost on the home screen'},
-  game_over:{i:'💀',n:'GAME OVER... JUST KIDDING',h:'Lose all your lives'},
-  /* konami:{i:'⭐',n:'C-C-C-COMBO!',h:'↑ ↑ ↓ ↓ ← → ← → B A'} */
+  game_over:{i:'💀',n:'GAME OVER...',h:'Lose all your lives'},
+  konami:{i:'⭐',n:'C-C-C-COMBO!',h:'Secret: ↑ ↑ ↓ ↓ ← → ← → B A',secret:true}
 };
 const earned=new Set();
+/* секретные ачивки (secret:true) не входят в общий счёт и не видны в списке, пока не получены */
+function achProgress(){
+  const keys=Object.keys(ACH).filter(k=>!ACH[k].secret);
+  const got=keys.filter(k=>earned.has(k)).length;
+  const sec=Object.keys(ACH).filter(k=>ACH[k].secret&&earned.has(k)).length;
+  return got+'/'+keys.length+(sec?' +'+'★'.repeat(sec):'');
+}
 function updAchCount(){
   const el=document.getElementById('ach-count');
-  if(el){el.textContent=earned.size+'/'+Object.keys(ACH).length;tickEl(el);}
+  if(el){el.textContent=achProgress();tickEl(el);}
   if(document.getElementById('tp').classList.contains('open'))renderTP();
 }
 function showAch(key){
@@ -1441,6 +1448,7 @@ function openLB(card){
 function renderLB(){
   const card=lbList[lbIdx];
   if(!card)return;
+  checkPortfolioAch(card);
   const m=document.getElementById('lb-media');
   document.getElementById('lb-title').textContent=card.dataset.title||'';
   document.getElementById('lb-desc').innerHTML=card.dataset.desc||'';
@@ -1472,11 +1480,11 @@ function closeLBbg(e){if(e.target===document.getElementById('lb'))closeLB();}
 
 /* TROPHIES PANEL */
 function renderTP(){
-  document.getElementById('tp-list').innerHTML=Object.keys(ACH).map(k=>{
+  document.getElementById('tp-list').innerHTML=Object.keys(ACH).filter(k=>!ACH[k].secret||earned.has(k)).map(k=>{
     const d=ACH[k],got=earned.has(k);
-    return `<li class="${got?'got':'lock'}"><span class="tp-ico">${got?d.i:'🔒'}</span><span class="tp-txt"><b>${got?d.n:'???'}</b><small>${d.h}</small></span></li>`;
+    return `<li class="${got?'got':'lock'}${d.secret?' secret':''}"><span class="tp-ico">${got?d.i:'🔒'}</span><span class="tp-txt"><b>${got?d.n:'???'}</b><small>${d.h}</small></span></li>`;
   }).join('');
-  document.getElementById('tp-count').textContent=earned.size+'/'+Object.keys(ACH).length;
+  document.getElementById('tp-count').textContent=' '+achProgress();
   requestAnimationFrame(tpUpdateScrollBtn);
 }
 function openTP(){
@@ -1551,7 +1559,7 @@ function updateProgress(){
   document.getElementById('xp-fill').style.width=(p*100).toFixed(1)+'%';
   let idx=0;
   STAGES.forEach((s,i)=>{const el=document.getElementById(s.id);if(el&&sc.scrollTop>=el.offsetTop-80)idx=i;});
-  if(max>0&&sc.scrollTop>=max-4)idx=STAGES.length-1;
+  if(max>0&&sc.scrollTop>=max-4&&STAGES.length)idx=STAGES.length-1;
   return idx;
 }
 function navActive(idx){
@@ -1565,7 +1573,7 @@ function showStage(s){
   b.classList.remove('go');void b.offsetWidth;b.classList.add('go');
 }
 function onStageChange(idx){
-  if(idx===curStage)return;
+  if(!STAGES[idx]||idx===curStage)return;
   curStage=idx;
   clearTimeout(stageTimer);
   if(stagesSeen.has(idx))return;
@@ -1751,13 +1759,14 @@ function insertCoin(){
   else if(coinCount===10)showAch('coin_10');
 }
 
-let portfolioCheck=0;
-function checkPortfolioAch(){
-  portfolioCheck++;
-  if(portfolioCheck===1)showAch('portfolio_junior');
-  else if(portfolioCheck===3)showAch('portfolio_middle');
-  else if(portfolioCheck===5)showAch('portfolio_senior');
-  else if(portfolioCheck>=7)showAch('portfolio_complete');
+const portfolioSeen=new Set();
+function checkPortfolioAch(card){
+  if(card)portfolioSeen.add(card);
+  const n=portfolioSeen.size;
+  if(n>=1)showAch('portfolio_junior');
+  if(n>=3)showAch('portfolio_middle');
+  if(n>=5)showAch('portfolio_senior');
+  if(n>=7)showAch('portfolio_complete');
 }
 
 /* JOYSTICK */
@@ -1790,6 +1799,7 @@ function openCF(e){
   e.preventDefault();openSnd();
   document.getElementById('screen-content').classList.add('no-scroll');
   document.getElementById('cf').classList.add('open');
+  requestAnimationFrame(cfUpdateScrollBtn);
 }
 function closeCF(){
   const cf=document.getElementById('cf');
@@ -1805,17 +1815,33 @@ function toggleDrawer(btn){
   selSnd();
   document.querySelectorAll('.cf-drawer.open').forEach(d=>d.classList.remove('open'));
   if(!wasOpen)dr.classList.add('open');
+  setTimeout(cfUpdateScrollBtn,300);
 }
 function updCFCount(){
   const n=document.querySelectorAll('.cf-file').length;
   const el=document.getElementById('cf-nav-count');
   if(el)el.textContent='('+n+')';
+  const c=document.getElementById('cf-count');
+  if(c)c.textContent=' '+n;
+}
+function cfUpdateScrollBtn(){
+  const sc=document.getElementById('cf-drawers'),btn=document.getElementById('cf-page-btn');
+  if(!sc||!btn)return;
+  const need=sc.scrollHeight>sc.clientHeight+4;
+  const atBottom=sc.scrollTop+sc.clientHeight>=sc.scrollHeight-4;
+  btn.classList.toggle('show',need&&!atBottom);
+}
+function cfPageDown(){
+  const sc=document.getElementById('cf-drawers');
+  if(!sc)return;
+  selSnd();
+  sc.scrollBy({top:sc.clientHeight*0.8,behavior:'smooth'});
 }
 
 const K=['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
 let ki=0;
 document.addEventListener('keydown',e=>{
-  if(e.key===K[ki]){ki++;if(ki===K.length){ki=0;scoreAdd(9999);showAch('konami');[0,80,160,240].forEach((t,i)=>setTimeout(()=>beep(660+i*220,.1,'square',.07),t));}}
+  if((e.key.length===1?e.key.toLowerCase():e.key)===K[ki]){ki++;if(ki===K.length){ki=0;scoreAdd(9999);showAch('konami');[0,80,160,240].forEach((t,i)=>setTimeout(()=>beep(660+i*220,.1,'square',.07),t));}}
   else ki=0;
 });
 
@@ -1826,11 +1852,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const sc=document.getElementById('screen-content');
   let scTick=false;
   sc.addEventListener('scroll',()=>{
-    scoreAdd(1);
     if(scTick)return;
     scTick=true;
     requestAnimationFrame(()=>{
       scTick=false;
+      scoreAdd(1);
       const idx=updateProgress();
       navActive(idx);
       onStageChange(idx);
@@ -1850,6 +1876,8 @@ document.addEventListener('DOMContentLoaded', () => {
   updCFCount();
   document.getElementById('tp-scroll').addEventListener('scroll',tpUpdateScrollBtn,{passive:true});
   window.addEventListener('resize',tpUpdateScrollBtn);
+  document.getElementById('cf-drawers').addEventListener('scroll',cfUpdateScrollBtn,{passive:true});
+  window.addEventListener('resize',cfUpdateScrollBtn);
 
   if (document.fonts && document.fonts.ready) {
     document.fonts.ready.then(() => {
