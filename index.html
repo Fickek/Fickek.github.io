@@ -365,19 +365,20 @@ body {
   100%{transform:translateX(-50%) translateY(-108%);opacity:0;}
 }
 .coin-anim{
+  /* пиксельная монетка: спрайт 12x12, нарисован прямо в CSS (SVG из прямоугольников) */
   position:absolute;
   bottom:-2px;left:50%;
   transform:translateX(-50%) translateY(0);
-  width:clamp(20px,3vw,28px);
-  height:clamp(20px,3vw,28px);
-  background:radial-gradient(circle at 35% 30%,#ffe066,var(--amber) 60%,#886600);
-  border-radius:50%;
-  border:2px solid #886600;
+  width:24px;
+  height:24px;
+  background:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' shape-rendering='crispEdges'><rect x='4' y='0' width='4' height='1' fill='%23704c00'/><rect x='2' y='1' width='2' height='1' fill='%23704c00'/><rect x='4' y='1' width='4' height='1' fill='%23ffb300'/><rect x='8' y='1' width='2' height='1' fill='%23704c00'/><rect x='1' y='2' width='1' height='1' fill='%23704c00'/><rect x='2' y='2' width='1' height='1' fill='%23ffb300'/><rect x='3' y='2' width='1' height='1' fill='%23fff0a0'/><rect x='4' y='2' width='5' height='1' fill='%23ffb300'/><rect x='9' y='2' width='1' height='1' fill='%23c98600'/><rect x='10' y='2' width='1' height='1' fill='%23704c00'/><rect x='1' y='3' width='1' height='1' fill='%23704c00'/><rect x='2' y='3' width='1' height='1' fill='%23ffb300'/><rect x='3' y='3' width='1' height='1' fill='%23fff0a0'/><rect x='4' y='3' width='1' height='1' fill='%23ffb300'/><rect x='5' y='3' width='2' height='1' fill='%23704c00'/><rect x='7' y='3' width='2' height='1' fill='%23ffb300'/><rect x='9' y='3' width='1' height='1' fill='%23c98600'/><rect x='10' y='3' width='1' height='1' fill='%23704c00'/><rect x='0' y='4' width='1' height='1' fill='%23704c00'/><rect x='1' y='4' width='1' height='1' fill='%23ffb300'/><rect x='2' y='4' width='1' height='1' fill='%23fff0a0'/><rect x='3' y='4' width='2' height='1' fill='%23ffb300'/><rect x='5' y='4' width='1' height='1' fill='%23704c00'/><rect x='6' y='4' width='4' height='1' fill='%23ffb300'/><rect x='10' y='4' width='1' height='1' fill='%23c98600'/><rect x='11' y='4' width='1' height='1' fill='%23704c00'/><rect x='0' y='5' width='1' height='1' fill='%23704c00'/><rect x='1' y='5' width='1' height='1' fill='%23ffb300'/><rect x='2' y='5' width='1' height='1' fill='%23fff0a0'/><rect x='3' y='5' width='2' height='1' fill='%23ffb300'/><rect x='5' y='5' width='1' height='1' fill='%23704c00'/><rect x='6' y='5' width='4' height='1' fill='%23ffb300'/><rect x='10' y='5' width='1' height='1' fill='%23c98600'/><rect x='11' y='5' width='1' height='1' fill='%23704c00'/><rect x='0' y='6' width='1' height='1' fill='%23704c00'/><rect x='1' y='6' width='1' height='1' fill='%23ffb300'/><rect x='2' y='6' width='1' height='1' fill='%23fff0a0'/><rect x='3' y='6' width='2' height='1' fill='%23ffb300'/><rect x='5' y='6' width='1' height='1' fill='%23704c00'/><rect x='6' y='6' width='4' height='1' fill='%23ffb300'/><rect x='10' y='6' width='1' height='1' fill='%23c98600'/><rect x='11' y='6' width='1' height='1' fill='%23704c00'/><rect x='0' y='7' width='1' height='1' fill='%23704c00'/><rect x='1' y='7' width='1' height='1' fill='%23ffb300'/><rect x='2' y='7' width='1' height='1' fill='%23fff0a0'/><rect x='3' y='7' width='2' height='1' fill='%23ffb300'/><rect x='5' y='7' width='1' height='1' fill='%23704c00'/><rect x='6' y='7' width='4' height='1' fill='%23ffb300'/><rect x='10' y='7' width='1' height='1' fill='%23c98600'/><rect x='11' y='7' width='1' height='1' fill='%23704c00'/><rect x='1' y='8' width='1' height='1' fill='%23704c00'/><rect x='2' y='8' width='3' height='1' fill='%23ffb300'/><rect x='5' y='8' width='2' height='1' fill='%23704c00'/><rect x='7' y='8' width='1' height='1' fill='%23ffb300'/><rect x='8' y='8' width='2' height='1' fill='%23c98600'/><rect x='10' y='8' width='1' height='1' fill='%23704c00'/><rect x='1' y='9' width='1' height='1' fill='%23704c00'/><rect x='2' y='9' width='6' height='1' fill='%23ffb300'/><rect x='8' y='9' width='2' height='1' fill='%23c98600'/><rect x='10' y='9' width='1' height='1' fill='%23704c00'/><rect x='2' y='10' width='2' height='1' fill='%23704c00'/><rect x='4' y='10' width='4' height='1' fill='%23c98600'/><rect x='8' y='10' width='2' height='1' fill='%23704c00'/><rect x='4' y='11' width='4' height='1' fill='%23704c00'/></svg>") center/100% 100% no-repeat;
+  image-rendering:pixelated;
   pointer-events:none;
-  animation:coinFlyUp 0.5s ease-out forwards;
-  box-shadow:0 0 10px rgba(255,179,0,0.7);
+  animation:coinFlyUp 0.5s steps(8,end) forwards;
+  filter:drop-shadow(0 0 5px rgba(255,179,0,0.75));
   z-index:20;
 }
+@media(min-width:1100px){.coin-anim{width:36px;height:36px;}}
 
 .coin-label{
   font-family:var(--font);
