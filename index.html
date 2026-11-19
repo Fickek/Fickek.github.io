@@ -358,27 +358,32 @@ body {
 }
 .coin-slot-btn:active{box-shadow:inset 0 6px 10px rgba(0,0,0,0.95);}
 
-@keyframes coinFlyUp{
-  0%  {transform:translateX(-50%) translateY(0);   opacity:1;}
-  65% {transform:translateX(-50%) translateY(-88%);opacity:1;}
-  85% {transform:translateX(-50%) translateY(-102%);opacity:0.7;}
-  100%{transform:translateX(-50%) translateY(-108%);opacity:0;}
+/* монетка падает сверху и проваливается в щель. .coin-clip - окно, обрезанное по нижнему
+   краю щели: всё, что ниже щели, не видно, поэтому монетка "уходит внутрь" */
+@keyframes coinDrop{
+  0%  {transform:translateX(-50%) translateY(-320%);}
+  35% {transform:translateX(-50%) translateY(0);}
+  100%{transform:translateX(-50%) translateY(105%);}
 }
+.coin-clip{position:absolute;left:-30%;right:-30%;top:-320%;bottom:42%;overflow:hidden;pointer-events:none;z-index:20;}
+@keyframes slotHit{0%,100%{box-shadow:inset 0 3px 8px rgba(0,0,0,0.9);}40%{box-shadow:inset 0 3px 8px rgba(0,0,0,0.9),0 0 22px rgba(255,179,0,0.9);border-color:var(--amber);}}
+.coin-slot-btn.hit{animation:slotHit 0.35s ease-out;}
 .coin-anim{
   /* пиксельная монетка: спрайт 12x12, нарисован прямо в CSS (SVG из прямоугольников) */
   position:absolute;
-  bottom:-2px;left:50%;
-  transform:translateX(-50%) translateY(0);
-  width:24px;
-  height:24px;
+  bottom:0;left:50%;
+  transform:translateX(-50%) translateY(-320%);
+  /* размер - от монетоприёмника: половина ширины слота (окно .coin-clip шире слота в 1.6 раза) */
+  width:calc(100% / 1.6 * 0.5);
+  aspect-ratio:1;
+  height:auto;
   background:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' shape-rendering='crispEdges'><rect x='4' y='0' width='4' height='1' fill='%23704c00'/><rect x='2' y='1' width='2' height='1' fill='%23704c00'/><rect x='4' y='1' width='4' height='1' fill='%23ffb300'/><rect x='8' y='1' width='2' height='1' fill='%23704c00'/><rect x='1' y='2' width='1' height='1' fill='%23704c00'/><rect x='2' y='2' width='1' height='1' fill='%23ffb300'/><rect x='3' y='2' width='1' height='1' fill='%23fff0a0'/><rect x='4' y='2' width='5' height='1' fill='%23ffb300'/><rect x='9' y='2' width='1' height='1' fill='%23c98600'/><rect x='10' y='2' width='1' height='1' fill='%23704c00'/><rect x='1' y='3' width='1' height='1' fill='%23704c00'/><rect x='2' y='3' width='1' height='1' fill='%23ffb300'/><rect x='3' y='3' width='1' height='1' fill='%23fff0a0'/><rect x='4' y='3' width='1' height='1' fill='%23ffb300'/><rect x='5' y='3' width='2' height='1' fill='%23704c00'/><rect x='7' y='3' width='2' height='1' fill='%23ffb300'/><rect x='9' y='3' width='1' height='1' fill='%23c98600'/><rect x='10' y='3' width='1' height='1' fill='%23704c00'/><rect x='0' y='4' width='1' height='1' fill='%23704c00'/><rect x='1' y='4' width='1' height='1' fill='%23ffb300'/><rect x='2' y='4' width='1' height='1' fill='%23fff0a0'/><rect x='3' y='4' width='2' height='1' fill='%23ffb300'/><rect x='5' y='4' width='1' height='1' fill='%23704c00'/><rect x='6' y='4' width='4' height='1' fill='%23ffb300'/><rect x='10' y='4' width='1' height='1' fill='%23c98600'/><rect x='11' y='4' width='1' height='1' fill='%23704c00'/><rect x='0' y='5' width='1' height='1' fill='%23704c00'/><rect x='1' y='5' width='1' height='1' fill='%23ffb300'/><rect x='2' y='5' width='1' height='1' fill='%23fff0a0'/><rect x='3' y='5' width='2' height='1' fill='%23ffb300'/><rect x='5' y='5' width='1' height='1' fill='%23704c00'/><rect x='6' y='5' width='4' height='1' fill='%23ffb300'/><rect x='10' y='5' width='1' height='1' fill='%23c98600'/><rect x='11' y='5' width='1' height='1' fill='%23704c00'/><rect x='0' y='6' width='1' height='1' fill='%23704c00'/><rect x='1' y='6' width='1' height='1' fill='%23ffb300'/><rect x='2' y='6' width='1' height='1' fill='%23fff0a0'/><rect x='3' y='6' width='2' height='1' fill='%23ffb300'/><rect x='5' y='6' width='1' height='1' fill='%23704c00'/><rect x='6' y='6' width='4' height='1' fill='%23ffb300'/><rect x='10' y='6' width='1' height='1' fill='%23c98600'/><rect x='11' y='6' width='1' height='1' fill='%23704c00'/><rect x='0' y='7' width='1' height='1' fill='%23704c00'/><rect x='1' y='7' width='1' height='1' fill='%23ffb300'/><rect x='2' y='7' width='1' height='1' fill='%23fff0a0'/><rect x='3' y='7' width='2' height='1' fill='%23ffb300'/><rect x='5' y='7' width='1' height='1' fill='%23704c00'/><rect x='6' y='7' width='4' height='1' fill='%23ffb300'/><rect x='10' y='7' width='1' height='1' fill='%23c98600'/><rect x='11' y='7' width='1' height='1' fill='%23704c00'/><rect x='1' y='8' width='1' height='1' fill='%23704c00'/><rect x='2' y='8' width='3' height='1' fill='%23ffb300'/><rect x='5' y='8' width='2' height='1' fill='%23704c00'/><rect x='7' y='8' width='1' height='1' fill='%23ffb300'/><rect x='8' y='8' width='2' height='1' fill='%23c98600'/><rect x='10' y='8' width='1' height='1' fill='%23704c00'/><rect x='1' y='9' width='1' height='1' fill='%23704c00'/><rect x='2' y='9' width='6' height='1' fill='%23ffb300'/><rect x='8' y='9' width='2' height='1' fill='%23c98600'/><rect x='10' y='9' width='1' height='1' fill='%23704c00'/><rect x='2' y='10' width='2' height='1' fill='%23704c00'/><rect x='4' y='10' width='4' height='1' fill='%23c98600'/><rect x='8' y='10' width='2' height='1' fill='%23704c00'/><rect x='4' y='11' width='4' height='1' fill='%23704c00'/></svg>") center/100% 100% no-repeat;
   image-rendering:pixelated;
   pointer-events:none;
-  animation:coinFlyUp 0.5s steps(8,end) forwards;
+  animation:coinDrop 0.9s steps(18,end) forwards;
   filter:drop-shadow(0 0 5px rgba(255,179,0,0.75));
   z-index:20;
 }
-@media(min-width:1100px){.coin-anim{width:36px;height:36px;}}
 
 .coin-label{
   font-family:var(--font);
@@ -1903,12 +1908,15 @@ function btnPress(color){
 /* COIN */
 let coinCount=0;
 function insertCoin(){
-  coinSnd();
   scoreAdd(500);
   coinCount++;
-  const wrap=document.querySelector('.coin-slot-wrap');
+  const wrap=document.querySelector('.coin-slot-wrap'),slot=document.getElementById('coin-slot');
+  const clip=document.createElement('div');clip.className='coin-clip';
   const coin=document.createElement('div');coin.className='coin-anim';
-  wrap.appendChild(coin);setTimeout(()=>coin.remove(),550);
+  clip.appendChild(coin);wrap.appendChild(clip);setTimeout(()=>clip.remove(),950);
+  /* звук и вспышка щели - в момент, когда монетка касается щели (35% анимации) */
+  const land=REDUCED?0:315;
+  setTimeout(()=>{coinSnd();slot.classList.remove('hit');void slot.offsetWidth;slot.classList.add('hit');},land);
   if(!gameStarted) enterSite();
   if(coinCount===1)showAch('coin_first');
   else if(coinCount===5)showAch('coin_5');
