@@ -437,7 +437,7 @@ body {
   .coin-label{font-size:6px;}
   #hud{padding:3px 8px;gap:4px;flex-wrap:nowrap;overflow:hidden;}
   .hud-sep{height:16px;}
-  .hud-item:nth-child(11),.hud-sep:nth-child(10){display:none;}
+  .hud-m-hide{display:none;}
   .port-grid{grid-template-columns:repeat(2,1fr);}
   .mcard.lg,.mcard.wd,.mcard.tl,.mcard.md,.mcard.sm{grid-column:span 2;grid-row:span 1;}
 }
@@ -476,7 +476,7 @@ body {
 .hero>*:not(.hero-grid):not(.ghost-lane){position:relative;z-index:1;}
 .hero-grid{inset:-40px;transform:translate3d(var(--px,0px),var(--py,0px),0);transition:transform 0.25s ease-out;will-change:transform;}
 .hero-desc{min-height:calc(2 * 1.9em);}
-.hero-desc .cur{display:inline-block;width:0.6em;height:1em;background:var(--ph);margin-left:3px;vertical-align:-0.12em;box-shadow:0 0 8px var(--glow);animation:blink 1s step-end infinite;}
+.cur{display:inline-block;width:0.6em;height:1em;background:var(--ph);margin-left:3px;vertical-align:-0.12em;box-shadow:0 0 8px var(--glow);animation:blink 1s step-end infinite;}
 
 /* RGB-split glitch on the name */
 .hero h1.glitch span{display:block;position:relative;}
@@ -573,7 +573,7 @@ body {
 /* ---------- REDUCED MOTION ---------- */
 @media (prefers-reduced-motion:reduce){
   #screen-content{animation:none;}
-  .mq-title,.mq-lamps i,.konami-hint,.coin-label,#insert-coin h2,.hero-desc .cur{animation:none;}
+  .konami-hint,.coin-label,#insert-coin h2,.cur{animation:none;}
   .hero h1.glitch span::before,.hero h1.glitch span::after,.hero h1.glitch:hover span::before,.hero h1.glitch:hover span::after{animation:none;}
   .ghost-lane{display:none;}
   .hero-grid{transition:none;}
@@ -617,7 +617,7 @@ body {
 .cf-drawer.open .cf-drawer-arrow{transform:rotate(90deg);}
 .cf-drawer-files{max-height:0;overflow:hidden;transition:max-height 0.28s ease;}
 .cf-drawer.open .cf-drawer-files{max-height:320px;}
-.cf-file{display:flex;align-items:center;gap:10px;padding:8px 10px 8px 46px;border-top:1px solid var(--ph3);text-decoration:none;color:inherit;cursor:inherit;transition:background 0.12s;}
+.cf-file{display:flex;align-items:flex-start;gap:10px;padding:8px 10px 8px 46px;border-top:1px solid var(--ph3);text-decoration:none;color:inherit;cursor:inherit;transition:background 0.12s;}
 .cf-file:hover,.cf-file:focus-visible{background:rgba(255,179,0,0.08);}
 .cf-file-name{flex:1;min-width:0;font-family:var(--mono);font-size:clamp(10px,1.2vw,12px);color:var(--ph2);line-height:1.5;}
 .cf-file-open{flex-shrink:0;font-family:var(--font);font-size:clamp(7px,1vw,8px);color:var(--amber);white-space:nowrap;}
@@ -629,9 +629,112 @@ body {
   .cf-box{width:100%;}
 }
 
+/* =====================================================
+   v4: LANGUAGE SWITCH · CV MENU · PROJECT WINDOW · SOUND
+   ===================================================== */
+/* язык в HUD */
+.lang-val{display:flex;align-items:center;gap:3px;}
+.lang-val span{opacity:0.35;}
+.lang-val span.on{opacity:1;}
+.lang-val i{font-style:normal;opacity:0.35;}
+#screen-nav .ns{display:none;}
+
+/* выпадающее меню CV (hero и футер) */
+.cv-dd{position:relative;display:inline-block;align-self:flex-start;margin-bottom:22px;}
+#hero .cv-dd{z-index:3;}
+#hero .cv-menu{left:calc(100% + 6px);top:0;min-width:0;}
+.cv-btn{font-family:var(--font);font-size:clamp(8px,1.1vw,10px);letter-spacing:1px;padding:10px 14px;background:rgba(200,255,0,0.06);border:1.5px solid var(--ph);color:var(--ph);cursor:inherit;text-shadow:0 0 8px var(--glow);box-shadow:0 0 14px rgba(200,255,0,0.15);transition:background 0.12s,color 0.12s;display:flex;align-items:center;gap:8px;}
+.cv-btn:hover,.cv-dd.open .cv-btn{background:var(--ph);color:#000;text-shadow:none;}
+.cv-arr{display:inline-block;width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:6px solid currentColor;transform:rotate(-90deg);}
+.cv-dd.up .cv-arr{transform:rotate(180deg);}
+.cv-menu{position:absolute;left:0;top:calc(100% + 4px);min-width:100%;background:var(--bg);border:1.5px solid var(--ph);box-shadow:0 0 20px rgba(200,255,0,0.2);display:none;flex-direction:column;z-index:60;}
+.cv-dd.open .cv-menu{display:flex;}
+.cv-dd.up .cv-menu{top:auto;bottom:calc(100% + 4px);left:auto;right:0;}
+.cv-menu .cv-item{display:flex;align-items:center;gap:10px;margin:0;padding:9px 12px;font-family:var(--mono);font-size:clamp(11px,1.2vw,13px);letter-spacing:0;color:var(--ph2);text-decoration:none;white-space:nowrap;cursor:inherit;border-top:1px solid var(--ph3);}
+.cv-menu .cv-item:first-child{border-top:none;}
+.cv-item b{font-family:var(--font);font-weight:400;font-size:clamp(7px,0.9vw,8px);color:var(--amber);}
+.cv-menu .cv-item:hover,.cv-menu .cv-item:focus-visible{background:rgba(200,255,0,0.1);color:var(--ph);}
+.ft-links{display:flex;align-items:center;flex-wrap:wrap;gap:8px 0;}
+.screen-footer .cv-dd{margin:0 0 0 16px;}
+.screen-footer .cv-btn{font-size:clamp(7px,0.9vw,8px);padding:5px 10px;border-width:1px;box-shadow:none;}
+
+/* окно коммерческого проекта (в стиле TROPHIES) */
+.pcard[data-case]{cursor:inherit;}
+.pcard:focus-visible::after{opacity:1;}
+.pcard{display:flex;flex-direction:column;}
+.proj-body{flex:1;}
+.proj-stats{align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:8px 16px;}
+.sval{line-height:1.5;}
+.pc-more{margin-left:auto;}
+.pc-more{font-family:var(--font);font-size:clamp(7px,0.9vw,8px);color:var(--amber);letter-spacing:1px;white-space:nowrap;transition:color 0.12s;}
+.pcard:hover .pc-more{color:var(--ph);}
+#cs{position:absolute;inset:0;background:rgba(0,0,0,0.82);z-index:152;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.2s;padding:clamp(10px,3vw,24px);}
+#cs.open{opacity:1;pointer-events:all;}
+.cs-box{width:min(680px,100%);max-height:94%;}
+.cs-meta{font-family:var(--font);font-size:clamp(7px,0.9vw,8px);color:var(--amber);letter-spacing:2px;line-height:1.8;margin-bottom:8px;}
+.cs-role{font-family:var(--font);font-size:clamp(8px,1.1vw,10px);color:var(--ph);line-height:1.7;margin-bottom:16px;padding-bottom:14px;border-bottom:1px dashed var(--ph3);}
+#cs-list{list-style:none;display:flex;flex-direction:column;gap:12px;}
+#cs-list li{position:relative;padding-left:18px;font-family:var(--mono);font-size:clamp(12px,1.35vw,14px);color:var(--ph2);line-height:1.7;}
+#cs-list li::before{content:'\25B8';position:absolute;left:0;top:0;color:var(--amber);}
+.cs-skip{margin-top:16px;font-family:var(--font);font-size:clamp(6px,0.8vw,7px);color:var(--ph3);letter-spacing:1px;min-height:1.2em;}
+
+/* язык документа в списке тестовых */
+.cf-doc-lang{flex-shrink:0;font-family:var(--font);font-size:7px;color:var(--ph3);border:1px solid var(--ph3);padding:3px 4px;}
+
+/* кнопка звука на панели + красный индикатор над ней */
+.snd-area{display:flex;flex-direction:column;align-items:center;gap:5px;flex-shrink:0;}
+.snd-led{width:8px;height:8px;border-radius:50%;background:#1c0808;border:1px solid #000;box-shadow:inset 0 1px 2px rgba(0,0,0,0.8);transition:background 0.12s,box-shadow 0.12s;}
+.snd-led.on{background:#ff2b2b;box-shadow:0 0 6px #ff2b2b,0 0 14px rgba(255,43,43,0.7);}
+.snd-btn{width:clamp(30px,4.6vw,44px);height:clamp(30px,4.6vw,44px);border-radius:50%;border:2px solid var(--metal2);background:radial-gradient(circle at 35% 30%,#4a4e62,#23252f 70%);box-shadow:0 4px 0 #0d0e13,0 0 0 1px #000;color:#c9ccd8;cursor:inherit;display:flex;align-items:center;justify-content:center;transition:transform 0.08s,box-shadow 0.08s;}
+.snd-btn:active{transform:translateY(3px);box-shadow:0 1px 0 #0d0e13,0 0 0 1px #000;}
+.snd-btn svg{width:54%;height:54%;display:block;}
+.snd-btn .snd-x{display:none;}
+.snd-btn.muted{color:#6d7183;}
+.snd-btn.muted .snd-w{display:none;}
+.snd-btn.muted .snd-x{display:block;}
+.snd-label{font-family:var(--font);font-size:clamp(6px,0.9vw,8px);color:#8a8fa5;letter-spacing:1px;text-align:center;line-height:1.8;}
+
+@media(max-width:600px){
+  .screw{display:none;}  /* на узком экране винты перекрывали крайние пункты HUD и меню */
+  #screen-nav a{letter-spacing:0;}
+  #screen-nav .nl{display:none;}
+  #screen-nav .ns{display:inline;}
+  .snd-btn{width:26px;height:26px;border-width:1px;}
+  .snd-led{width:6px;height:6px;}
+  .screen-footer{flex-direction:column;align-items:flex-start;}
+  .ft-links>*:first-child{margin-left:0;}
+}
+
+/* окно получает фокус программно, рамка фокуса ему не нужна */
+[tabindex="-1"]:focus{outline:none;}
+
+/* запасной экран, если у посетителя выключен JavaScript */
+.nojs{position:fixed;inset:0;z-index:100000;background:var(--bg);color:var(--ph2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:24px;text-align:center;font-family:var(--mono);font-size:15px;line-height:1.7;cursor:auto;}
+.nojs h1{font-family:var(--font);font-size:clamp(16px,4vw,32px);color:var(--ph);line-height:1.5;}
+.nojs a{color:var(--ph);margin:0 8px;}
+.nojs small{color:var(--ph3);font-size:13px;}
+
+/* сенсорные экраны: наведения нет, поэтому название работы видно всегда */
+@media (hover:none){
+  .covlay{opacity:1;background:linear-gradient(to top,rgba(0,0,0,0.9) 0%,rgba(0,0,0,0.35) 45%,transparent 70%);}
+}
+
+/* краткое описание тестового под названием */
+.cf-file-txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px;}
+.cf-file-desc{font-family:var(--mono);font-size:clamp(10px,1.1vw,11px);color:var(--ph3);line-height:1.5;}
+.cf-file:hover .cf-file-desc{color:var(--ph2);}
 </style>
 </head>
 <body>
+<noscript>
+  <div class="nojs">
+    <h1>DANIIL PAVLOV</h1>
+    <p>Technical Game Designer · 3.5+ years · PC &amp; Mobile F2P<br>LiveOps · Economy · Balance · UE5 · Unity · C++ · SQL</p>
+    <p><a href="https://drive.google.com/file/d/1kVmJ-X8w0aQM5Qgb-I5Qt3zxFxHCi4ak/view?usp=sharing">CV (EN)</a><a href="https://drive.google.com/file/d/12IximlO_lVVIP4YwewO58Ox-wBf1nC3e/view?usp=sharing">CV (RU)</a></p>
+    <p><a href="https://t.me/Fickek">Telegram</a><a href="https://linkedin.com/in/daniilpavlovdev">LinkedIn</a><a href="https://github.com/Fickek">GitHub</a></p>
+    <small>This portfolio is an interactive arcade cabinet and needs JavaScript.<br>Для интерактивной версии портфолио включите JavaScript.</small>
+  </div>
+</noscript>
 <div id="cabinet">
 
   <div id="screen-wrap">
@@ -650,7 +753,7 @@ body {
       <!-- INSERT COIN -->
       <div id="insert-coin">
         <h2>INSERT COIN</h2>
-        <p class="ic-sub">Use the coin slot below</p>
+        <p class="ic-sub" data-i18n="ic_sub">Use the coin slot below</p>
         <p class="ic-arrow">▼ ▼ ▼</p>
       </div>
 
@@ -658,15 +761,17 @@ body {
         <div id="hud">
           <div class="hud-item"><span class="hud-lbl">SCORE</span><span class="hud-val" id="score-val">000000</span></div>
           <div class="hud-sep"></div>
-          <div class="hud-item"><span class="hud-lbl">PLAYER</span><span class="hud-val">D.PAVLOV</span></div>
-          <div class="hud-sep"></div>
+          <div class="hud-item hud-m-hide"><span class="hud-lbl">PLAYER</span><span class="hud-val">D.PAVLOV</span></div>
+          <div class="hud-sep hud-m-hide"></div>
           <div class="hud-item"><span class="hud-lbl">LIVES</span><div class="hud-lives" id="lives"><div class="heart"></div><div class="heart"></div><div class="heart"></div></div></div>
-          <div class="hud-sep"></div>
-          <div class="hud-item"><span class="hud-lbl">LEVEL</span><span class="hud-val" id="level-val">01</span></div>
+          <div class="hud-sep hud-m-hide"></div>
+          <div class="hud-item hud-m-hide"><span class="hud-lbl">LEVEL</span><span class="hud-val" id="level-val">01</span></div>
           <div class="hud-sep"></div>
           <div class="hud-item hud-click" id="trophy-btn" role="button" tabindex="0" aria-label="Open trophies"><span class="hud-lbl">TROPHIES</span><span class="hud-val" id="ach-count">0/14</span></div>
           <div class="hud-sep"></div>
-          <div class="hud-item"><span class="hud-lbl">HI-SCORE</span><span class="hud-val">999999</span></div>
+          <div class="hud-item hud-click" id="lang-btn" role="button" tabindex="0" aria-label="Switch language / Сменить язык"><span class="hud-lbl">LANG</span><span class="hud-val lang-val"><span data-l="en" class="on">EN</span><i>/</i><span data-l="ru">RU</span></span></div>
+          <div class="hud-sep hud-m-hide"></div>
+          <div class="hud-item hud-m-hide"><span class="hud-lbl">HI-SCORE</span><span class="hud-val">999999</span></div>
           <div class="hud-xp" aria-hidden="true"><div id="xp-fill"></div></div>
         </div>
 
@@ -675,18 +780,21 @@ body {
           <div class="ghost-lane" id="ghosts" aria-hidden="true"></div>
           <p class="hero-label">&gt; GAME DESIGNER_</p>
           <h1 class="glitch" aria-label="Daniil Pavlov"><span data-text="DANIIL" aria-hidden="true">DANIIL</span><span data-text="PAVLOV" aria-hidden="true">PAVLOV</span></h1>
-          <h2>3.5+ YRS · PC &amp; MOBILE F2P</h2>
+          <h2 data-i18n="hero_sub">3.5+ YRS · PC &amp; MOBILE F2P</h2>
           <p class="hero-desc" id="hero-desc"><span id="hero-type">Systems · LiveOps · Events · Economy<br>UE5 · Unity · C++ · Blueprint · SQL</span></p>
-          <!-- <div class="hero-tags">
-            <span class="tag">LIVEOPS</span><span class="tag">SYSTEMS</span><span class="tag">F2P</span>
-            <span class="tag">UE5</span><span class="tag">UNITY</span><span class="tag">EVENTS</span>
-            <span class="tag">BALANCE</span><span class="tag">C++</span>
-          </div> -->
+          <!-- CV: ссылки на резюме задаются в одном месте - CV_LINKS в скрипте (и продублированы в <noscript> вверху) -->
+          <div class="cv-dd">
+            <button class="cv-btn" type="button" aria-haspopup="true" aria-expanded="false" onclick="toggleCV(this)"><span data-i18n="cv_btn">DOWNLOAD CV</span><span class="cv-arr"></span></button>
+            <div class="cv-menu" role="menu">
+              <a class="cv-item" role="menuitem" data-cv="en" href="#" target="_blank" rel="noopener" onclick="cvPick()"><b>EN</b>English · PDF &#8599;</a>
+              <a class="cv-item" role="menuitem" data-cv="ru" href="#" target="_blank" rel="noopener" onclick="cvPick()"><b>RU</b>Русский · PDF &#8599;</a>
+            </div>
+          </div>
           <span class="konami-hint">TRY: ↑↑↓↓←→←→ B A</span>
         </div>
 
         <div id="portfolio" class="inner-section">
-          <div class="sec-header fu"><span class="sec-num">STAGE 01</span><h2 class="sec-title">PORTFOLIO</h2>
+          <div class="sec-header fu"><span class="sec-num">STAGE 01</span><h2 class="sec-title" data-i18n="sec_portfolio">PORTFOLIO</h2>
             <div class="sec-line"></div>
           </div>
           <!-- Настройки карточки (все необязательные, пишутся в тег .mcard / .pcard):
@@ -697,12 +805,66 @@ body {
                data-badge-bg="#220000"      цвет фона плашки
           -->
           <div class="port-grid">
+            <div class="mcard lg fu" data-group="hide" data-badge="AI HIDE AND SEEK" data-type="image" data-src="assets/images/UE5AIHideAndSeekGame_Icon_1.webp" data-title="UE5 AI Hide &amp; Seek" data-desc="Hide-and-seek prototype where AI bots play against each other on their own: Behavior Trees, custom BT tasks and EQS" data-title-ru="UE5: ИИ-прятки" data-desc-ru="Прототип пряток, в котором боты сами играют друг с другом: Behavior Trees, свои BT Tasks и EQS" onclick="openLB(this);">
+              <img src="assets/images/UE5AIHideAndSeekGame_Icon_1.webp" width="1280" height="710" loading="lazy" decoding="async" alt="Screenshot: UE5 AI hide and seek game">
+              <div class="covlay">
+                <h3>UE5 AI Hide &amp; Seek</h3>
+                <p>UE5</p>
+              </div>
+            </div>
+
+            <div class="mcard md fu" data-group="tps" data-badge="BOSS" data-badge-color="#ff3333" data-type="youtube" data-youtube-id="7TR6tAux9ts" data-title="UE5 TPS Boss Fight" data-desc="Third-person boss arena in UE5: a two-phase boss with homing projectiles and a spawned hand with weak spots to shoot" data-title-ru="UE5: TPS-битва с боссом" data-desc-ru="Арена с боссом от третьего лица на UE5: босс с двумя фазами, самонаводящиеся снаряды и появляющаяся рука с уязвимыми точками" onclick="openLB(this);">
+              <div class="vthumb"><img src="assets/images/TPSUE5Gameplay_Icon_1.webp" width="1680" height="905" loading="lazy" decoding="async" alt="Video preview: UE5 third-person boss battle"><div class="play-wrap"><div class="play-btn"></div></div></div>
+              <div class="covlay">
+                <h3>UE5 TPS Boss Fight</h3>
+                <p>UE5</p>
+              </div>
+            </div>
+
+            <div class="mcard md fu" data-group="tps" data-badge="BOSS" data-badge-color="#ff3333" data-type="image" data-src="assets/images/TPSUE5Gameplay_Icon_2.webp" data-title="UE5 TPS Boss Fight" data-desc="Third-person boss arena in UE5: a two-phase boss with homing projectiles and a spawned hand with weak spots to shoot" data-title-ru="UE5: TPS-битва с боссом" data-desc-ru="Арена с боссом от третьего лица на UE5: босс с двумя фазами, самонаводящиеся снаряды и появляющаяся рука с уязвимыми точками" onclick="openLB(this);">
+              <img src="assets/images/TPSUE5Gameplay_Icon_2.webp" width="1680" height="902" loading="lazy" decoding="async" alt="Screenshot: UE5 third-person boss battle">
+              <div class="covlay">
+                <h3>UE5 TPS Boss Fight</h3>
+                <p>UE5</p>
+              </div>
+            </div>
+
+            <div class="mcard sm fu" data-group="tps" data-badge="BOSS" data-badge-color="#ff3333" data-type="image" data-src="assets/images/TPSUE5Gameplay_Icon_3.webp" data-title="UE5 TPS Boss Fight" data-desc="Third-person boss arena in UE5: a two-phase boss with homing projectiles and a spawned hand with weak spots to shoot" data-title-ru="UE5: TPS-битва с боссом" data-desc-ru="Арена с боссом от третьего лица на UE5: босс с двумя фазами, самонаводящиеся снаряды и появляющаяся рука с уязвимыми точками" onclick="openLB(this);">
+              <img src="assets/images/TPSUE5Gameplay_Icon_3.webp" width="1680" height="905" loading="lazy" decoding="async" alt="Screenshot: UE5 third-person boss battle">
+              <div class="covlay"><h3>UE5 TPS Boss Fight</h3>
+                <p>UE5</p>
+              </div>
+            </div>
+
+            <div class="mcard wd fu" data-group="hide" data-badge="AI HIDE AND SEEK" data-type="youtube" data-youtube-id="F5lmJn4IcvU" data-title="UE5 AI Hide &amp; Seek" data-desc="Hide-and-seek prototype where AI bots play against each other on their own: Behavior Trees, custom BT tasks and EQS" data-title-ru="UE5: ИИ-прятки" data-desc-ru="Прототип пряток, в котором боты сами играют друг с другом: Behavior Trees, свои BT Tasks и EQS" onclick="openLB(this);">
+              <div class="vthumb">
+                <img src="assets/images/UE5AIHideAndSeekGame_Icon_2.webp" width="1448" height="789" loading="lazy" decoding="async" alt="Video preview: UE5 AI hide and seek game"><div class="play-wrap"><div class="play-btn"></div></div></div><div class="covlay"><h3>UE5 AI Hide &amp; Seek</h3>
+                <p>UE5</p>
+              </div>
+            </div>
+
+            <div class="mcard tl fu" data-badge="PLAYABLE" data-badge-color="#33e0ff" data-badge-bg="#001a22" data-type="image" data-src="assets/images/FlappyMax_Icon_1.webp" data-title="FlappyMax" data-desc="A Flappy Bird parody made in Unity.<br><a href='https://fikek.itch.io/flappymax' target='_blank' rel='noopener' class='desc-link'>Play on itch.io</a>" data-desc-ru="Пародия на Flappy Bird на Unity.<br><a href='https://fikek.itch.io/flappymax' target='_blank' rel='noopener' class='desc-link'>Играть на itch.io</a>" onclick="openLB(this);">
+              <img src="assets/images/FlappyMax_Icon_1.webp" width="605" height="1208" loading="lazy" decoding="async" alt="Screenshot: FlappyMax, a Flappy Bird parody made in Unity">
+              <div class="covlay">
+                <h3>FlappyMax</h3>
+                <p>Unity</p>
+              </div>
+            </div>
+
+            <div class="mcard wd lg fu" data-badge="PLAYABLE" data-badge-color="#33e0ff" data-badge-bg="#001a22" data-type="image" data-src="assets/images/DonkeyKirya_Icon_1.webp" data-title="DonkeyKirya" data-desc="A Donkey Kong parody made in Unity.<br><a href='https://fikek.itch.io/donkeykirya' target='_blank' rel='noopener' class='desc-link'>Play on itch.io</a>" data-desc-ru="Пародия на Donkey Kong на Unity.<br><a href='https://fikek.itch.io/donkeykirya' target='_blank' rel='noopener' class='desc-link'>Играть на itch.io</a>" onclick="openLB(this);">
+              <img src="assets/images/DonkeyKirya_Icon_1.webp" width="1680" height="726" loading="lazy" decoding="async" alt="Screenshot: DonkeyKirya, a Donkey Kong parody made in Unity">
+              <div class="covlay">
+                <h3>DonkeyKirya</h3>
+                <p>Unity</p></div>
+            </div>
+
+
 
             <div class="mcard sm fu" data-group="c++" data-badge="IN PROGRESS" data-badge-color="#2dd11b" data-badge-bg="#001a22" data-pixel="128" data-type="image"
               data-src="assets/images/UE5CPPTPS.png" data-title="UE5 C++ TPS Rebuild"
-              data-desc="Third-person shooter rebuilt in UE5 C++: stamina system with per-attack costs, health pickups, and takedown finishers with paired animations and Motion Warping"
+              data-desc="Third-person shooter rebuilt in UE5 C++: stamina system with per-attack costs, health pickups, and takedown finishers with paired animations and Motion Warping" data-desc-ru="Шутер от третьего лица, пересобранный на UE5 C++: система стамины со стоимостью каждой атаки, аптечки и добивания с парными анимациями и Motion Warping"
               onclick="openLB(this);">
-              <img src="assets/images/UE5CPPTPS.png" alt="Screenshot: UE5 C++ TPS Rebuild">
+              <img src="assets/images/UE5CPPTPS.png" width="1921" height="1326" loading="lazy" decoding="async" alt="Screenshot: UE5 C++ TPS Rebuild">
               <div class="covlay">
                 <h3>UE5 C++ TPS Rebuild</h3>
                 <p>UE5</p>
@@ -710,136 +872,82 @@ body {
             </div>
 
             <div class="mcard wd fu" data-group="building" data-badge="IN PROGRESS" data-badge-color="#2dd11b" data-badge-bg="#001a22" data-pixel="128" data-type="image" data-src="assets/images/UE5BuildingSim.png"
-              data-title="UE5 building simulator"
-              data-desc="Implementation of a building simulator in UE5, where the player can construct and manage various structures"
+              data-title="UE5 Building Simulator"
+              data-desc="Building simulator in UE5 where the player constructs and manages various structures" data-title-ru="UE5: симулятор строительства" data-desc-ru="Симулятор строительства на UE5: игрок возводит постройки и управляет ими"
               onclick="openLB(this);">
-              <img src="assets/images/UE5BuildingSim.png" alt="Screenshot: UE5 building simulator">
+              <img src="assets/images/UE5BuildingSim.png" width="2559" height="1378" loading="lazy" decoding="async" alt="Screenshot: UE5 Building Simulator">
               <div class="covlay">
-                <h3>UE5 building simulator</h3>
+                <h3>UE5 Building Simulator</h3>
                 <p>UE5</p>
               </div>
             </div>
-
-            <div class="mcard lg fu" data-group="hide" data-badge="AI HIDE AND SEEK" data-type="image" data-src="assets/images/UE5AIHideAndSeekGame_Icon_1.webp" data-title="UE5 AI Hide And Seek Game" data-desc="Implementation of the hide and seek game, where the bots themselves play with each other" onclick="openLB(this);">
-              <img src="assets/images/UE5AIHideAndSeekGame_Icon_1.webp" alt="Screenshot: UE5 AI hide and seek game">
-              <div class="covlay">
-                <h3>UE5 AI Hide And Seek Game</h3>
-                <p>UE5</p>
-              </div>
-            </div>
-
-            <div class="mcard md fu" data-group="tps" data-badge="BOSS" data-badge-color="#ff3333" data-type="youtube" data-youtube-id="7TR6tAux9ts" data-title="TPSUE5Gameplay" data-desc="Implementation of a boss battle" onclick="openLB(this);">
-              <div class="vthumb"><img src="assets/images/TPSUE5Gameplay_Icon_1.webp" alt="Video preview: UE5 third-person boss battle"><div class="play-wrap"><div class="play-btn"></div></div></div>
-              <div class="covlay">
-                <h3>TPSUE5Gameplay</h3>
-                <p>UE5</p>
-              </div>
-            </div>
-
-            <div class="mcard md fu" data-group="tps" data-badge="BOSS" data-badge-color="#ff3333" data-type="image" data-src="assets/images/TPSUE5Gameplay_Icon_2.webp" data-title="TPSUE5Gameplay" data-desc="Implementation of a boss battle" onclick="openLB(this);">
-              <img src="assets/images/TPSUE5Gameplay_Icon_2.webp" alt="Screenshot: UE5 third-person boss battle">
-              <div class="covlay">
-                <h3>TPSUE5Gameplay</h3>
-                <p>UE5</p>
-              </div>
-            </div>
-
-            <div class="mcard sm fu" data-group="tps" data-badge="BOSS" data-badge-color="#ff3333" data-type="image" data-src="assets/images/TPSUE5Gameplay_Icon_3.webp" data-title="TPSUE5Gameplay" data-desc="Implementation of a boss battle" onclick="openLB(this);">
-              <img src="assets/images/TPSUE5Gameplay_Icon_3.webp" alt="Screenshot: UE5 third-person boss battle">
-              <div class="covlay"><h3>TPSUE5Gameplay</h3>
-                <p>UE5</p>
-              </div>
-            </div>
-
-            <div class="mcard wd fu" data-group="hide" data-badge="AI HIDE AND SEEK" data-type="youtube" data-youtube-id="F5lmJn4IcvU" data-title="UE5AIHideAndSeekGame" data-desc="Implementation of the hide and seek game, where the bots themselves play with each other" onclick="openLB(this);">
-              <div class="vthumb">
-                <img src="assets/images/UE5AIHideAndSeekGame_Icon_2.webp" alt="Video preview: UE5 AI hide and seek game"><div class="play-wrap"><div class="play-btn"></div></div></div><div class="covlay"><h3>UE5AIHideAndSeekGame</h3>
-                <p>UE5</p>
-              </div>
-            </div>
-
-            <div class="mcard tl fu" data-badge="PLAYABLE" data-badge-color="#33e0ff" data-badge-bg="#001a22" data-type="image" data-src="assets/images/FlappyMax_Icon_1.webp" data-title="FlappyMax" data-desc="Implementation of a Flappy Bird parody in Unity.<br><a href='https://fikek.itch.io/flappymax' target='_blank' class='desc-link'>Link</a>" onclick="openLB(this);">
-              <img src="assets/images/FlappyMax_Icon_1.webp" alt="Screenshot: FlappyMax, a Flappy Bird parody made in Unity">
-              <div class="covlay">
-                <h3>FlappyMax</h3>
-                <p>Unity</p>
-              </div>
-            </div>
-
-            <div class="mcard wd lg fu" data-badge="PLAYABLE" data-badge-color="#33e0ff" data-badge-bg="#001a22" data-type="image" data-src="assets/images/DonkeyKirya_Icon_1.webp" data-title="DonkeyKirya" data-desc="Implementation of a Donkey Kong parody in Unity.<br><a href='https://fikek.itch.io/donkeykirya' target='_blank' class='desc-link'>Link</a>" onclick="openLB(this);">
-              <img src="assets/images/DonkeyKirya_Icon_1.webp" alt="Screenshot: DonkeyKirya, a Donkey Kong parody made in Unity">
-              <div class="covlay">
-                <h3>DonkeyKirya</h3>
-                <p>Unity</p></div>
-            </div>
-
           </div>
         </div>
 
 <div id="projects" class="inner-section">
-          <div class="sec-header fu"><span class="sec-num">STAGE 02</span><h2 class="sec-title">COMMERCIAL PROJECTS</h2><div class="sec-line"></div></div>
+          <div class="sec-header fu"><span class="sec-num">STAGE 02</span><h2 class="sec-title" data-i18n="sec_projects">COMMERCIAL PROJECTS</h2><div class="sec-line"></div></div>
           <div class="proj-grid">
             
-            <div class="pcard fu">
+            <div class="pcard fu" data-case="nda" onclick="openCS(this)">
               <div class="proj-banner">
                 <div class="banner-img-wrap" id="TBA-banner">
-                  <img src="assets/images/TBA.png" alt="TBA project banner">
+                  <img src="assets/images/TBA.png" width="2559" height="1333" loading="lazy" decoding="async" alt="Unannounced RPG project banner">
                 </div>
               </div>
               <div class="proj-body">
-                <p class="proj-studio">TBA · 2026 - TBA</p>
-                <h3 class="proj-name">TBA</h3>
-                <p class="proj-desc">Game Design</p>
-                <div class="proj-meta"><span class="mtag">PC</span><span class="mtag">UNREAL</span><span class="mtag">C++</span>
+                <p class="proj-studio" data-i18n="ps_nda">NDA · AUG 2026 – NOW</p>
+                <h3 class="proj-name" data-i18n="pn_nda">UNANNOUNCED RPG</h3>
+                <p class="proj-desc" data-i18n="pd_nda">Gameplay mechanics in C++ and design specs for game features on Unreal Engine 5.</p>
+                <div class="proj-meta"><span class="mtag">RPG</span><span class="mtag">PC</span><span class="mtag">UE5</span><span class="mtag">C++</span>
                 </div>
               </div>
               <div class="proj-stats">
                 <div class="stat">
                   <span class="sval">Game Designer</span>
-                  <span class="slbl">Specialization</span>
+                  <span class="slbl" data-i18n="spec">Specialization</span>
                 </div>
               </div>
             </div>
 
-            <div class="pcard fu">
+            <div class="pcard fu" data-case="skyforge" onclick="openCS(this)">
               <div class="proj-banner">
                 <div class="banner-img-wrap" id="skyforge-banner">
-                  <img src="assets/images/Skyforge_Icon_1.webp" alt="Skyforge project banner">
+                  <img src="assets/images/Skyforge_Icon_1.webp" width="800" height="1200" loading="lazy" decoding="async" alt="Skyforge project banner">
                 </div>
               </div>
-              <div class="proj-body"><p class="proj-studio">PIXEL SKY · 2024–2025</p><h3 class="proj-name">SKYFORGE</h3><p class="proj-desc">LiveOps events, weapon and economy balance, and SQL work for a PC MMO.</p><div class="proj-meta"><span class="mtag">PC MMO</span><span class="mtag">LIVEOPS</span><span class="mtag">BALANCE</span><span class="mtag">EVENTS</span><span class="mtag">SQL</span></div></div>
+              <div class="proj-body"><p class="proj-studio">PIXEL SKY · 2024–2025</p><h3 class="proj-name">SKYFORGE</h3><p class="proj-desc" data-i18n="pd_skyforge">LiveOps events, weapon balance, progression and SQL work for a PC MMO.</p><div class="proj-meta"><span class="mtag">PC MMO</span><span class="mtag">LIVEOPS</span><span class="mtag">BALANCE</span><span class="mtag">EVENTS</span><span class="mtag">SQL</span></div></div>
               <div class="proj-stats">
               <div class="stat">
                 <span class="sval">Technical Game Designer</span>
-                <span class="slbl">Specialization</span>
+                <span class="slbl" data-i18n="spec">Specialization</span>
               </div>
             </div>
             </div>
             
-            <div class="pcard fu">
+            <div class="pcard fu" data-case="knightcats" onclick="openCS(this)">
               <div class="proj-banner">
                 <div class="banner-img-wrap" id="knightcats-banner">
-                  <img src="assets/images/KnightCats2_Icon_1.webp" alt="Knight Cats 2 project banner">
+                  <img src="assets/images/KnightCats2_Icon_1.webp" width="256" height="256" loading="lazy" decoding="async" alt="Knight Cats 2 project banner">
                 </div>
               </div>
-              <div class="proj-body"><p class="proj-studio">ELEPHANT GAMES · 2023</p><h3 class="proj-name">KNIGHT CATS 2</h3><p class="proj-desc">Technical design and gameplay implementation in Unity and C#.</p><div class="proj-meta"><span class="mtag">PC</span><span class="mtag">UNITY</span><span class="mtag">C#</span></div></div>
+              <div class="proj-body"><p class="proj-studio">ELEPHANT GAMES · 2023</p><h3 class="proj-name">KNIGHT CATS 2</h3><p class="proj-desc" data-i18n="pd_knightcats">Level logic in Unity, Spine animation integration and C# fixes.</p><div class="proj-meta"><span class="mtag">PC</span><span class="mtag">UNITY</span><span class="mtag">C#</span></div></div>
               <div class="proj-stats"><div class="stat">
                 <span class="sval">Technical Designer</span>
-                <span class="slbl">Specialization</span>
+                <span class="slbl" data-i18n="spec">Specialization</span>
               </div>
             </div>
             </div>
 
-            <div class="pcard fu">
+            <div class="pcard fu" data-case="rescue" onclick="openCS(this)">
               <div class="proj-banner">
                 <div class="banner-img-wrap" id="rescue-banner">
-                  <img src="assets/images/RescueDash_Icon_1.webp" alt="Rescue Dash project banner">
+                  <img src="assets/images/RescueDash_Icon_1.webp" width="1680" height="1680" loading="lazy" decoding="async" alt="Rescue Dash project banner">
                 </div>
               </div>
-              <div class="proj-body"><p class="proj-studio">WHALEBOX STUDIO · 2021–2022</p><h3 class="proj-name">RESCUE DASH</h3><p class="proj-desc">Game and level design for a mobile F2P game built in Unity.</p><div class="proj-meta"><span class="mtag">MOBILE F2P</span><span class="mtag">LEVEL DESIGN</span><span class="mtag">UNITY</span></div></div>
+              <div class="proj-body"><p class="proj-studio">WHALEBOX STUDIO · 2021–2022</p><h3 class="proj-name">RESCUE DASH</h3><p class="proj-desc" data-i18n="pd_rescue">100+ levels, difficulty balance and configs for a mobile F2P game in Unity.</p><div class="proj-meta"><span class="mtag">MOBILE F2P</span><span class="mtag">LEVEL DESIGN</span><span class="mtag">UNITY</span></div></div>
               <div class="proj-stats"><div class="stat">
                 <span class="sval">Game/Level Designer</span>
-                <span class="slbl">Specialization</span>
+                <span class="slbl" data-i18n="spec">Specialization</span>
               </div></div>
             </div>
           </div>
@@ -847,19 +955,25 @@ body {
 
         <div class="screen-footer">
           <span class="ft-copy">© 2026 DANIIL PAVLOV · GAME DESIGNER</span>
-          <div> 
-            <a class="tag" href="https://t.me/Fickek" target="_blank">Telegram</a>
-            <a class="tag" href="https://linkedin.com/in/daniilpavlovdev" target="_blank">LinkedIn</a>
-            <a class="tag"  href="https://github.com/Fickek" target="_blank">GitHub</a>
+          <div class="ft-links">
+            <a class="tag" href="https://t.me/Fickek" target="_blank" rel="noopener">Telegram</a>
+            <a class="tag" href="https://linkedin.com/in/daniilpavlovdev" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="tag" href="https://github.com/Fickek" target="_blank" rel="noopener">GitHub</a>
+            <div class="cv-dd up">
+              <button class="cv-btn" type="button" aria-haspopup="true" aria-expanded="false" onclick="toggleCV(this)"><span>CV</span><span class="cv-arr"></span></button>
+              <div class="cv-menu" role="menu">
+              <a class="cv-item" role="menuitem" data-cv="en" href="#" target="_blank" rel="noopener" onclick="cvPick()"><b>EN</b>English · PDF &#8599;</a>
+              <a class="cv-item" role="menuitem" data-cv="ru" href="#" target="_blank" rel="noopener" onclick="cvPick()"><b>RU</b>Русский · PDF &#8599;</a>
+              </div>
+            </div>
           </div>
         </div>
 
         <nav id="screen-nav">
-          <a href="#hero"      class="active" onclick="navClick(event,'hero')">HOME</a>
-          <a href="#portfolio"              onclick="navClick(event,'portfolio')">PORTFOLIO</a>
-          <a href="#projects"               onclick="navClick(event,'projects')">COMMERCIAL PROJECTS</a>
-          <a href="#" id="casefiles-tab"    onclick="openCF(event)">TEST ASSIGNMENTS<span class="nav-count" id="cf-nav-count"></span></a>
-        <!--  <a href="#stats"                  onclick="navClick(event,'stats')">STATS</a> -->
+          <a href="#hero"      class="active" onclick="navClick(event,'hero')" data-i18n="nav_home">HOME</a>
+          <a href="#portfolio"              onclick="navClick(event,'portfolio')" data-i18n="nav_portfolio">PORTFOLIO</a>
+          <a href="#projects"               onclick="navClick(event,'projects')"><span class="nl" data-i18n="nav_projects">COMMERCIAL PROJECTS</span><span class="ns" data-i18n="nav_projects_s">PROJECTS</span></a>
+          <a href="#" id="casefiles-tab"    onclick="openCF(event)"><span class="nl" data-i18n="nav_tests">TEST ASSIGNMENTS</span><span class="ns" data-i18n="nav_tests_s">TESTS</span><span class="nav-count" id="cf-nav-count"></span></a>
         </nav>
       </div><!-- /main -->
 
@@ -885,8 +999,7 @@ body {
     <div id="cf" onclick="closeCFbg(event)" role="dialog" aria-modal="true" aria-label="Case files">
       <div class="cf-box">
         <div class="cf-head">
-          <h2>TEST ASSIGNMENTS<span id="cf-count"></span></h2>
-          <!-- <span class="cf-sub">TEST ASSIGNMENTS</span> -->
+          <h2><span data-i18n="cf_title">TEST ASSIGNMENTS</span><span id="cf-count"></span></h2>
         </div>
         <button class="lb-close" onclick="closeCF()" aria-label="Close">X</button>
 
@@ -896,13 +1009,14 @@ body {
             <button class="cf-drawer-face" onclick="toggleDrawer(this)">
               <span class="cf-handle"></span>
               <span class="cf-drawer-name">OWLCAT STUDIO</span>
-              <span class="cf-drawer-count">1 FILE</span>
+              <span class="cf-drawer-count" data-i18n="cf_1file">1 FILE</span>
               <span class="cf-drawer-arrow">&#9656;</span>
             </button>
             <div class="cf-drawer-files">
-              <a class="cf-file" href="https://docs.google.com/document/d/1rPSfuPtkdhh3SI1Uk8WA-xrNpae0uKoUU_xtre3udaU/edit?usp=sharing" target="_blank" rel="noopener" onclick="briefClick(event,this)">
-                <span class="cf-file-name">Тестовое задание GD Owlcat</span>
-                <span class="cf-file-open">OPEN DOC &#8599;</span>
+              <a class="cf-file" href="https://docs.google.com/document/d/1rPSfuPtkdhh3SI1Uk8WA-xrNpae0uKoUU_xtre3udaU/preview" target="_blank" rel="noopener" onclick="briefClick(event,this)">
+                <span class="cf-file-txt"><span class="cf-file-name" data-i18n="cf_file">Game Designer test assignment</span><span class="cf-file-desc" data-i18n="cf_d1">Baldur's Gate 3 analysis and a moral-compass design: alignment axes, world reputation and companion reactions, plus work estimates and tasks for other teams.</span></span>
+                <span class="cf-doc-lang" title="Document language">RU</span>
+                <span class="cf-file-open"><span data-i18n="cf_open">OPEN DOC</span> &#8599;</span>
               </a>
             </div>
           </div>
@@ -911,13 +1025,14 @@ body {
             <button class="cf-drawer-face" onclick="toggleDrawer(this)">
               <span class="cf-handle"></span>
               <span class="cf-drawer-name">HOLIDAY STUDIOS</span>
-              <span class="cf-drawer-count">1 FILE</span>
+              <span class="cf-drawer-count" data-i18n="cf_1file">1 FILE</span>
               <span class="cf-drawer-arrow">&#9656;</span>
             </button>
             <div class="cf-drawer-files">
-              <a class="cf-file" href="https://docs.google.com/document/d/1m1G6UqonOSJ16EyOXLbQGmZZfU_zFgcaIYBtlEit-Dc/edit?usp=sharing" target="_blank" rel="noopener" onclick="briefClick(event,this)">
-                <span class="cf-file-name">Test Assignment GD Holiday Studios</span>
-                <span class="cf-file-open">OPEN DOC &#8599;</span>
+              <a class="cf-file" href="https://docs.google.com/document/d/1m1G6UqonOSJ16EyOXLbQGmZZfU_zFgcaIYBtlEit-Dc/preview" target="_blank" rel="noopener" onclick="briefClick(event,this)">
+                <span class="cf-file-txt"><span class="cf-file-name" data-i18n="cf_file">Game Designer test assignment</span><span class="cf-file-desc" data-i18n="cf_d2">Stat growth system for a roster of 20 heroes, levels 1–120: role weights, star ranks and stat conversion.</span></span>
+                <span class="cf-doc-lang" title="Document language">EN</span>
+                <span class="cf-file-open"><span data-i18n="cf_open">OPEN DOC</span> &#8599;</span>
               </a>
             </div>
           </div>
@@ -926,13 +1041,14 @@ body {
             <button class="cf-drawer-face" onclick="toggleDrawer(this)">
               <span class="cf-handle"></span>
               <span class="cf-drawer-name">WIZARDY</span>
-              <span class="cf-drawer-count">1 FILE</span>
+              <span class="cf-drawer-count" data-i18n="cf_1file">1 FILE</span>
               <span class="cf-drawer-arrow">&#9656;</span>
             </button>
             <div class="cf-drawer-files">
-              <a class="cf-file" href="https://docs.google.com/document/d/1aZNF6EtpbhoXoLz7vkOQtQ7DqwGWYenoHCSN51nRDWI/edit?usp=sharing" target="_blank" rel="noopener" onclick="briefClick(event,this)">
-                <span class="cf-file-name">Тестовое задание GD Wizardy</span>
-                <span class="cf-file-open">OPEN DOC &#8599;</span>
+              <a class="cf-file" href="https://docs.google.com/document/d/1aZNF6EtpbhoXoLz7vkOQtQ7DqwGWYenoHCSN51nRDWI/preview" target="_blank" rel="noopener" onclick="briefClick(event,this)">
+                <span class="cf-file-txt"><span class="cf-file-name" data-i18n="cf_file">Game Designer test assignment</span><span class="cf-file-desc" data-i18n="cf_d3">Feature design document: the blacksmithing system of Kingdom Come: Deliverance II and its links to inventory, economy and quests.</span></span>
+                <span class="cf-doc-lang" title="Document language">RU</span>
+                <span class="cf-file-open"><span data-i18n="cf_open">OPEN DOC</span> &#8599;</span>
               </a>
             </div>
           </div>
@@ -941,15 +1057,16 @@ body {
             <button class="cf-drawer-face" onclick="toggleDrawer(this)">
               <span class="cf-handle"></span>
               <span class="cf-drawer-name">INDIE</span>
-              <span class="cf-drawer-count">1 FILE</span>
+              <span class="cf-drawer-count" data-i18n="cf_1file">1 FILE</span>
               <span class="cf-drawer-arrow">&#9656;</span>
             </button>
             <div class="cf-drawer-files">
               <a class="cf-file"
-                href="https://docs.google.com/document/d/1Yby7939eKmgygqroCJ54rFYBxdmQn71xPxFYJPyv1iE/edit?usp=sharing"
+                href="https://docs.google.com/document/d/1Yby7939eKmgygqroCJ54rFYBxdmQn71xPxFYJPyv1iE/preview"
                 target="_blank" rel="noopener" onclick="briefClick(event,this)">
-                <span class="cf-file-name">Тестовое задание GD INDIE</span>
-                <span class="cf-file-open">OPEN DOC &#8599;</span>
+                <span class="cf-file-txt"><span class="cf-file-name" data-i18n="cf_file">Game Designer test assignment</span><span class="cf-file-desc" data-i18n="cf_d4">Theory (core loop, pacing, USP, pseudo-randomness) and practice: DPS and probability math, a party-vs-boss combat simulation and a tech spec for hit and armor class logic.</span></span>
+                <span class="cf-doc-lang" title="Document language">RU</span>
+                <span class="cf-file-open"><span data-i18n="cf_open">OPEN DOC</span> &#8599;</span>
               </a>
             </div>
           </div>
@@ -958,15 +1075,16 @@ body {
             <button class="cf-drawer-face" onclick="toggleDrawer(this)">
               <span class="cf-handle"></span>
               <span class="cf-drawer-name">Forte Bank</span>
-              <span class="cf-drawer-count">1 FILE</span>
+              <span class="cf-drawer-count" data-i18n="cf_1file">1 FILE</span>
               <span class="cf-drawer-arrow">&#9656;</span>
             </button>
             <div class="cf-drawer-files">
               <a class="cf-file"
-                href="https://docs.google.com/document/d/1M8c9YNdZ2mZcBCgTzdLXJvvtN6qzzvhb0Ru8CZVWiUk/edit?usp=sharing"
+                href="https://docs.google.com/document/d/1M8c9YNdZ2mZcBCgTzdLXJvvtN6qzzvhb0Ru8CZVWiUk/preview"
                 target="_blank" rel="noopener" onclick="briefClick(event,this)">
-                <span class="cf-file-name">Тестовое задание GD Forte Bank</span>
-                <span class="cf-file-open">OPEN DOC &#8599;</span>
+                <span class="cf-file-txt"><span class="cf-file-name" data-i18n="cf_file">Game Designer test assignment</span><span class="cf-file-desc" data-i18n="cf_d5">Gamification inside a marketplace app (Golden Apple pet game): UX problems, a retention mechanic, currency economy, daily rewards and a feature spec.</span></span>
+                <span class="cf-doc-lang" title="Document language">RU</span>
+                <span class="cf-file-open"><span data-i18n="cf_open">OPEN DOC</span> &#8599;</span>
               </a>
             </div>
           </div>
@@ -976,15 +1094,16 @@ body {
             <button class="cf-drawer-face" onclick="toggleDrawer(this)">
               <span class="cf-handle"></span>
               <span class="cf-drawer-name">White Beacon Games</span>
-              <span class="cf-drawer-count">1 FILE</span>
+              <span class="cf-drawer-count" data-i18n="cf_1file">1 FILE</span>
               <span class="cf-drawer-arrow">&#9656;</span>
             </button>
             <div class="cf-drawer-files">
               <a class="cf-file"
-                href="https://docs.google.com/document/d/1lTFQjzNGWl4M3LS3yp8xi_yUMpKkuVw-A9Ru6Yua6HA/edit?usp=sharing"
+                href="https://docs.google.com/document/d/1lTFQjzNGWl4M3LS3yp8xi_yUMpKkuVw-A9Ru6Yua6HA/preview"
                 target="_blank" rel="noopener" onclick="briefClick(event,this)">
-                <span class="cf-file-name">Тестовое задание GD White Beacon Games</span>
-                <span class="cf-file-open">OPEN DOC &#8599;</span>
+                <span class="cf-file-txt"><span class="cf-file-name" data-i18n="cf_file">Game Designer test assignment</span><span class="cf-file-desc" data-i18n="cf_d6">Decomposition of the Delivery feature in Eatventure and a technical specification for it.</span></span>
+                <span class="cf-doc-lang" title="Document language">RU</span>
+                <span class="cf-file-open"><span data-i18n="cf_open">OPEN DOC</span> &#8599;</span>
               </a>
             </div>
           </div>
@@ -993,15 +1112,16 @@ body {
             <button class="cf-drawer-face" onclick="toggleDrawer(this)">
               <span class="cf-handle"></span>
               <span class="cf-drawer-name">GOODVILLE</span>
-              <span class="cf-drawer-count">1 FILE</span>
+              <span class="cf-drawer-count" data-i18n="cf_1file">1 FILE</span>
               <span class="cf-drawer-arrow">&#9656;</span>
             </button>
             <div class="cf-drawer-files">
               <a class="cf-file"
-                href="https://docs.google.com/document/d/1tDL5KhgmAvyKVZxUsxDkNQXv8WlGfxpAQWO_4s7O5eU/edit?usp=sharing"
+                href="https://docs.google.com/document/d/1tDL5KhgmAvyKVZxUsxDkNQXv8WlGfxpAQWO_4s7O5eU/preview"
                 target="_blank" rel="noopener" onclick="briefClick(event,this)">
-                <span class="cf-file-name">Тестовое задание GD GOODVILLE</span>
-                <span class="cf-file-open">OPEN DOC &#8599;</span>
+                <span class="cf-file-txt"><span class="cf-file-name" data-i18n="cf_file">Game Designer test assignment</span><span class="cf-file-desc" data-i18n="cf_d7">Ideas for a collaboration between the game Goodville and WhatsApp, and how they would affect the game.</span></span>
+                <span class="cf-doc-lang" title="Document language">RU</span>
+                <span class="cf-file-open"><span data-i18n="cf_open">OPEN DOC</span> &#8599;</span>
               </a>
             </div>
           </div>
@@ -1014,12 +1134,26 @@ body {
     <!-- TROPHIES — теперь тоже внутри #screen-wrap, открывается на мониторе автомата -->
     <div id="tp" onclick="closeTPbg(event)" role="dialog" aria-modal="true" aria-label="Trophies">
       <div class="tp-box">
-        <div class="tp-head"><h2>TROPHIES<span id="tp-count"></span></h2></div>
+        <div class="tp-head"><h2><span data-i18n="tp_title">TROPHIES</span><span id="tp-count"></span></h2></div>
         <button class="lb-close" onclick="closeTP()" aria-label="Close">X</button>
         <div class="tp-scroll" id="tp-scroll">
           <ul id="tp-list"></ul>
         </div>
         <button class="tp-page-btn" id="tp-page-btn" onclick="tpPageDown()" aria-label="Scroll down"><span>&#9660;</span></button>
+      </div>
+    </div>
+
+    <!-- PROJECT WINDOW — подробности коммерческого проекта (тексты в CASES в скрипте) -->
+    <div id="cs" onclick="closeCSbg(event)" role="dialog" aria-modal="true" aria-label="Project details">
+      <div class="tp-box cs-box" onclick="csSkip()">
+        <div class="tp-head"><h2 id="cs-title"></h2></div>
+        <button class="lb-close" onclick="closeCS()" aria-label="Close">X</button>
+        <div class="tp-scroll" id="cs-scroll">
+          <p class="cs-meta" id="cs-meta"></p>
+          <p class="cs-role" id="cs-role"></p>
+          <ul id="cs-list"></ul>
+          <p class="cs-skip" id="cs-skip"></p>
+        </div>
       </div>
     </div>
   </div><!-- /screen-wrap -->
@@ -1040,6 +1174,20 @@ body {
 
   <!-- CONTROL PANEL -->
   <div id="ctrl-panel">
+
+    <!-- Sound: кнопка + красный индикатор (горит = звук включён) -->
+    <div class="snd-area">
+      <span class="snd-led on" id="snd-led" aria-hidden="true"></span>
+      <button class="snd-btn" id="snd-btn" type="button" onclick="toggleSound()" aria-pressed="true" aria-label="Sound on/off">
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9.5h4l5-4.5v14l-5-4.5H3z" fill="currentColor" stroke="none"/>
+          <path class="snd-w" d="M15.5 9a4.2 4.2 0 0 1 0 6"/>
+          <path class="snd-w" d="M18.3 6.2a8.2 8.2 0 0 1 0 11.6"/>
+          <path class="snd-x" d="M16 9.5l5 5M21 9.5l-5 5"/>
+        </svg>
+      </button>
+      <div class="snd-label">SOUND</div>
+    </div>
 
     <div class="ctrl-center">
       <!-- Joystick -->
@@ -1113,11 +1261,82 @@ body {
 
 <div id="ach">
   <div class="ach-ico" id="ach-ico">🏆</div>
-  <div class="ach-txt"><span class="ach-lbl">ACHIEVEMENT UNLOCKED</span><span class="ach-name" id="ach-name">PORTFOLIO LOADED</span></div>
+  <div class="ach-txt"><span class="ach-lbl" data-i18n="ach_lbl">ACHIEVEMENT UNLOCKED</span><span class="ach-name" id="ach-name">PORTFOLIO LOADED</span></div>
 </div>
 
 <script>
 const REDUCED=!!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+/* STORAGE: localStorage может быть недоступен (приватный режим), поэтому через try */
+function lsGet(k){try{return localStorage.getItem(k);}catch(e){return null;}}
+function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){}}
+
+/* SOUND ON/OFF: кнопка SOUND на панели, выбор запоминается */
+let MUTED=lsGet('pv_muted')==='1';
+
+/* =====================================================================
+   LANGUAGE (EN / RU)
+   Английский текст лежит прямо в HTML. Русский - в I18N.ru по ключу из
+   атрибута data-i18n. Чтобы перевести новый элемент: добавь ему
+   data-i18n="my_key" и строку my_key в I18N.ru.
+   Карточки портфолио переводятся атрибутами data-title-ru / data-desc-ru.
+   Тексты окон коммерческих проектов - в CASES (ниже).
+   По умолчанию язык берётся из браузера, выбор запоминается.
+   ===================================================================== */
+let LANG=(function(){
+  const v=lsGet('pv_lang');
+  if(v==='ru'||v==='en')return v;
+  return /^(ru|kk|be)\b/i.test(navigator.language||'')?'ru':'en';
+})();
+const I18N={
+  en:{
+    more:'DETAILS >',
+    cs_skip:'CLICK TO SHOW ALL TEXT'
+  },
+  ru:{
+    ic_sub:'Опусти монету в слот ниже',
+    hero_sub:'3.5+ ЛЕТ · PC И MOBILE F2P',
+    cv_btn:'СКАЧАТЬ CV',
+    sec_portfolio:'ПОРТФОЛИО',
+    sec_projects:'КОММЕРЧЕСКИЕ ПРОЕКТЫ',
+    ps_nda:'NDA · АВГ 2026 – СЕЙЧАС',
+    pn_nda:'НЕАНОНСИРОВАННАЯ RPG',
+    pd_nda:'Игровые механики на C++ и ТЗ на игровые фичи в Unreal Engine 5.',
+    pd_skyforge:'LiveOps-ивенты, баланс оружия, прогрессия и работа с SQL для PC MMO.',
+    pd_knightcats:'Логика уровней в Unity, интеграция Spine-анимаций и правки на C#.',
+    pd_rescue:'100+ уровней, баланс сложности и конфиги мобильной F2P-игры на Unity.',
+    spec:'Специализация',
+    more:'ПОДРОБНЕЕ >',
+    nav_home:'ГЛАВНАЯ',
+    nav_portfolio:'ПОРТФОЛИО',
+    nav_projects:'КОММЕРЧЕСКИЕ ПРОЕКТЫ',
+    nav_projects_s:'ПРОЕКТЫ',
+    nav_tests:'ТЕСТОВЫЕ ЗАДАНИЯ',
+    nav_tests_s:'ТЕСТОВЫЕ',
+    cf_title:'ТЕСТОВЫЕ ЗАДАНИЯ',
+    cf_1file:'1 ФАЙЛ',
+    cf_file:'Тестовое задание гейм-дизайнера',
+    cf_open:'ОТКРЫТЬ',
+    cf_d1:'Разбор Baldur\'s Gate 3 и дизайн «морального компаса»: оси мировоззрения, репутация в мире и реакции компаньонов, оценка сроков и задачи для других отделов.',
+    cf_d2:'Система роста характеристик для 20 героев, уровни 1–120: веса ролей, звёздность и конверсия статов.',
+    cf_d3:'Дизайн-документ механики: кузнечное ремесло Kingdom Come: Deliverance II и его связь с инвентарём, экономикой и квестами.',
+    cf_d4:'Теория (геймплейный цикл, пейсинг, USP, псевдослучайность) и практика: расчёт DPS и вероятностей, симуляция боя отряда с боссом, ТЗ на расчёт попадания и КБ.',
+    cf_d5:'Геймификация в приложении маркетплейса («Золотое Яблоко», тамагочи): проблемы UX, механика удержания, экономика валют, ежедневные награды и ТЗ на фичу.',
+    cf_d6:'Декомпозиция фичи «Доставка» в Eatventure и техническое задание на неё.',
+    cf_d7:'Идеи коллаборации игры «Гудвилль» с WhatsApp и их влияние на игру.',
+    tp_title:'ТРОФЕИ',
+    ach_lbl:'ДОСТИЖЕНИЕ ПОЛУЧЕНО',
+    cs_skip:'КЛИК — ПОКАЗАТЬ ВЕСЬ ТЕКСТ'
+  }
+};
+function t(k){
+  const v=I18N[LANG][k];
+  return v!==undefined?v:(I18N.en[k]!==undefined?I18N.en[k]:'');
+}
+/* текст карточки портфолио на текущем языке: f = 'title' или 'desc' */
+function cardText(card,f){
+  return (LANG==='ru'&&card.dataset[f+'Ru'])||card.dataset[f]||'';
+}
 
 /* =====================================================================
    PIXEL MODE: пикселизация картинок (миниатюра карточки, баннер проекта
@@ -1169,7 +1388,7 @@ function pixelBlocksFor(card,open){
 /* AUDIO */
 let AC;
 function ac(){if(!AC)AC=new(window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume();return AC;}
-function beep(f,d,t='square',v=0.07){try{const c=ac(),o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.type=t;o.frequency.value=f;g.gain.setValueAtTime(v,c.currentTime);g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+d);o.start();o.stop(c.currentTime+d);}catch(e){}}
+function beep(f,d,t='square',v=0.07){if(MUTED)return;try{const c=ac(),o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.type=t;o.frequency.value=f;g.gain.setValueAtTime(v,c.currentTime);g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+d);o.start();o.stop(c.currentTime+d);}catch(e){}}
 function coinSnd(){beep(988,.08,'square',.1);setTimeout(()=>beep(1318,.12,'square',.1),80);setTimeout(()=>beep(1568,.15,'square',.1),160);}
 function selSnd(){beep(440,.06,'square',.05);}
 function hvSnd(){beep(330,.04,'square',.025);}
@@ -1182,24 +1401,23 @@ function ghostSnd(){beep(880,.05,'square',.06);setTimeout(()=>beep(440,.12,'sawt
 function lifeSnd(){beep(196,.2,'sawtooth',.05);}
 function tickEl(el){el.classList.remove('tick');void el.offsetWidth;el.classList.add('tick');}
 
-/* ACHIEVEMENTS (i = icon, n = name, h = hint shown in the trophy list) */
+/* ACHIEVEMENTS (i = icon, n = name, h = hint shown in the trophy list, hr = the same hint in Russian) */
 const ACH={
-  boot:{i:'🎮',n:'PORTFOLIO LOADED',h:'Insert a coin to start'},
-  coin_first:{i:'🪙',n:'FIRST COIN INSERTED',h:'Use the coin slot'},
-  coin_5:{i:'💰',n:'HIGH ROLLER',h:'Insert 5 coins'},
-  coin_10:{i:'🤑',n:'ARCADE ADDICT',h:'Insert 10 coins'},
-  btn_red:{i:'🔴',n:'RED BUTTON PRESSED',h:'Press the red button'},
-  btn_green:{i:'🟢',n:'GREEN BUTTON PRESSED',h:'Press the green button'},
-  btn_blue:{i:'🔵',n:'BLUE BUTTON PRESSED',h:'Press the blue button'},
-  btn_yellow:{i:'🟡',n:'YELLOW BUTTON PRESSED',h:'Press the yellow button'},
-  portfolio_junior:{i:'🩸',n:'FIRST BLOOD',h:'Open a work in Stage 01'},
-  portfolio_middle:{i:'🧗🏻‍♀️',n:'TOMB VIEWER',h:'Open 3 works'},
-  portfolio_senior:{i:'🐺',n:'WATCHER 3: WILD PORTFOLIO',h:'Open 5 works'},
-  portfolio_complete:{i:'🏆',n:'RETENTION 100%',h:'Open 7 works'},
-  /* stage_stats:{i:'📜',n:'CHARACTER SHEET',h:'Reach the last stage'}, */
-  ghost_catch:{i:'👻',n:'GHOST BUSTER',h:'Catch a ghost on the home screen'},
-  game_over:{i:'💀',n:'GAME OVER...',h:'Lose all your lives'},
-  konami:{i:'⭐',n:'C-C-C-COMBO!',h:'Secret: ↑ ↑ ↓ ↓ ← → ← → B A',secret:true}
+  boot:{i:'🎮',n:'PORTFOLIO LOADED',h:'Insert a coin to start',hr:'Опусти монету, чтобы начать'},
+  coin_first:{i:'🪙',n:'FIRST COIN INSERTED',h:'Use the coin slot',hr:'Используй монетоприёмник'},
+  coin_5:{i:'💰',n:'HIGH ROLLER',h:'Insert 5 coins',hr:'Опусти 5 монет'},
+  coin_10:{i:'🤑',n:'ARCADE ADDICT',h:'Insert 10 coins',hr:'Опусти 10 монет'},
+  btn_red:{i:'🔴',n:'RED BUTTON PRESSED',h:'Press the red button',hr:'Нажми красную кнопку'},
+  btn_green:{i:'🟢',n:'GREEN BUTTON PRESSED',h:'Press the green button',hr:'Нажми зелёную кнопку'},
+  btn_blue:{i:'🔵',n:'BLUE BUTTON PRESSED',h:'Press the blue button',hr:'Нажми синюю кнопку'},
+  btn_yellow:{i:'🟡',n:'YELLOW BUTTON PRESSED',h:'Press the yellow button',hr:'Нажми жёлтую кнопку'},
+  portfolio_junior:{i:'🩸',n:'FIRST BLOOD',h:'Open a work in Stage 01',hr:'Открой работу в Stage 01'},
+  portfolio_middle:{i:'🧗🏻‍♀️',n:'TOMB VIEWER',h:'Open 3 works',hr:'Открой 3 работы'},
+  portfolio_senior:{i:'🐺',n:'WATCHER 3: WILD PORTFOLIO',h:'Open 5 works',hr:'Открой 5 работ'},
+  portfolio_complete:{i:'🏆',n:'RETENTION 100%',h:'Open 7 works',hr:'Открой 7 работ'},
+  ghost_catch:{i:'👻',n:'GHOST BUSTER',h:'Catch a ghost on the home screen',hr:'Поймай привидение на главном экране'},
+  game_over:{i:'💀',n:'GAME OVER...',h:'Lose all your lives',hr:'Потеряй все жизни'},
+  konami:{i:'⭐',n:'C-C-C-COMBO!',h:'Secret: ↑ ↑ ↓ ↓ ← → ← → B A',hr:'Секрет: ↑ ↑ ↓ ↓ ← → ← → B A',secret:true}
 };
 const earned=new Set();
 /* секретные ачивки (secret:true) не входят в общий счёт и не видны в списке, пока не получены */
@@ -1306,24 +1524,40 @@ function showInsertCoin(){
 }
 
 /* HERO: typewriter for the description */
-const HERO_LINES=['Systems · LiveOps · Events · Economy','UE5 · Unity · C++ · Blueprint · SQL'];
+const HERO_LINES={
+  en:['Systems · LiveOps · Events · Economy','UE5 · Unity · C++ · Blueprint · SQL'],
+  ru:['Системы · LiveOps · Ивенты · Экономика','UE5 · Unity · C++ · Blueprint · SQL']
+};
+let heroIv=0;
+/* показать описание целиком, без анимации (смена языка, reduced motion) */
+function heroStatic(){
+  const el=document.getElementById('hero-type');
+  if(!el)return;
+  clearInterval(heroIv);heroIv=0;
+  const L=HERO_LINES[LANG];
+  el.textContent='';
+  el.append(document.createTextNode(L[0]),document.createElement('br'),document.createTextNode(L[1]));
+}
 function typeHero(){
   const el=document.getElementById('hero-type');
-  if(!el||REDUCED)return;
+  if(!el)return;
+  if(REDUCED){heroStatic();return;}
+  clearInterval(heroIv);
+  const L=HERO_LINES[LANG];
   el.textContent='';
   const nodes=[document.createTextNode(''),document.createTextNode('')];
   const cur=document.createElement('span');cur.className='cur';
   el.append(nodes[0],document.createElement('br'),nodes[1]);
   nodes[0].after(cur);
   let line=0,ch=0,n=0;
-  const iv=setInterval(()=>{
-    const txt=HERO_LINES[line];
+  heroIv=setInterval(()=>{
+    const txt=L[line];
     ch++;n++;
     nodes[line].nodeValue=txt.slice(0,ch);
     if(n%3===0)beep(1500,.012,'square',.012);
     if(ch>=txt.length){
       line++;ch=0;
-      if(line>=HERO_LINES.length){clearInterval(iv);return;}
+      if(line>=L.length){clearInterval(heroIv);heroIv=0;return;}
       nodes[line].after(cur);
     }
   },26);
@@ -1416,16 +1650,16 @@ function openLB(card){
   renderLB();
   document.getElementById('screen-content').classList.add('no-scroll');
   document.getElementById('lb').classList.add('open');
+  modalFocus('lb');
 }
 function renderLB(){
   const card=lbList[lbIdx];
   if(!card)return;
   checkPortfolioAch(card);
   const m=document.getElementById('lb-media');
-  document.getElementById('lb-title').textContent=card.dataset.title||'';
-  document.getElementById('lb-desc').innerHTML=card.dataset.desc||'';
+  renderLBText();
   if(card.dataset.type==='youtube'){
-    m.innerHTML=`<iframe src="https://www.youtube.com/embed/${card.dataset.youtubeId}?autoplay=1&rel=0" allow="autoplay;fullscreen" allowfullscreen></iframe>`;
+    m.innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${card.dataset.youtubeId}?autoplay=1&rel=0" title="${card.dataset.title||'Video'}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
   } else {
     m.innerHTML=`<img src="${card.dataset.src}" alt="${card.dataset.title||''}">`;
     applyPixel(m.querySelector('img'),pixelBlocksFor(card,true));
@@ -1433,6 +1667,13 @@ function renderLB(){
   const multi=lbList.length>1;
   document.getElementById('lb-count').textContent=multi?(lbIdx+1)+' / '+lbList.length:'';
   document.getElementById('lb').classList.toggle('multi',multi);
+}
+/* заголовок и описание в открытом окне, на текущем языке */
+function renderLBText(){
+  const card=lbList[lbIdx];
+  if(!card)return;
+  document.getElementById('lb-title').textContent=cardText(card,'title');
+  document.getElementById('lb-desc').innerHTML=cardText(card,'desc');
 }
 function lbStep(d){
   if(lbList.length<2)return;
@@ -1447,6 +1688,7 @@ function closeLB(){
   document.getElementById('lb-media').innerHTML='';
   lbList=[];
   document.getElementById('screen-content').classList.remove('no-scroll');
+  modalRestore();
 }
 function closeLBbg(e){if(e.target===document.getElementById('lb'))closeLB();}
 
@@ -1454,7 +1696,7 @@ function closeLBbg(e){if(e.target===document.getElementById('lb'))closeLB();}
 function renderTP(){
   document.getElementById('tp-list').innerHTML=Object.keys(ACH).filter(k=>!ACH[k].secret||earned.has(k)).map(k=>{
     const d=ACH[k],got=earned.has(k);
-    return `<li class="${got?'got':'lock'}${d.secret?' secret':''}"><span class="tp-ico">${got?d.i:'🔒'}</span><span class="tp-txt"><b>${got?d.n:'???'}</b><small>${d.h}</small></span></li>`;
+    return `<li class="${got?'got':'lock'}${d.secret?' secret':''}"><span class="tp-ico">${got?d.i:'🔒'}</span><span class="tp-txt"><b>${got?d.n:'???'}</b><small>${LANG==='ru'&&d.hr?d.hr:d.h}</small></span></li>`;
   }).join('');
   document.getElementById('tp-count').textContent=' '+achProgress();
   requestAnimationFrame(tpUpdateScrollBtn);
@@ -1463,6 +1705,7 @@ function openTP(){
   openSnd();renderTP();
   document.getElementById('screen-content').classList.add('no-scroll');
   document.getElementById('tp').classList.add('open');
+  modalFocus('tp');
   requestAnimationFrame(tpUpdateScrollBtn);
 }
 function closeTP(){
@@ -1471,6 +1714,7 @@ function closeTP(){
   closeSnd();
   t.classList.remove('open');
   document.getElementById('screen-content').classList.remove('no-scroll');
+  modalRestore();
 }
 function closeTPbg(e){if(e.target===document.getElementById('tp'))closeTP();}
 function tpUpdateScrollBtn(){
@@ -1489,7 +1733,7 @@ function tpPageDown(){
 
 document.addEventListener('keydown',e=>{
   const lbOpen=document.getElementById('lb').classList.contains('open');
-  if(e.key==='Escape'){closeLB();closeTP();closeCF();}
+  if(e.key==='Escape'){closeLB();closeTP();closeCF();closeCS();closeCVs();}
   else if(lbOpen&&e.key==='ArrowLeft')lbStep(-1);
   else if(lbOpen&&e.key==='ArrowRight')lbStep(1);
 });
@@ -1510,8 +1754,24 @@ function navClick(e,id){
   const sc=document.getElementById('screen-content');
   const el=document.getElementById(id);
   if(el) sc.scrollTo({top:el.offsetTop-50,behavior:'smooth'});
-  document.querySelectorAll('#screen-nav a').forEach(a=>a.classList.remove('active'));
-  e.currentTarget.classList.add('active');
+  navLock=true;               // выбранный пункт остаётся подсвеченным, пока посетитель сам не начнёт листать
+  navSet(id);
+}
+/* NAV: подсветка пункта меню по разделу, который сейчас на экране */
+const NAV_SECTIONS=['hero','portfolio','projects'];
+let navLock=false;
+function navSet(id){
+  document.querySelectorAll('#screen-nav a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+id));
+}
+function updateNav(){
+  if(navLock)return;
+  const sc=document.getElementById('screen-content');
+  const max=sc.scrollHeight-sc.clientHeight;
+  const probe=sc.scrollTop+sc.clientHeight*0.35;   // раздел считается текущим, когда его начало поднялось в верхнюю треть экрана
+  let cur=NAV_SECTIONS[0];
+  NAV_SECTIONS.forEach(id=>{const el=document.getElementById(id);if(el&&probe>=el.offsetTop)cur=id;});
+  if(max>0&&sc.scrollTop>=max-4)cur=NAV_SECTIONS[NAV_SECTIONS.length-1];
+  navSet(cur);
 }
 
 /* STAGES, LEVEL AND XP BAR */
@@ -1533,9 +1793,6 @@ function updateProgress(){
   STAGES.forEach((s,i)=>{const el=document.getElementById(s.id);if(el&&sc.scrollTop>=el.offsetTop-80)idx=i;});
   if(max>0&&sc.scrollTop>=max-4&&STAGES.length)idx=STAGES.length-1;
   return idx;
-}
-function navActive(idx){
-  /*document.querySelectorAll('#screen-nav a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+STAGES[idx].id));*/
 }
 function showStage(s){
   const b=document.getElementById('stage-banner');
@@ -1658,6 +1915,14 @@ function initCards(){
     c.setAttribute('aria-label',c.dataset.title||'Open project');
     c.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();c.click();}});
   });
+  /* коммерческие проекты: клик / Enter открывает окно с подробностями */
+  document.querySelectorAll('.pcard[data-case]').forEach(c=>{
+    c.tabIndex=0;
+    c.setAttribute('role','button');
+    c.addEventListener('keydown',e=>{if(e.target===c&&(e.key==='Enter'||e.key===' ')){e.preventDefault();e.stopPropagation();c.click();}});
+    const st=c.querySelector('.proj-stats');
+    if(st){const m=document.createElement('span');m.className='pc-more';m.dataset.i18n='more';m.textContent=I18N.en.more;st.appendChild(m);}
+  });
   document.querySelectorAll('.mcard,.pcard').forEach(el=>el.addEventListener('mouseenter',()=>pixelFocus(el)));
   document.querySelectorAll('.mcard,.pcard').forEach(card=>{
     const blocks=pixelBlocksFor(card,false);
@@ -1715,7 +1980,7 @@ function checkPortfolioAch(card){
 })();
 
 /* HOVER & KONAMI */
-document.querySelectorAll('.mcard,.pcard,.tag,.cf-drawer-face,.cf-file').forEach(el=>el.addEventListener('mouseenter',()=>hvSnd()));
+document.querySelectorAll('.mcard,.pcard,.tag,.cf-drawer-face,.cf-file,.cv-btn,.cv-item').forEach(el=>el.addEventListener('mouseenter',()=>hvSnd()));
 
 /* CASE FILES — клики по файлам внутри ящиков: пока href="#" (ссылка-заглушка),
    засчитываем звук/очки, но никуда не уходим. Как только вставишь настоящую
@@ -1730,6 +1995,7 @@ function openCF(e){
   e.preventDefault();openSnd();
   document.getElementById('screen-content').classList.add('no-scroll');
   document.getElementById('cf').classList.add('open');
+  modalFocus('cf');
   requestAnimationFrame(cfUpdateScrollBtn);
 }
 function closeCF(){
@@ -1738,6 +2004,7 @@ function closeCF(){
   closeSnd();
   cf.classList.remove('open');
   document.getElementById('screen-content').classList.remove('no-scroll');
+  modalRestore();
 }
 function closeCFbg(e){if(e.target===document.getElementById('cf'))closeCF();}
 function toggleDrawer(btn){
@@ -1769,6 +2036,228 @@ function cfPageDown(){
   sc.scrollBy({top:sc.clientHeight*0.8,behavior:'smooth'});
 }
 
+/* =====================================================================
+   PROJECT WINDOW: окно с подробностями коммерческого проекта.
+   Открывается кликом по карточке .pcard с атрибутом data-case="ключ".
+   Текст печатается "в реальном времени"; клик по окну показывает его
+   сразу целиком. При повторном открытии текст показывается без печати.
+     title - заголовок окна      meta - студия · даты · платформа
+     role  - должность           pts  - пункты (что делал)
+   CS_SPEED - сколько символов печатается за один тик (больше = быстрее).
+   ===================================================================== */
+const CS_SPEED=4,CS_TICK=16;
+const CASES={
+  nda:{
+    en:{title:'UNANNOUNCED RPG',meta:'NDA · AUG 2026 – PRESENT · UNREAL ENGINE 5',role:'GAME DESIGNER',pts:[
+      'Implement part of the RPG\'s gameplay mechanics in C++ in Unreal Engine 5.',
+      'Write design specifications for game features and track their implementation with the development team.',
+      'The project is under NDA, so more details will appear here after the announcement.'
+    ]},
+    ru:{title:'НЕАНОНСИРОВАННАЯ RPG',meta:'NDA · АВГ 2026 – СЕЙЧАС · UNREAL ENGINE 5',role:'GAME DESIGNER',pts:[
+      'Реализую часть игровых механик RPG на C++ в Unreal Engine 5.',
+      'Пишу ТЗ на игровые фичи и контролирую выполнение задач командой разработки.',
+      'Проект под NDA, поэтому подробности появятся здесь после анонса.'
+    ]}
+  },
+  skyforge:{
+    en:{title:'SKYFORGE',meta:'PIXEL SKY · MAY 2024 – SEP 2025 · PC MMO',role:'TECHNICAL GAME DESIGNER',pts:[
+      'Developed and launched a seasonal event that reactivated ~28% of inactive players (internal analytics) and boosted average CCU during the event.',
+      'Performed a full rebalance of 90+ weapons based on data analysis and community feedback, stabilizing the meta and reducing imbalance complaints by 30%.',
+      'Created new weapons from scratch: configured their parameters, balanced them through internal team playtests and integrated VFX.',
+      'Designed and implemented a new character progression system for late-game retention, increasing average session length for the target audience.',
+      'Worked directly with SQL databases to distribute event rewards, fix player data issues and extract custom analytics for the game design team.',
+      'Wrote and maintained technical documentation (GDD) for new features, events and weapons, keeping game design, art and development in sync.'
+    ]},
+    ru:{title:'SKYFORGE',meta:'PIXEL SKY · МАЙ 2024 – СЕН 2025 · PC MMO',role:'TECHNICAL GAME DESIGNER',pts:[
+      'Разработал и запустил сезонный ивент, который вернул в игру ~28% неактивных игроков (по внутренней аналитике) и увеличил средний онлайн на время проведения.',
+      'Провёл полный ребаланс 90+ единиц оружия на основе анализа данных и фидбека комьюнити: мета выровнялась, жалоб на дисбаланс стало на 30% меньше.',
+      'Создавал новое оружие с нуля: настраивал параметры, балансировал через плейтесты внутри команды, подключал VFX.',
+      'Спроектировал и внедрил новую систему прогрессии персонажа для удержания на поздних этапах игры, что увеличило среднюю продолжительность сессии целевой аудитории.',
+      'Напрямую работал с SQL-базой: начислял ивентовые награды, исправлял ошибки в данных игроков и собирал нестандартную аналитику для команды гейм-дизайна.',
+      'Готовил и поддерживал техническую документацию (GDD) для новых фичей, ивентов и оружия, синхронизируя гейм-дизайн, арт и разработку.'
+    ]}
+  },
+  knightcats:{
+    en:{title:'KNIGHT CATS 2',meta:'ELEPHANT GAMES · JAN 2023 – JUN 2023 · UNITY',role:'TECHNICAL DESIGNER',pts:[
+      'Implemented and configured level logic in Unity, working closely with the art department to integrate Spine animations and visual effects.',
+      'Modified C# scripts to fix bugs in existing mechanics, reducing the workload on the development team.'
+    ]},
+    ru:{title:'KNIGHT CATS 2',meta:'ELEPHANT GAMES · ЯНВ 2023 – ИЮН 2023 · UNITY',role:'TECHNICAL DESIGNER',pts:[
+      'Реализовывал и настраивал логику уровней в Unity, тесно работая с отделом арта над интеграцией Spine-анимаций и визуальных эффектов.',
+      'Вносил изменения в C#-скрипты, исправляя баги в существующих механиках, что снижало нагрузку на команду разработки.'
+    ]}
+  },
+  rescue:{
+    en:{title:'RESCUE DASH',meta:'WHALEBOX STUDIO · OCT 2021 – DEC 2022 · MOBILE F2P',role:'GAME / LEVEL DESIGNER',pts:[
+      'Built 100+ levels in Unity, owning difficulty balance and the player learning curve. Edited game configs in JSON and ScriptableObjects.',
+      'Built most of the levels for a new in-game event, which launched successfully and showed strong engagement metrics.',
+      'Adapted 2D assets in Photoshop for engine integration, speeding up the team\'s workflow and reducing the art department\'s workload.'
+    ]},
+    ru:{title:'RESCUE DASH',meta:'WHALEBOX STUDIO · ОКТ 2021 – ДЕК 2022 · MOBILE F2P',role:'GAME / LEVEL DESIGNER',pts:[
+      'Реализовал 100+ уровней в Unity, отвечая за баланс сложности и кривую обучения игроков. Вносил правки в конфиги игры в JSON и ScriptableObjects.',
+      'Сделал основную часть уровней для нового игрового ивента, который успешно запустился и показал хорошие метрики вовлечения.',
+      'Адаптировал 2D-ассеты в Photoshop для интеграции в движок, ускоряя работу команды и снижая нагрузку на отдел арта.'
+    ]}
+  }
+};
+let csKey=null,csIv=0,csData=null;
+const csSeen=new Set();
+function openCS(card){
+  const cs=document.getElementById('cs');
+  if(cs.classList.contains('open')){csSkip();return;}
+  if(!CASES[card.dataset.case])return;
+  csKey=card.dataset.case;
+  openSnd();scoreAdd(100);
+  document.getElementById('screen-content').classList.add('no-scroll');
+  cs.classList.add('open');
+  modalFocus('cs');
+  renderCS(false);
+}
+/* instant=true - показать текст сразу (смена языка при открытом окне) */
+function renderCS(instant){
+  clearInterval(csIv);csIv=0;
+  const d=csData=CASES[csKey][LANG]||CASES[csKey].en;
+  document.getElementById('cs-title').textContent=d.title;
+  document.getElementById('cs-meta').textContent=d.meta;
+  document.getElementById('cs-role').textContent=d.role;
+  const ul=document.getElementById('cs-list'),sc=document.getElementById('cs-scroll'),skip=document.getElementById('cs-skip');
+  ul.innerHTML='';sc.scrollTop=0;
+  const lis=d.pts.map(()=>{const li=document.createElement('li');li.style.display='none';ul.appendChild(li);return li;});
+  if(instant||REDUCED||csSeen.has(csKey+'|'+LANG)){csFinish();return;}
+  skip.textContent=t('cs_skip');
+  const cur=document.createElement('span');cur.className='cur';
+  let i=0,ch=0,n=0;
+  lis[0].style.display='';
+  csIv=setInterval(()=>{
+    const txt=d.pts[i];
+    ch=Math.min(txt.length,ch+CS_SPEED);n++;
+    lis[i].textContent=txt.slice(0,ch);
+    lis[i].appendChild(cur);
+    if(n%4===0)beep(1500,.012,'square',.012);
+    sc.scrollTop=sc.scrollHeight;
+    if(ch>=txt.length){
+      i++;ch=0;
+      if(i>=lis.length){csFinish();return;}
+      lis[i].style.display='';
+    }
+  },CS_TICK);
+}
+function csFinish(){
+  clearInterval(csIv);csIv=0;
+  if(!csData)return;
+  document.querySelectorAll('#cs-list li').forEach((li,i)=>{li.style.display='';li.textContent=csData.pts[i];});
+  document.getElementById('cs-skip').textContent='';
+  csSeen.add(csKey+'|'+LANG);
+}
+function csSkip(){if(!csIv)return;csFinish();document.getElementById('cs-scroll').scrollTop=0;}
+function closeCS(){
+  const cs=document.getElementById('cs');
+  if(!cs.classList.contains('open'))return;
+  clearInterval(csIv);csIv=0;
+  closeSnd();
+  cs.classList.remove('open');
+  document.getElementById('screen-content').classList.remove('no-scroll');
+  modalRestore();
+}
+function closeCSbg(e){if(e.target===document.getElementById('cs'))closeCS();}
+
+/* MODALS: при открытии окна фокус клавиатуры переходит в него, Tab ходит только
+   по элементам окна, после закрытия фокус возвращается туда, где был. */
+let modalPrev=null;
+function modalFocus(id){
+  const m=document.getElementById(id);
+  modalPrev=document.activeElement;
+  const box=m.querySelector('.tp-box,.cf-box,.lb-inner')||m;
+  box.tabIndex=-1;
+  box.focus({preventScroll:true});
+}
+function modalRestore(){
+  const p=modalPrev;modalPrev=null;
+  if(p&&p!==document.body&&document.contains(p)&&p.focus)p.focus({preventScroll:true});
+}
+document.addEventListener('keydown',e=>{
+  const m=document.querySelector('#lb.open,#tp.open,#cf.open,#cs.open');
+  if(!m)return;
+  const a=document.activeElement;
+  if((e.key==='Enter'||e.key===' ')&&m.id==='cs'&&csIv&&!(a&&a.tagName==='BUTTON')){e.preventDefault();csSkip();return;}
+  if(e.key!=='Tab')return;
+  const f=Array.from(m.querySelectorAll('button,a[href],[tabindex="0"]')).filter(el=>!el.disabled&&el.offsetParent!==null&&getComputedStyle(el).pointerEvents!=='none');
+  if(!f.length){e.preventDefault();return;}
+  const first=f[0],last=f[f.length-1];
+  if(!f.includes(a)){e.preventDefault();(e.shiftKey?last:first).focus();}
+  else if(e.shiftKey&&a===first){e.preventDefault();last.focus();}
+  else if(!e.shiftKey&&a===last){e.preventDefault();first.focus();}
+});
+
+/* CV MENU: выпадающее меню с выбором версии резюме (EN / RU).
+   Ссылки ведут на PDF в папке Google Drive "Резюме/ForSite" (открыты всем по ссылке).
+   Чтобы обновить резюме, не меняя ссылку: в Drive у файла "Управление версиями" -> загрузить новую версию. */
+const CV_LINKS={
+  en:'https://drive.google.com/file/d/1kVmJ-X8w0aQM5Qgb-I5Qt3zxFxHCi4ak/view?usp=sharing',
+  ru:'https://drive.google.com/file/d/12IximlO_lVVIP4YwewO58Ox-wBf1nC3e/view?usp=sharing'
+};
+function initCV(){
+  document.querySelectorAll('.cv-item[data-cv]').forEach(a=>{const u=CV_LINKS[a.dataset.cv];if(u)a.href=u;});
+}
+function closeCVs(){
+  document.querySelectorAll('.cv-dd.open').forEach(d=>{
+    d.classList.remove('open');
+    d.querySelector('.cv-btn').setAttribute('aria-expanded','false');
+  });
+}
+function toggleCV(btn){
+  const dd=btn.closest('.cv-dd'),was=dd.classList.contains('open');
+  closeCVs();
+  if(was){closeSnd();return;}
+  dd.classList.add('open');btn.setAttribute('aria-expanded','true');openSnd();
+}
+function cvPick(){selSnd();scoreAdd(150);setTimeout(closeCVs,60);}
+document.addEventListener('click',e=>{if(!e.target.closest('.cv-dd'))closeCVs();});
+
+/* SOUND BUTTON: красный индикатор горит, когда звук включён */
+function renderSound(){
+  const led=document.getElementById('snd-led'),btn=document.getElementById('snd-btn');
+  if(led)led.classList.toggle('on',!MUTED);
+  if(btn){btn.classList.toggle('muted',MUTED);btn.setAttribute('aria-pressed',String(!MUTED));}
+}
+function toggleSound(){
+  MUTED=!MUTED;
+  lsSet('pv_muted',MUTED?'1':'0');
+  renderSound();
+  if(!MUTED)selSnd();
+}
+
+/* LANGUAGE: применить текущий язык ко всей странице */
+function applyLang(){
+  document.documentElement.lang=LANG;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{el.textContent=t(el.dataset.i18n);});
+  document.querySelectorAll('.lang-val span').forEach(sp=>sp.classList.toggle('on',sp.dataset.l===LANG));
+  document.querySelectorAll('.mcard').forEach(c=>{
+    const tt=cardText(c,'title');
+    const h=c.querySelector('.covlay h3');
+    if(h)h.textContent=tt;
+    c.setAttribute('aria-label',tt||'Open project');
+  });
+  heroStatic();
+  if(document.getElementById('tp').classList.contains('open'))renderTP();
+  if(document.getElementById('lb').classList.contains('open'))renderLBText();
+  if(document.getElementById('cs').classList.contains('open'))renderCS(true);
+}
+function initLang(){
+  /* английские строки берём из HTML, чтобы не дублировать их в I18N.en */
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const k=el.dataset.i18n;
+    if(I18N.en[k]===undefined)I18N.en[k]=el.textContent;
+  });
+  applyLang();
+}
+function toggleLang(){
+  selSnd();
+  LANG=LANG==='ru'?'en':'ru';
+  lsSet('pv_lang',LANG);
+  applyLang();
+}
+
 const K=['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
 let ki=0;
 document.addEventListener('keydown',e=>{
@@ -1789,10 +2278,12 @@ document.addEventListener('DOMContentLoaded', () => {
       scTick=false;
       scoreAdd(1);
       const idx=updateProgress();
-      navActive(idx);
+      updateNav();
       onStageChange(idx);
     });
   },{passive:true});
+  /* ручная прокрутка (колесо, тач, клавиши, полоса прокрутки) снимает фиксацию пункта меню */
+  ['wheel','touchmove','pointerdown','keydown'].forEach(ev=>sc.addEventListener(ev,()=>{navLock=false;},{passive:true}));
   window.addEventListener('resize',updateProgress);
   document.querySelectorAll('.fu').forEach(el=>obs.observe(el));
 
@@ -1804,6 +2295,12 @@ document.addEventListener('DOMContentLoaded', () => {
   tb.addEventListener('click',openTP);
   tb.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openTP();}});
   updCFCount();
+  initLang();
+  initCV();
+  renderSound();
+  const lb=document.getElementById('lang-btn');
+  lb.addEventListener('click',toggleLang);
+  lb.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggleLang();}});
   document.getElementById('tp-scroll').addEventListener('scroll',tpUpdateScrollBtn,{passive:true});
   window.addEventListener('resize',tpUpdateScrollBtn);
   document.getElementById('cf-drawers').addEventListener('scroll',cfUpdateScrollBtn,{passive:true});
