@@ -800,20 +800,17 @@ body {
           <!-- Настройки карточки (все необязательные, пишутся в тег .mcard / .pcard):
                data-pixel="on|off|32"       пикселизация картинки (число = blocks); по умолчанию берётся PIXEL_MODE
                data-pixel-open="on|off|32"  то же, но только для открытого окна (если нет, берётся data-pixel)
-               data-badge="TEXT"            плашка в левом верхнем углу (только .mcard)
-               data-badge-color="#ff3333"   цвет текста и рамки плашки (hex, rgb(), название цвета)
-               data-badge-bg="#220000"      цвет фона плашки
+                плашка в левом верхнем углу (только .mcard; тексты и цвета - BADGES в скрипте)
           -->
           <div class="port-grid">
-            <div class="mcard lg fu" data-group="hide" data-badge="AI HIDE AND SEEK" data-type="image" data-src="assets/images/UE5AIHideAndSeekGame_Icon_1.webp" data-title="UE5 AI Hide &amp; Seek" data-desc="Hide-and-seek prototype where AI bots play against each other on their own: Behavior Trees, custom BT tasks and EQS" data-title-ru="UE5: ИИ-прятки" data-desc-ru="Прототип пряток, в котором боты сами играют друг с другом: Behavior Trees, свои BT Tasks и EQS" onclick="openLB(this);">
-              <img src="assets/images/UE5AIHideAndSeekGame_Icon_1.webp" width="1280" height="710" loading="lazy" decoding="async" alt="Screenshot: UE5 AI hide and seek game">
-              <div class="covlay">
-                <h3>UE5 AI Hide &amp; Seek</h3>
+            <div data-badge="video" class="mcard lg fu" data-group="hide" data-type="youtube" data-youtube-id="F5lmJn4IcvU" data-title="UE5 AI Hide &amp; Seek" data-desc="Hide-and-seek prototype where AI bots play against each other on their own: Behavior Trees, custom BT tasks and EQS" data-title-ru="UE5: ИИ-прятки" data-desc-ru="Прототип пряток, в котором боты сами играют друг с другом: Behavior Trees, свои BT Tasks и EQS" onclick="openLB(this);">
+              <div class="vthumb">
+                <img src="assets/images/UE5AIHideAndSeekGame_Icon_2.webp" width="1448" height="789" loading="lazy" decoding="async" alt="Video preview: UE5 AI hide and seek game"><div class="play-wrap"><div class="play-btn"></div></div></div><div class="covlay"><h3>UE5 AI Hide &amp; Seek</h3>
                 <p>UE5</p>
               </div>
             </div>
 
-            <div class="mcard md fu" data-group="tps" data-badge="BOSS" data-badge-color="#ff3333" data-type="youtube" data-youtube-id="7TR6tAux9ts" data-title="UE5 TPS Boss Fight" data-desc="Third-person boss arena in UE5: a two-phase boss with homing projectiles and a spawned hand with weak spots to shoot" data-title-ru="UE5: TPS-битва с боссом" data-desc-ru="Арена с боссом от третьего лица на UE5: босс с двумя фазами, самонаводящиеся снаряды и появляющаяся рука с уязвимыми точками" onclick="openLB(this);">
+            <div data-badge="video" class="mcard md fu" data-group="tps" data-type="youtube" data-youtube-id="7TR6tAux9ts" data-title="UE5 TPS Boss Fight" data-desc="Third-person boss arena in UE5: a two-phase boss with homing projectiles and a spawned hand with weak spots to shoot" data-title-ru="UE5: TPS-битва с боссом" data-desc-ru="Арена с боссом от третьего лица на UE5: босс с двумя фазами, самонаводящиеся снаряды и появляющаяся рука с уязвимыми точками" onclick="openLB(this);">
               <div class="vthumb"><img src="assets/images/TPSUE5Gameplay_Icon_1.webp" width="1680" height="905" loading="lazy" decoding="async" alt="Video preview: UE5 third-person boss battle"><div class="play-wrap"><div class="play-btn"></div></div></div>
               <div class="covlay">
                 <h3>UE5 TPS Boss Fight</h3>
@@ -821,7 +818,7 @@ body {
               </div>
             </div>
 
-            <div class="mcard md fu" data-group="tps" data-badge="BOSS" data-badge-color="#ff3333" data-type="image" data-src="assets/images/TPSUE5Gameplay_Icon_2.webp" data-title="UE5 TPS Boss Fight" data-desc="Third-person boss arena in UE5: a two-phase boss with homing projectiles and a spawned hand with weak spots to shoot" data-title-ru="UE5: TPS-битва с боссом" data-desc-ru="Арена с боссом от третьего лица на UE5: босс с двумя фазами, самонаводящиеся снаряды и появляющаяся рука с уязвимыми точками" onclick="openLB(this);">
+            <div class="mcard md fu" data-group="tps" data-type="image" data-src="assets/images/TPSUE5Gameplay_Icon_2.webp" data-title="UE5 TPS Boss Fight" data-desc="Third-person boss arena in UE5: a two-phase boss with homing projectiles and a spawned hand with weak spots to shoot" data-title-ru="UE5: TPS-битва с боссом" data-desc-ru="Арена с боссом от третьего лица на UE5: босс с двумя фазами, самонаводящиеся снаряды и появляющаяся рука с уязвимыми точками" onclick="openLB(this);">
               <img src="assets/images/TPSUE5Gameplay_Icon_2.webp" width="1680" height="902" loading="lazy" decoding="async" alt="Screenshot: UE5 third-person boss battle">
               <div class="covlay">
                 <h3>UE5 TPS Boss Fight</h3>
@@ -829,21 +826,22 @@ body {
               </div>
             </div>
 
-            <div class="mcard sm fu" data-group="tps" data-badge="BOSS" data-badge-color="#ff3333" data-type="image" data-src="assets/images/TPSUE5Gameplay_Icon_3.webp" data-title="UE5 TPS Boss Fight" data-desc="Third-person boss arena in UE5: a two-phase boss with homing projectiles and a spawned hand with weak spots to shoot" data-title-ru="UE5: TPS-битва с боссом" data-desc-ru="Арена с боссом от третьего лица на UE5: босс с двумя фазами, самонаводящиеся снаряды и появляющаяся рука с уязвимыми точками" onclick="openLB(this);">
+            <div class="mcard sm fu" data-group="tps" data-type="image" data-src="assets/images/TPSUE5Gameplay_Icon_3.webp" data-title="UE5 TPS Boss Fight" data-desc="Third-person boss arena in UE5: a two-phase boss with homing projectiles and a spawned hand with weak spots to shoot" data-title-ru="UE5: TPS-битва с боссом" data-desc-ru="Арена с боссом от третьего лица на UE5: босс с двумя фазами, самонаводящиеся снаряды и появляющаяся рука с уязвимыми точками" onclick="openLB(this);">
               <img src="assets/images/TPSUE5Gameplay_Icon_3.webp" width="1680" height="905" loading="lazy" decoding="async" alt="Screenshot: UE5 third-person boss battle">
               <div class="covlay"><h3>UE5 TPS Boss Fight</h3>
                 <p>UE5</p>
               </div>
             </div>
 
-            <div class="mcard wd fu" data-group="hide" data-badge="AI HIDE AND SEEK" data-type="youtube" data-youtube-id="F5lmJn4IcvU" data-title="UE5 AI Hide &amp; Seek" data-desc="Hide-and-seek prototype where AI bots play against each other on their own: Behavior Trees, custom BT tasks and EQS" data-title-ru="UE5: ИИ-прятки" data-desc-ru="Прототип пряток, в котором боты сами играют друг с другом: Behavior Trees, свои BT Tasks и EQS" onclick="openLB(this);">
-              <div class="vthumb">
-                <img src="assets/images/UE5AIHideAndSeekGame_Icon_2.webp" width="1448" height="789" loading="lazy" decoding="async" alt="Video preview: UE5 AI hide and seek game"><div class="play-wrap"><div class="play-btn"></div></div></div><div class="covlay"><h3>UE5 AI Hide &amp; Seek</h3>
+            <div class="mcard wd fu" data-group="hide" data-type="image" data-src="assets/images/UE5AIHideAndSeekGame_Icon_1.webp" data-title="UE5 AI Hide &amp; Seek" data-desc="Hide-and-seek prototype where AI bots play against each other on their own: Behavior Trees, custom BT tasks and EQS" data-title-ru="UE5: ИИ-прятки" data-desc-ru="Прототип пряток, в котором боты сами играют друг с другом: Behavior Trees, свои BT Tasks и EQS" onclick="openLB(this);">
+              <img src="assets/images/UE5AIHideAndSeekGame_Icon_1.webp" width="1280" height="710" loading="lazy" decoding="async" alt="Screenshot: UE5 AI hide and seek game">
+              <div class="covlay">
+                <h3>UE5 AI Hide &amp; Seek</h3>
                 <p>UE5</p>
               </div>
             </div>
 
-            <div class="mcard tl fu" data-badge="PLAYABLE" data-badge-color="#33e0ff" data-badge-bg="#001a22" data-type="image" data-src="assets/images/FlappyMax_Icon_1.webp" data-title="FlappyMax" data-desc="A Flappy Bird parody made in Unity.<br><a href='https://fikek.itch.io/flappymax' target='_blank' rel='noopener' class='desc-link'>Play on itch.io</a>" data-desc-ru="Пародия на Flappy Bird на Unity.<br><a href='https://fikek.itch.io/flappymax' target='_blank' rel='noopener' class='desc-link'>Играть на itch.io</a>" onclick="openLB(this);">
+            <div data-badge="play" class="mcard tl fu" data-type="image" data-src="assets/images/FlappyMax_Icon_1.webp" data-title="FlappyMax" data-desc="A Flappy Bird parody made in Unity.<br><a href='https://fikek.itch.io/flappymax' target='_blank' rel='noopener' class='desc-link'>Play on itch.io</a>" data-desc-ru="Пародия на Flappy Bird на Unity.<br><a href='https://fikek.itch.io/flappymax' target='_blank' rel='noopener' class='desc-link'>Играть на itch.io</a>" onclick="openLB(this);">
               <img src="assets/images/FlappyMax_Icon_1.webp" width="605" height="1208" loading="lazy" decoding="async" alt="Screenshot: FlappyMax, a Flappy Bird parody made in Unity">
               <div class="covlay">
                 <h3>FlappyMax</h3>
@@ -851,7 +849,7 @@ body {
               </div>
             </div>
 
-            <div class="mcard wd lg fu" data-badge="PLAYABLE" data-badge-color="#33e0ff" data-badge-bg="#001a22" data-type="image" data-src="assets/images/DonkeyKirya_Icon_1.webp" data-title="DonkeyKirya" data-desc="A Donkey Kong parody made in Unity.<br><a href='https://fikek.itch.io/donkeykirya' target='_blank' rel='noopener' class='desc-link'>Play on itch.io</a>" data-desc-ru="Пародия на Donkey Kong на Unity.<br><a href='https://fikek.itch.io/donkeykirya' target='_blank' rel='noopener' class='desc-link'>Играть на itch.io</a>" onclick="openLB(this);">
+            <div data-badge="play" class="mcard wd lg fu" data-type="image" data-src="assets/images/DonkeyKirya_Icon_1.webp" data-title="DonkeyKirya" data-desc="A Donkey Kong parody made in Unity.<br><a href='https://fikek.itch.io/donkeykirya' target='_blank' rel='noopener' class='desc-link'>Play on itch.io</a>" data-desc-ru="Пародия на Donkey Kong на Unity.<br><a href='https://fikek.itch.io/donkeykirya' target='_blank' rel='noopener' class='desc-link'>Играть на itch.io</a>" onclick="openLB(this);">
               <img src="assets/images/DonkeyKirya_Icon_1.webp" width="1680" height="726" loading="lazy" decoding="async" alt="Screenshot: DonkeyKirya, a Donkey Kong parody made in Unity">
               <div class="covlay">
                 <h3>DonkeyKirya</h3>
@@ -860,7 +858,7 @@ body {
 
 
 
-            <div class="mcard sm fu" data-group="c++" data-badge="IN PROGRESS" data-badge-color="#2dd11b" data-badge-bg="#001a22" data-pixel="128" data-type="image"
+            <div data-badge="wip" class="mcard sm fu" data-group="c++" data-pixel="128" data-type="image"
               data-src="assets/images/UE5CPPTPS.png" data-title="UE5 C++ TPS Rebuild"
               data-desc="Third-person shooter rebuilt in UE5 C++: stamina system with per-attack costs, health pickups, and takedown finishers with paired animations and Motion Warping" data-desc-ru="Шутер от третьего лица, пересобранный на UE5 C++: система стамины со стоимостью каждой атаки, аптечки и добивания с парными анимациями и Motion Warping"
               onclick="openLB(this);">
@@ -871,7 +869,7 @@ body {
               </div>
             </div>
 
-            <div class="mcard wd fu" data-group="building" data-badge="IN PROGRESS" data-badge-color="#2dd11b" data-badge-bg="#001a22" data-pixel="128" data-type="image" data-src="assets/images/UE5BuildingSim.png"
+            <div data-badge="wip" class="mcard wd fu" data-group="building" data-pixel="128" data-type="image" data-src="assets/images/UE5BuildingSim.png"
               data-title="UE5 Building Simulator"
               data-desc="Building simulator in UE5 where the player constructs and manages various structures" data-title-ru="UE5: симулятор строительства" data-desc-ru="Симулятор строительства на UE5: игрок возводит постройки и управляет ими"
               onclick="openLB(this);">
@@ -1864,6 +1862,14 @@ function applyPixel(img,blocks){
   else img.addEventListener('load',go,{once:true});
 }
 
+/* BADGES: плашка на карточке портфолио говорит, ЧТО можно сделать с работой.
+   Пишется в тег карточки: data-badge="video" | "play" | "wip". */
+const BADGES={
+  video:{en:'VIDEO',ru:'ВИДЕО',color:'#ffb300',bg:'#1a1200'},
+  play:{en:'PLAYABLE',ru:'МОЖНО ПОИГРАТЬ',color:'#33e0ff',bg:'#001a22'},
+  wip:{en:'IN PROGRESS',ru:'В РАБОТЕ',color:'#2dd11b',bg:'#001a05'}
+};
+
 /* CARDS: pixel "focus" on hover, badges, keyboard access */
 function pixelFocus(card){
   if(REDUCED||pixelBlocksFor(card,false))return;
@@ -1900,9 +1906,14 @@ function pixelFocus(card){
 }
 function initCards(){
   document.querySelectorAll('.mcard[data-badge]').forEach(c=>{
+    const d=BADGES[c.dataset.badge];
+    if(!d)return;
     const b=document.createElement('span');
     b.className='badge';
-    b.textContent=c.dataset.badge;
+    b.dataset.badge=c.dataset.badge;
+    b.textContent=d[LANG]||d.en;
+    c.dataset.badgeColor=d.color;
+    c.dataset.badgeBg=d.bg;
     // data-badge-color: цвет текста и рамки, data-badge-bg: цвет фона (любой CSS-цвет)
     const okColor=v=>!!v&&(!(window.CSS&&window.CSS.supports)||window.CSS.supports('color',v));
     if(okColor(c.dataset.badgeColor))b.style.setProperty('--bc',c.dataset.badgeColor);
@@ -2238,6 +2249,7 @@ function applyLang(){
     if(h)h.textContent=tt;
     c.setAttribute('aria-label',tt||'Open project');
   });
+  document.querySelectorAll('.badge[data-badge]').forEach(b=>{const d=BADGES[b.dataset.badge];if(d)b.textContent=d[LANG]||d.en;});
   heroStatic();
   if(document.getElementById('tp').classList.contains('open'))renderTP();
   if(document.getElementById('lb').classList.contains('open'))renderLBText();
