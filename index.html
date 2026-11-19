@@ -182,7 +182,7 @@ body {
 .hero-label{font-family:var(--font);font-size:clamp(8px,1vw,9px);color:var(--ph3);letter-spacing:2px;margin-bottom:16px;}
 .hero h1{font-family:var(--font);font-size:clamp(18px,5vw,56px);color:var(--ph);text-shadow:0 0 30px var(--glow),0 0 70px rgba(200,255,0,0.12);line-height:1.4;margin-bottom:10px;}
 .hero h2{font-family:var(--font);font-size:clamp(9px,1.5vw,14px);line-height:1.6;color:var(--amber);text-shadow:0 0 14px rgba(255,179,0,0.5);margin-bottom:24px;}
-.hero-desc{font-family:var(--mono);color:var(--ph2);font-size:clamp(10px,1.5vw,14px);max-width:520px;line-height:1.9;margin-bottom:24px;border-left:2px solid var(--ph3);padding-left:14px;}
+.hero-desc{font-family:var(--mono);color:var(--ph2);font-size:clamp(10px,1.5vw,14px);max-width:520px;line-height:1.9;min-height:calc(2 * 1.9em);margin-bottom:24px;border-left:2px solid var(--ph3);padding-left:14px;}
 .tag{font-family:var(--font);font-size:clamp(7px,1vw,8px);padding:5px 10px;border:1px solid var(--ph3);color:var(--ph2);letter-spacing:1px;cursor:inherit;transition:all 0.12s;}
 .tag:hover{border-color:var(--ph);color:var(--ph);background:rgba(200,255,0,0.04);}
 .konami-hint{font-family:var(--font);font-size:clamp(6px,0.9vw,7px);color:var(--ph3);animation:blink 3.5s step-end infinite;}
@@ -196,7 +196,7 @@ body {
 
 /* PORTFOLIO GRID */
 .port-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:8px;grid-auto-rows:clamp(100px,14vw,200px);}
-.mcard{position:relative;overflow:hidden;background:var(--bg2);border:1px solid var(--ph3);cursor:inherit;transition:border-color 0.15s,box-shadow 0.15s,transform 0.15s;}
+.mcard{position:relative;overflow:hidden;background:var(--bg3);border:1px solid var(--ph3);cursor:inherit;transition:border-color 0.15s,box-shadow 0.15s,transform 0.15s;}
 .mcard::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,0.13) 0,rgba(0,0,0,0.13) 1px,transparent 1px,transparent 3px);pointer-events:none;z-index:2;}
 .mcard:hover{border-color:var(--ph);box-shadow:0 0 16px rgba(200,255,0,0.2);transform:scale(1.01);z-index:5;}
 .mcard.lg{grid-column:span 7;grid-row:span 2;}.mcard.md{grid-column:span 5;}.mcard.sm{grid-column:span 4;}.mcard.wd{grid-column:span 8;}.mcard.tl{grid-column:span 4;grid-row:span 2;}
@@ -219,7 +219,7 @@ body {
 .pcard::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--ph);transform:scaleX(0);transition:transform 0.28s;transform-origin:left;}
 .pcard:hover{border-color:var(--ph);box-shadow:0 0 20px rgba(200,255,0,0.12);transform:translateY(-3px);}
 .pcard:hover::before{transform:scaleX(1);}
-.proj-banner{height:clamp(80px,10vw,400px);background:var(--bg3);display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--ph3);font-size:clamp(32px,5vw,52px);}
+.proj-banner{position:relative;overflow:hidden;height:clamp(110px,13vw,210px);background:var(--bg3);display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--ph3);font-size:clamp(32px,5vw,52px);}
 .proj-body{padding:clamp(12px,2vw,20px);}
 .proj-studio{font-family:var(--font);font-size:clamp(7px,0.9vw,8px);line-height:1.7;color:var(--amber);letter-spacing:2px;margin-bottom:8px;}
 .proj-name{font-family:var(--font);font-size:clamp(9px,1.5vw,14px);color:var(--ph);margin-bottom:10px;line-height:1.5;text-shadow:0 0 10px var(--glow);}
@@ -263,7 +263,7 @@ body {
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:16px;
+  gap:clamp(8px,1.5vw,20px);
   z-index:1;
   position:relative;
 }
@@ -403,7 +403,6 @@ body {
 .fu.vis{opacity:1;transform:translateY(0);}
 
 /* PROJECT BANNERS */
-.proj-banner{position:relative;overflow:hidden;}
 .banner-img-wrap{width:100%;height:100%;position:relative;}
 .banner-img-wrap img{width:100%;height:100%;object-fit:cover;filter:saturate(0.85);transition:filter 0.2s;}
 .proj-banner:hover .banner-img-wrap img{filter:saturate(1);} 
@@ -444,9 +443,7 @@ body {
 .desc-link{color:var(--ph);text-decoration:none;font-family:var(--font);font-size:clamp(8px,1vw,9px);border-bottom:1px solid var(--ph3);padding-bottom:1px;transition:border-color 0.15s,color 0.15s;}
 .desc-link:hover{color:var(--amber);border-color:var(--amber);}
 .coin-slot-btn:disabled{opacity:0.3;pointer-events:none;}
-#ctrl-panel{justify-content:space-between;gap:clamp(8px,1.5vw,20px);}
 .ctrl-center{display:flex;align-items:center;gap:clamp(6px,1.2vw,14px);flex:1;justify-content:center;}
-.mcard { background: var(--bg3); }
 
 /* =====================================================
    v3 ADDITIONS
@@ -475,7 +472,6 @@ body {
 /* ---------- HERO ---------- */
 .hero>*:not(.hero-grid):not(.ghost-lane){position:relative;z-index:1;}
 .hero-grid{inset:-40px;transform:translate3d(var(--px,0px),var(--py,0px),0);transition:transform 0.25s ease-out;will-change:transform;}
-.hero-desc{min-height:calc(2 * 1.9em);}
 .cur{display:inline-block;width:0.6em;height:1em;background:var(--ph);margin-left:3px;vertical-align:-0.12em;box-shadow:0 0 8px var(--glow);animation:blink 1s step-end infinite;}
 
 /* RGB-split glitch on the name */
@@ -519,16 +515,8 @@ body {
 .mcard:hover::after,.mcard:focus-visible::after,.pcard:hover::after{opacity:1;}
 .pix{position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated;pointer-events:none;z-index:1;display:none;}
 .badge{position:absolute;top:8px;left:8px;z-index:5;font-family:var(--font);font-size:clamp(7px,0.8vw,8px);padding:4px 6px;background:var(--bb,rgba(0,0,0,0.78));border:1px solid var(--bc,var(--amber));color:var(--bc,var(--amber));letter-spacing:1px;pointer-events:none;}
-.proj-banner{height:clamp(110px,13vw,210px);}
 
 /* ---------- STAGE BANNER ---------- */
-#stage-banner{position:absolute;left:0;right:0;top:38%;z-index:97;display:flex;flex-direction:column;align-items:center;gap:10px;pointer-events:none;opacity:0;}
-#stage-banner::before{content:'';position:absolute;left:0;right:0;top:-16px;bottom:-16px;background:linear-gradient(transparent,rgba(0,0,0,0.75) 25%,rgba(0,0,0,0.75) 75%,transparent);z-index:-1;}
-#stage-banner.go{animation:stageIn 2s steps(1) forwards;}
-.sb-num{font-family:var(--font);font-size:clamp(16px,4.5vw,40px);color:#fff700;text-shadow:0 0 20px #fff700,0 0 50px rgba(255,247,0,0.4);letter-spacing:4px;text-align:center;}
-.sb-name{font-family:var(--font);font-size:clamp(7px,1.4vw,12px);color:var(--ph);text-shadow:0 0 12px var(--glow);letter-spacing:3px;text-align:center;}
-@keyframes stageIn{0%{opacity:0;}5%{opacity:1;}20%{opacity:0.2;}25%{opacity:1;}30%{opacity:0.2;}35%,80%{opacity:1;}90%{opacity:0.4;}100%{opacity:0;}}
-@keyframes stageFade{0%{opacity:0;}10%,80%{opacity:1;}100%{opacity:0;}}
 
 /* ---------- LIGHTBOX GALLERY ---------- */
 .lb-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:clamp(30px,5vw,44px);height:clamp(44px,8vw,64px);background:rgba(0,0,0,0.75);border:1.5px solid var(--ph);color:var(--ph);font-family:var(--font);font-size:clamp(9px,1.6vw,13px);cursor:inherit;display:none;align-items:center;justify-content:center;transition:background 0.12s,color 0.12s;}
@@ -567,7 +555,6 @@ body {
 /* ---------- RESPONSIVE ---------- */
 @media(max-width:600px){
   #screen-wrap::before,#screen-wrap::after,.glare{border-radius:5px;}
-  #stage-banner{top:34%;}
 }
 
 /* ---------- REDUCED MOTION ---------- */
@@ -577,7 +564,6 @@ body {
   .hero h1.glitch span::before,.hero h1.glitch span::after,.hero h1.glitch:hover span::before,.hero h1.glitch:hover span::after{animation:none;}
   .ghost-lane{display:none;}
   .hero-grid{transition:none;}
-  #stage-banner.go{animation:stageFade 1.6s linear forwards;}
 }
 
 
@@ -665,8 +651,7 @@ body {
 .proj-body{flex:1;}
 .proj-stats{align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:8px 16px;}
 .sval{line-height:1.5;}
-.pc-more{margin-left:auto;}
-.pc-more{font-family:var(--font);font-size:clamp(7px,0.9vw,8px);color:var(--amber);letter-spacing:1px;white-space:nowrap;transition:color 0.12s;}
+.pc-more{margin-left:auto;font-family:var(--font);font-size:clamp(7px,0.9vw,8px);color:var(--amber);letter-spacing:1px;white-space:nowrap;transition:color 0.12s;}
 .pcard:hover .pc-more{color:var(--ph);}
 #cs{position:absolute;inset:0;background:rgba(0,0,0,0.82);z-index:152;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.2s;padding:clamp(10px,3vw,24px);}
 #cs.open{opacity:1;pointer-events:all;}
@@ -741,7 +726,6 @@ body {
     <div class="screw tl"></div><div class="screw tr"></div>
     <div class="screw bl"></div><div class="screw br"></div>
     <div class="glare"></div>
-    <div id="stage-banner" aria-hidden="true"><div class="sb-num" id="sb-num"></div><div class="sb-name" id="sb-name"></div></div>
     <div id="screen-content">
 
       <div id="boot">
@@ -888,7 +872,7 @@ body {
             
             <div class="pcard fu" data-case="nda" onclick="openCS(this)">
               <div class="proj-banner">
-                <div class="banner-img-wrap" id="TBA-banner">
+                <div class="banner-img-wrap">
                   <img src="assets/images/TBA.png" width="2559" height="1333" loading="lazy" decoding="async" alt="Unannounced RPG project banner">
                 </div>
               </div>
@@ -909,7 +893,7 @@ body {
 
             <div class="pcard fu" data-case="skyforge" onclick="openCS(this)">
               <div class="proj-banner">
-                <div class="banner-img-wrap" id="skyforge-banner">
+                <div class="banner-img-wrap">
                   <img src="assets/images/Skyforge_Icon_1.webp" width="800" height="1200" loading="lazy" decoding="async" alt="Skyforge project banner">
                 </div>
               </div>
@@ -924,7 +908,7 @@ body {
             
             <div class="pcard fu" data-case="knightcats" onclick="openCS(this)">
               <div class="proj-banner">
-                <div class="banner-img-wrap" id="knightcats-banner">
+                <div class="banner-img-wrap">
                   <img src="assets/images/KnightCats2_Icon_1.webp" width="256" height="256" loading="lazy" decoding="async" alt="Knight Cats 2 project banner">
                 </div>
               </div>
@@ -938,7 +922,7 @@ body {
 
             <div class="pcard fu" data-case="rescue" onclick="openCS(this)">
               <div class="proj-banner">
-                <div class="banner-img-wrap" id="rescue-banner">
+                <div class="banner-img-wrap">
                   <img src="assets/images/RescueDash_Icon_1.webp" width="1680" height="1680" loading="lazy" decoding="async" alt="Rescue Dash project banner">
                 </div>
               </div>
@@ -1129,7 +1113,7 @@ body {
       </div>
     </div>
 
-    <!-- TROPHIES — теперь тоже внутри #screen-wrap, открывается на мониторе автомата -->
+    <!-- TROPHIES — окно внутри #screen-wrap, открывается на мониторе автомата -->
     <div id="tp" onclick="closeTPbg(event)" role="dialog" aria-modal="true" aria-label="Trophies">
       <div class="tp-box">
         <div class="tp-head"><h2><span data-i18n="tp_title">TROPHIES</span><span id="tp-count"></span></h2></div>
@@ -1394,7 +1378,6 @@ function openSnd(){beep(660,.07);setTimeout(()=>beep(880,.09),55);}
 function closeSnd(){beep(440,.06);setTimeout(()=>beep(330,.07),45);}
 function achSnd(){[523,659,784,1047].forEach((f,i)=>setTimeout(()=>beep(f,.12,'square',.06),i*75));}
 function bootSnd(i){beep([220,330,440,550,660,770,880][i%7],.045,'square',.04);}
-function stageSnd(){[392,523,659,784,1047].forEach((f,i)=>setTimeout(()=>beep(f,.09,'square',.055),i*85));}
 function ghostSnd(){beep(880,.05,'square',.06);setTimeout(()=>beep(440,.12,'sawtooth',.05),50);}
 function lifeSnd(){beep(196,.2,'sawtooth',.05);}
 function tickEl(el){el.classList.remove('tick');void el.offsetWidth;el.classList.add('tick');}
@@ -1772,46 +1755,12 @@ function updateNav(){
   navSet(cur);
 }
 
-/* STAGES, LEVEL AND XP BAR */
-const STAGES=[
-  /*{id:'hero',lvl:1},
-  {id:'portfolio',lvl:2,num:'STAGE 01',name:'PORTFOLIO'},
-  {id:'projects',lvl:3,num:'STAGE 02',name:'COMMERCIAL PROJECTS'},
-  {id:'stats',lvl:4,num:'STAGE 03',name:'PLAYER STATS'}*/
-];
-let curStage=0,stageTimer=0;
-const stagesSeen=new Set([0]);
-
+/* XP BAR: полоска прогресса прокрутки под HUD */
 function updateProgress(){
   const sc=document.getElementById('screen-content');
   const max=sc.scrollHeight-sc.clientHeight;
   const p=max>0?Math.min(1,sc.scrollTop/max):0;
   document.getElementById('xp-fill').style.width=(p*100).toFixed(1)+'%';
-  let idx=0;
-  STAGES.forEach((s,i)=>{const el=document.getElementById(s.id);if(el&&sc.scrollTop>=el.offsetTop-80)idx=i;});
-  if(max>0&&sc.scrollTop>=max-4&&STAGES.length)idx=STAGES.length-1;
-  return idx;
-}
-function showStage(s){
-  const b=document.getElementById('stage-banner');
-  document.getElementById('sb-num').textContent=s.num;
-  document.getElementById('sb-name').textContent=s.name;
-  stageSnd();
-  b.classList.remove('go');void b.offsetWidth;b.classList.add('go');
-}
-function onStageChange(idx){
-  if(!STAGES[idx]||idx===curStage)return;
-  curStage=idx;
-  clearTimeout(stageTimer);
-  if(stagesSeen.has(idx))return;
-  stageTimer=setTimeout(()=>{
-    if(curStage!==idx)return;
-    stagesSeen.add(idx);
-    const lv=document.getElementById('level-val');
-    lv.textContent=String(STAGES[idx].lvl).padStart(2,'0');tickEl(lv);
-    showStage(STAGES[idx]);
-    scoreAdd(250);
-  },400);
 }
 
 /* SCROLL & OBSERVER */
@@ -1993,9 +1942,7 @@ function checkPortfolioAch(card){
 /* HOVER & KONAMI */
 document.querySelectorAll('.mcard,.pcard,.tag,.cf-drawer-face,.cf-file,.cv-btn,.cv-item').forEach(el=>el.addEventListener('mouseenter',()=>hvSnd()));
 
-/* CASE FILES — клики по файлам внутри ящиков: пока href="#" (ссылка-заглушка),
-   засчитываем звук/очки, но никуда не уходим. Как только вставишь настоящую
-   ссылку на Google Doc в href, переход заработает сам. */
+/* TEST ASSIGNMENTS — клик по файлу: звук и очки; ссылка "#" никуда не ведёт */
 function briefClick(e,a){
   selSnd();scoreAdd(75);
   if(!a.getAttribute('href')||a.getAttribute('href')==='#')e.preventDefault();
@@ -2289,9 +2236,8 @@ document.addEventListener('DOMContentLoaded', () => {
     requestAnimationFrame(()=>{
       scTick=false;
       scoreAdd(1);
-      const idx=updateProgress();
+      updateProgress();
       updateNav();
-      onStageChange(idx);
     });
   },{passive:true});
   /* ручная прокрутка (колесо, тач, клавиши, полоса прокрутки) снимает фиксацию пункта меню */
