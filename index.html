@@ -525,9 +525,12 @@ body {
 
 /* ---------- LIGHTBOX GALLERY ---------- */
 .lb-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:clamp(30px,5vw,44px);height:clamp(44px,8vw,64px);background:rgba(0,0,0,0.75);border:1.5px solid var(--ph);color:var(--ph);font-family:var(--font);font-size:clamp(9px,1.6vw,13px);cursor:inherit;display:none;align-items:center;justify-content:center;transition:background 0.12s,color 0.12s;}
-.lb-arrow:hover{background:var(--ph);color:#000;}
-.lb-arrow.prev{left:clamp(6px,2vw,24px);}
-.lb-arrow.next{right:clamp(6px,2vw,24px);}
+.lb-arrow:active{background:var(--ph);color:#000;}
+@media (hover:hover){.lb-arrow:hover{background:var(--ph);color:#000;}}
+/* стрелки висят по центру картинки: на ПК снаружи рамки, на телефоне поверх её краёв */
+.lb-arrow.prev{left:calc(-1 * clamp(30px,5vw,44px) - 14px);}
+.lb-arrow.next{right:calc(-1 * clamp(30px,5vw,44px) - 14px);}
+@media(max-width:700px){.lb-arrow.prev{left:6px;}.lb-arrow.next{right:6px;}}
 #lb.multi .lb-arrow{display:flex;}
 .lb-count{font-family:var(--font);font-size:clamp(8px,1vw,9px);color:var(--amber);letter-spacing:2px;margin-bottom:8px;min-height:1em;}
 
@@ -640,7 +643,8 @@ body {
 .cv-dd.up .cv-arr{transform:rotate(180deg);}
 .cv-menu{position:absolute;left:0;top:calc(100% + 4px);min-width:100%;background:var(--bg);border:1.5px solid var(--ph);box-shadow:0 0 20px rgba(200,255,0,0.2);display:none;flex-direction:column;z-index:60;}
 .cv-dd.open .cv-menu{display:flex;}
-.cv-dd.up .cv-menu{top:auto;bottom:calc(100% + 4px);left:auto;right:0;}
+.cv-dd.up .cv-menu{top:auto;bottom:calc(100% + 4px);left:0;right:auto;}
+.cv-dd.up.flip .cv-menu{left:auto;right:0;}
 .cv-menu .cv-item{display:flex;align-items:center;gap:10px;margin:0;padding:9px 12px;font-family:var(--mono);font-size:clamp(11px,1.2vw,13px);letter-spacing:0;color:var(--ph2);text-decoration:none;white-space:nowrap;cursor:inherit;border-top:1px solid var(--ph3);}
 .cv-menu .cv-item:first-child{border-top:none;}
 .cv-item b{font-family:var(--font);font-weight:400;font-size:clamp(7px,0.9vw,8px);color:var(--amber);}
@@ -1147,10 +1151,10 @@ body {
 
   <!-- LIGHTBOX -->
   <div id="lb" onclick="closeLBbg(event)" role="dialog" aria-modal="true" aria-label="Project viewer">
-    <button class="lb-arrow prev" onclick="lbStep(-1)" aria-label="Previous">&#9664;</button>
-    <button class="lb-arrow next" onclick="lbStep(1)" aria-label="Next">&#9654;</button>
     <div class="lb-inner">
       <div class="lb-frame">
+        <button class="lb-arrow prev" onclick="lbStep(-1)" aria-label="Previous">&#9664;</button>
+        <button class="lb-arrow next" onclick="lbStep(1)" aria-label="Next">&#9654;</button>
         <div class="lbc tl"></div><div class="lbc tr"></div><div class="lbc bl"></div><div class="lbc br"></div>
         <div id="lb-media"></div>
       </div>
@@ -2175,7 +2179,11 @@ function toggleCV(btn){
   const dd=btn.closest('.cv-dd'),was=dd.classList.contains('open');
   closeCVs();
   if(was){closeSnd();return;}
+  dd.classList.remove('flip');
   dd.classList.add('open');btn.setAttribute('aria-expanded','true');openSnd();
+  /* если меню не влезает в экран справа - открываем его влево от кнопки */
+  const m=dd.querySelector('.cv-menu'),box=document.getElementById('screen-wrap').getBoundingClientRect();
+  if(m.getBoundingClientRect().right>box.right-6)dd.classList.add('flip');
 }
 function cvPick(){selSnd();scoreAdd(150);setTimeout(closeCVs,60);}
 document.addEventListener('click',e=>{if(!e.target.closest('.cv-dd'))closeCVs();});
