@@ -337,7 +337,7 @@ body {
 .coin-slot-btn{
   width:100%;height:100%;
   background:#0a0b0e;
-  border:2px solid var(--metal);
+  border:var(--btn-b) solid var(--metal);
   border-radius:10px;
   box-shadow:inset 0 3px 8px rgba(0,0,0,0.9);
   cursor:inherit;position:relative;
@@ -348,9 +348,9 @@ body {
 .coin-slot-btn::after{
   content:'';position:absolute;top:50%;left:50%;
   transform:translate(-50%,-50%);
-  width:55%;height:16%;
+  width:55%;height:calc(var(--slot-h) * 100%);
   background:#000;border-radius:3px;
-  border:1px solid #222;box-shadow:inset 0 2px 4px rgba(0,0,0,0.95);
+  border:var(--slot-b) solid #222;box-shadow:inset 0 2px 4px rgba(0,0,0,0.95);
 }
 .coin-slot-btn:hover{
   border-color:var(--amber);
@@ -365,9 +365,16 @@ body {
   35% {transform:translateX(-50%) translateY(0);}
   100%{transform:translateX(-50%) translateY(105%);}
 }
-.coin-clip{position:absolute;left:-30%;right:-30%;top:-320%;bottom:42%;overflow:hidden;pointer-events:none;z-index:20;}
+/* --btn-b - рамка слота, --slot-h - высота щели (доля высоты слота), --slot-b - толщина рамки щели.
+   --coin-line - где монетка начинает исчезать, от центра щели:
+   0 = по центру щели, 0.5 = по верхнему краю, -0.5 = по нижнему краю.
+   Толщина рамки вычитается: при -0.5 монетка уходит по верхней кромке нижней линии рамки. */
+.coin-slot-wrap{--btn-b:2px;--slot-h:0.16;--slot-b:1px;--coin-line:-0.5;}
+.coin-clip{position:absolute;left:-30%;right:-30%;top:-320%;bottom:calc(var(--btn-b) + (100% - 2 * var(--btn-b)) * (0.5 + var(--slot-h) * var(--coin-line)) + var(--slot-b));overflow:hidden;pointer-events:none;z-index:20;}
 @keyframes slotHit{0%,100%{box-shadow:inset 0 3px 8px rgba(0,0,0,0.9);}40%{box-shadow:inset 0 3px 8px rgba(0,0,0,0.9),0 0 22px rgba(255,179,0,0.9);border-color:var(--amber);}}
 .coin-slot-btn.hit{animation:slotHit 0.35s ease-out;}
+/* фокус с клавиатуры: вместо второй рамки-обводки слот подсвечивается зелёным */
+.coin-slot-btn:focus-visible{outline:none;border-color:var(--ph);box-shadow:inset 0 3px 8px rgba(0,0,0,0.9),0 0 14px rgba(200,255,0,0.55);}
 .coin-anim{
   /* пиксельная монетка: спрайт 12x12, нарисован прямо в CSS (SVG из прямоугольников) */
   position:absolute;
